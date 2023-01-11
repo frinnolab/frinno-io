@@ -1,0 +1,11 @@
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.exe
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\appsettings.json
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.deps.json
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.runtimeconfig.json
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.pdb
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
