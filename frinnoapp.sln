@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-api", "frinno-api\frinno-api.csproj", "{EF1026ED-FEAC-4800-AAB0-F4763AF14616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-core", "frinno-core\frinno-core.csproj", "{A7FA8E45-A118-4E20-A57D-23DD8B448607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-infrastructure", "frinno-infrastructure\frinno-infrastructure.csproj", "{910CCCF5-806A-4A07-AF3C-9BF9C603AAFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-application", "frinno-application\frinno-application.csproj", "{83A2D278-3499-46C2-BC25-E50B9185DE3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF1026ED-FEAC-4800-AAB0-F4763AF14616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1026ED-FEAC-4800-AAB0-F4763AF14616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1026ED-FEAC-4800-AAB0-F4763AF14616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1026ED-FEAC-4800-AAB0-F4763AF14616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7FA8E45-A118-4E20-A57D-23DD8B448607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7FA8E45-A118-4E20-A57D-23DD8B448607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7FA8E45-A118-4E20-A57D-23DD8B448607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7FA8E45-A118-4E20-A57D-23DD8B448607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{910CCCF5-806A-4A07-AF3C-9BF9C603AAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{910CCCF5-806A-4A07-AF3C-9BF9C603AAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{910CCCF5-806A-4A07-AF3C-9BF9C603AAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{910CCCF5-806A-4A07-AF3C-9BF9C603AAFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
