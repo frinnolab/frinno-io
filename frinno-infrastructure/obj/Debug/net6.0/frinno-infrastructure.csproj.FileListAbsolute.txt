@@ -1,0 +1,17 @@
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-infrastructure.deps.json
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-infrastructure.runtimeconfig.json
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-infrastructure.dll
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-infrastructure.pdb
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-core.dll
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-core.pdb
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.csproj.AssemblyReference.cache
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.AssemblyInfoInputs.cache
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.AssemblyInfo.cs
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.csproj.CoreCompileInputs.cache
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.csproj.CopyComplete
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.dll
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\refint\frinno-infrastructure.dll
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.pdb
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.genruntimeconfig.cache
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\ref\frinno-infrastructure.dll
