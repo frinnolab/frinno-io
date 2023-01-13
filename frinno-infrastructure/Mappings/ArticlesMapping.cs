@@ -11,12 +11,8 @@ namespace frinno_infrastructure.Mappings
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Article> builder)
         {
-            //Configure FKs
-            builder.Property<string>("ProfileId");
-            //Configure Relationships
-            builder.HasOne(p => p.Profile)
-            .WithMany(a=>a.Articles)
-            .HasForeignKey("ProfileId");
+            //Configure Indexes
+            builder.HasIndex(a=>a.Title);
         }
     }
 }

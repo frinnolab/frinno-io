@@ -12,6 +12,13 @@ namespace frinno_infrastructure.Mappings
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<ArticleTags> builder)
         {
+            //Configure Indexes
+            builder.HasIndex(a=>a.ArticelId);
+            builder.HasIndex(a=>a.Article.Title);
+            builder.HasIndex(t=>t.TagId);
+            builder.HasIndex(t=>t.Tag.Name);
+            
+            //Configure FK_Relationships
             builder.HasKey(a => new { a.ArticelId, a.TagId});
 
             //Configure Each Entity

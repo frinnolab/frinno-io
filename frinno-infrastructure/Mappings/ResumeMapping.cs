@@ -14,7 +14,7 @@ namespace frinno_infrastructure.Mappings
             builder.Property<string>("ProfileId");
             
             builder.HasOne(p=>p.Profile)
-            .WithOne()
+            .WithMany()
             .HasForeignKey("ProfileId");
         }
     }
