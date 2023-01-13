@@ -325,6 +325,9 @@
       "frinno-core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.0"
+        },
         "compile": {
           "bin/placeholder/frinno-core.dll": {}
         },
@@ -765,11 +768,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectUniqueName": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "projectName": "frinno-infrastructure",
-      "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-      "outputPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
+      "outputPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
