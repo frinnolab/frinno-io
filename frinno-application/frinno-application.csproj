@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\frinno-infrastructure\frinno-infrastructure.csproj" />
     <ProjectReference Include="..\frinno-core\frinno-core.csproj" />
   </ItemGroup>
   <PropertyGroup>

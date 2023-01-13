@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+kjFbBuZkTk9sFkDk04z40yLSKZUjV4NKuH0fvg5uwFvmd/u1UbBXOwvhjdM0rSp+6QwVZU/3USp0lNUfmfkwg==",
+  "dgSpecHash": "6nr8JSymoxalapFloioNvHcLMb0QZF4kxEKr7vGnf7o/Ds9EDEi83kuCLGWyMd6N69QwrgrB6z/P7cK9PsvsVg==",
   "success": true,
-  "projectFilePath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj",
+  "projectFilePath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0\\microsoft.entityframeworkcore.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0\\microsoft.entityframeworkcore.abstractions.6.0.0.nupkg.sha512",

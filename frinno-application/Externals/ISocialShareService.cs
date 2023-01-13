@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace frinno_application.Authentication
+namespace frinno_application.Externals
 {
-    public interface AuthService
+    public interface ISocialShareService
     {
         
     }
