@@ -5,16 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace frinno_core.Entities.user
+namespace frinno_core.Entities.Profile.ValueObjects
 {
     [Owned]
-    public class User
+    public class Address 
     {
         [Column]
-        public string Email { get; set; }
+        public string Mobile { get; set; }
         [Column]
-        public string Password { get; set; }
-        [NotMapped]
-        public string coPassword { get; set; }
+        public string City { get; set; }   
     }
 }
