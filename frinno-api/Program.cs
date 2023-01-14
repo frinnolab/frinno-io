@@ -1,3 +1,9 @@
+using frinno_application.Generics;
+using frinno_infrastructure;
+using frinno_infrastructure.Data;
+using frinno_infrastructure.Repostories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
+builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
+
+builder.Services.AddScoped<IMockingDataService ,MockRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -15,6 +26,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+if (app.Environment.IsProduction())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

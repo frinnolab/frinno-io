@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\frinno-core\frinno-core.csproj" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>frinno_application</RootNamespace>

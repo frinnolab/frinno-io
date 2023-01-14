@@ -1,0 +1,15 @@
+D:\FRINNOLAB\Projects\frn\frinno-application\bin\Debug\net6.0\frinno-application.deps.json
+D:\FRINNOLAB\Projects\frn\frinno-application\bin\Debug\net6.0\frinno-application.dll
+D:\FRINNOLAB\Projects\frn\frinno-application\bin\Debug\net6.0\frinno-application.pdb
+D:\FRINNOLAB\Projects\frn\frinno-application\bin\Debug\net6.0\frinno-core.dll
+D:\FRINNOLAB\Projects\frn\frinno-application\bin\Debug\net6.0\frinno-core.pdb
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.csproj.AssemblyReference.cache
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.GeneratedMSBuildEditorConfig.editorconfig
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.AssemblyInfoInputs.cache
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.AssemblyInfo.cs
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.csproj.CoreCompileInputs.cache
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.csproj.CopyComplete
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.dll
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\refint\frinno-application.dll
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.pdb
+D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\ref\frinno-application.dll
