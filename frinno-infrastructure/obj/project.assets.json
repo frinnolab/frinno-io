@@ -322,6 +322,19 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "frinno-application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "frinno-core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/frinno-application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/frinno-application.dll": {}
+        }
+      },
       "frinno-core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -748,6 +761,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "frinno-application/1.0.0": {
+      "type": "project",
+      "path": "../frinno-application/frinno-application.csproj",
+      "msbuildProject": "../frinno-application/frinno-application.csproj"
+    },
     "frinno-core/1.0.0": {
       "type": "project",
       "path": "../frinno-core/frinno-core.csproj",
@@ -758,6 +776,7 @@
     "net6.0": [
       "Microsoft.EntityFrameworkCore >= 6.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.2",
+      "frinno-application >= 1.0.0",
       "frinno-core >= 1.0.0"
     ]
   },
@@ -794,6 +813,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj": {
+              "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj"
+            },
             "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj": {
               "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj"
             }

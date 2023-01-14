@@ -15,3 +15,5 @@ D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\refint\frinno-i
 D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.pdb
 D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.genruntimeconfig.cache
 D:\FRINNOLAB\Projects\frn\frinno-infrastructure\obj\Debug\net6.0\ref\frinno-infrastructure.dll
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-application.dll
+D:\FRINNOLAB\Projects\frn\frinno-infrastructure\bin\Debug\net6.0\frinno-application.pdb

@@ -25,21 +25,29 @@ namespace frinno_infrastructure.Repostories
         {
             var article = newMockData as MockArticle;
             mockData.MockArticles.Add(article);
+            mockData.SaveChanges();
         }
 
         public IEnumerable<object> FindMockAllDatas()
         {
-            throw new NotImplementedException();
+            var items = mockData.MockArticles.ToList();
+
+            return items;
         }
 
-        public void FindMockDataById(int mockDataId)
+        public object FindMockDataById(int mockDataId)
         {
-            //..var data = mockData.Find(mockDataId);
+            var data = mockData.MockArticles.Find(mockDataId);
+
+            return data;
         }
 
         public void RemoveMockData(int mockDataId)
         {
-            throw new NotImplementedException();
+            var data = mockData.MockArticles.Find(mockData);
+            mockData.Remove(data);
+            mockData.SaveChanges();
+
         }
     }
 }
