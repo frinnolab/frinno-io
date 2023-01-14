@@ -11,7 +11,7 @@ namespace frinno_application.Generics
         void AddMockData(object newMockData);
         void AddBulkMockData(List<object> newMockDatas);
         IEnumerable<object> FindMockAllDatas();
-        void FindMockDataById(int mockDataId);
+        object FindMockDataById(int mockDataId);
         void RemoveMockData(int mockDataId);
     }
 }

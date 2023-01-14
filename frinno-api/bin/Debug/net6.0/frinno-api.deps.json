@@ -498,14 +498,16 @@
       },
       "frinno-application/1.0.0": {
         "dependencies": {
-          "frinno-core": "1.0.0",
-          "frinno-infrastructure": "1.0.0"
+          "frinno-core": "1.0.0"
         },
         "runtime": {
           "frinno-application.dll": {}
         }
       },
       "frinno-core/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.2"
+        },
         "runtime": {
           "frinno-core.dll": {}
         }
@@ -513,6 +515,7 @@
       "frinno-infrastructure/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.2",
+          "frinno-application": "1.0.0",
           "frinno-core": "1.0.0"
         },
         "runtime": {

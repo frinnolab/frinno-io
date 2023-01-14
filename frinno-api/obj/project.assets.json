@@ -887,8 +887,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "frinno-core": "1.0.0",
-          "frinno-infrastructure": "1.0.0"
+          "frinno-core": "1.0.0"
         },
         "compile": {
           "bin/placeholder/frinno-application.dll": {}
@@ -915,6 +914,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.2",
+          "frinno-application": "1.0.0",
           "frinno-core": "1.0.0"
         },
         "compile": {

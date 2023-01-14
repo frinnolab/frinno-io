@@ -132,9 +132,6 @@
             "projectReferences": {
               "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj": {
                 "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj"
-              },
-              "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {
-                "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj"
               }
             }
           }
@@ -263,6 +260,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj": {
+                "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj"
+              },
               "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj": {
                 "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj"
               }
