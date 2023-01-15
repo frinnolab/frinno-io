@@ -9,6 +9,6 @@ namespace frinno_core.Entities.MockModels
     {
         public int Id { get; set; }
 
-        public DateTime Modified { get; set; }
+        public DateTime? Modified { get; set; }
     }
 }
