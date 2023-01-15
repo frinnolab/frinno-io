@@ -67,3 +67,4 @@ D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\frinno-application.pdb
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\frinno-infrastructure.pdb
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\IdentityModel.dll

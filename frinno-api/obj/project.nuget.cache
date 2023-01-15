@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "6te/gMV1SAWlmOr8CiaK3xllhbjr2kwRbR7DxwL+mLw5wJcEcseE6CNf3sgaGb4CU2RGJqx0MqutL84o6ZeI0w==",
+  "dgSpecHash": "YKdUZyYaZGdrYRZ5t+HoC4MEahbiqGk9vTMGfTZKt3bNerePbrKrKyPulKJ4lUEhwY0kTSGY1VYjikWDQRBxBw==",
   "success": true,
   "projectFilePath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-api\\frinno-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Frinno-LAB\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

@@ -11,9 +11,9 @@ namespace frinno_application.Generics
     {
         MockRegisterResponse RegisterUser(MockRegisterRequest request, MockRoles role);
         MockLoginResponse AuthenticateUser(MockUser user);
-        bool ValidateUser(MockUser request);
-        string HashedPassword(MockLoginRequest request);
-        MockTokenResponse CreateToken(MockLoginRequest request);
+        bool ValidateUserPassword(MockLoginRequest loginRequest,MockUser user);
+        PasswordHasModel HashedPassword(MockLoginRequest request);
+        MockTokenResponse CreateToken(MockUser user);
         void RevokeToken(string apiToken);
 
         List<MockUser> GetMockUsers();

@@ -21,6 +21,9 @@ namespace frinno_api.Controllers
             mockingService = service;
             mockingAuthService = auth;
         }
+
+        
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<MockArticle> GetAll()
         {
@@ -34,6 +37,7 @@ namespace frinno_api.Controllers
             }
         }
 
+        [Authorize()]
         [HttpGet("Id")]
         public ActionResult<MockArticle> GetSingle(int Id)
         {
@@ -63,7 +67,7 @@ namespace frinno_api.Controllers
         }
 
         [Authorize()]
-        [HttpPost("Mocks/AddBulk")]
+        [HttpPost("AddBulk")]
         public ActionResult<List<object>> AddBulk(List<MockArticle> datas)
         {
             if(ModelState.IsValid)
@@ -78,6 +82,7 @@ namespace frinno_api.Controllers
         }
 
         //Auth Endpoints
+        [AllowAnonymous]
         [HttpPost("Auth/Register")]
         public ActionResult<MockRegisterResponse> Register(MockRegisterRequest request)
         {
@@ -94,6 +99,7 @@ namespace frinno_api.Controllers
             return Ok(newUser);
         }
 
+        [AllowAnonymous]
         [HttpPost("Auth/Author/Register")]
         public ActionResult<MockRegisterResponse> RegisterAuthor(MockRegisterRequest request)
         {
@@ -110,6 +116,7 @@ namespace frinno_api.Controllers
             return Ok(newUser);
         }
 
+        [AllowAnonymous]
         [HttpPost("Auth/Login")]
         public ActionResult<MockLoginResponse> Login(MockLoginRequest request)
         {
@@ -120,7 +127,7 @@ namespace frinno_api.Controllers
                 return BadRequest();
             }
 
-            var IsValid  = mockingAuthService.ValidateUser(user);
+            var IsValid  = mockingAuthService.ValidateUserPassword(request,user);
 
             if(!IsValid)
             {
@@ -132,6 +139,7 @@ namespace frinno_api.Controllers
             return Ok(loggedUser);
         }
 
+        [AllowAnonymous]
         [HttpPost("Auth/{userId}Logout")]
         public ActionResult<string> Logout(int userId)
         {

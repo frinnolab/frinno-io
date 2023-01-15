@@ -1,9 +1,13 @@
+using System.Text;
 using frinno_application.Generics;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
 using frinno_infrastructure.Repostories.MockRepos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +23,53 @@ builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDat
 
 builder.Services.AddScoped<IMockingDataService ,MockRepository>();
 builder.Services.AddScoped<IMockAuthService ,MockAuthRepository>();
+
+//Setup Auth
+builder.Services.AddAuthentication(authOptions => {
+    authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(jwtOptions=>{
+    var key = builder.Configuration.GetSection("MockSettings:MockApiKey").ToString();
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters ()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidAudience = "FrinnoIO",
+        ValidIssuer = "FrinnoIO",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key ?? "5HMQ@FbiMTkWu6m"))
+    };
+});
+
+
+builder.Services.AddSwaggerGen(c=>{
+        // Include 'SecurityScheme' to use JWT Authentication
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
+
 
 var app = builder.Build();
 
@@ -40,6 +91,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

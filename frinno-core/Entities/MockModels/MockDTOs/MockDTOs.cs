@@ -7,6 +7,12 @@ namespace frinno_core.Entities.MockModels.MockDTOs
 {
     //Configure Mock Requests and Responses
 
+    public record PasswordHasModel
+    {
+        public string hashedPassword { get; set; }
+        public byte[] hashedSalt { get; set; }
+    }
+
     //Register
     public record MockRegisterRequest
     {
@@ -31,7 +37,7 @@ namespace frinno_core.Entities.MockModels.MockDTOs
     public record MockLoginResponse
     {
         public string Email { get; set; }
-        public MockTokenResponse Token { get; set; }
+        public string ApiToken { get; set; }
 
     }
     public record MockTokenResponse
