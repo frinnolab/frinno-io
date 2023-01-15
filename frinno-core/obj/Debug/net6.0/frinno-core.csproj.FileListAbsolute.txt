@@ -1,0 +1,12 @@
+D:\FRINNOLAB\Projects\frn\frinno-core\bin\Debug\net6.0\frinno-core.deps.json
+D:\FRINNOLAB\Projects\frn\frinno-core\bin\Debug\net6.0\frinno-core.dll
+D:\FRINNOLAB\Projects\frn\frinno-core\bin\Debug\net6.0\frinno-core.pdb
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.csproj.AssemblyReference.cache
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.GeneratedMSBuildEditorConfig.editorconfig
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.AssemblyInfoInputs.cache
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.AssemblyInfo.cs
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.csproj.CoreCompileInputs.cache
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.dll
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\refint\frinno-core.dll
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.pdb
+D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\ref\frinno-core.dll
