@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {}
+    "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {}
   },
   "projects": {
     "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj": {
@@ -134,14 +134,14 @@
         }
       }
     },
-    "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {
+    "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+        "projectUniqueName": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
         "projectName": "frinno-infrastructure",
-        "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+        "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
         "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-        "outputPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
+        "outputPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -182,6 +182,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "IdentityModel": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.2, )"

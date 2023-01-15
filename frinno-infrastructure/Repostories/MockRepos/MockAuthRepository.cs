@@ -1,15 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using frinno_application.Generics;
 using frinno_core.Entities.MockModels;
 using frinno_core.Entities.MockModels.MockDTOs;
+using Microsoft.IdentityModel.Tokens;
 
 namespace frinno_infrastructure.Repostories.MockRepos
 {
     public class MockAuthRepository : IMockAuthService
     {
+        private int hashKeySize = 64;
+        private int hashIterations = 4000;
+
+        private HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
         private readonly MockDataContext DB;
 
         public MockAuthRepository(MockDataContext context)
@@ -19,18 +28,36 @@ namespace frinno_infrastructure.Repostories.MockRepos
         public MockLoginResponse AuthenticateUser(MockUser user)
         {
             var response = new MockLoginResponse();
-            var token = new MockTokens() { User = user, Token = CreateToken(new MockLoginRequest{ Email = user.Email, Password = user.Password }).ApiToken};
+            var token = new MockTokens() { User = user, Token = CreateToken(user).ApiToken};
             token.IsValidToken = true;
             token.ValidUntil = new DateTime().AddMinutes(10);
             DB.MockTokens.Add(token);
+            response.Email = token.User.Email;
+            response.ApiToken = token.Token;
             DB.SaveChanges();
             return response;
         }
 
-        public MockTokenResponse CreateToken(MockLoginRequest request)
+        public MockTokenResponse CreateToken(MockUser user)
         {
             var randomTokn = "ajgaAy6e7weAnamaIa9982";
-            var response = new MockTokenResponse() { ApiToken = randomTokn };
+            var response = new MockTokenResponse();
+
+            var sKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(randomTokn));
+
+            var sCreds = new SigningCredentials(sKey, SecurityAlgorithms.HmacSha256);
+
+                var tokeOptions = new JwtSecurityToken(
+                issuer: "https://localhost:5001",
+                audience: "https://localhost:5001",
+                claims: new List<Claim>(),
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: sCreds
+            );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+
+            response.ApiToken = tokenString;
 
             return response;
         }
@@ -47,28 +74,31 @@ namespace frinno_infrastructure.Repostories.MockRepos
             return DB.MockUsers.ToList();
         }
 
-        public string HashedPassword(MockLoginRequest request)
-        {
-            string password = request.Password;
-
-            return password;
-        }
-
         public MockRegisterResponse RegisterUser(MockRegisterRequest request, MockRoles role)
         {
             var user  = new MockRegisterResponse();
 
             //Hash pasword
 
-            var password = HashedPassword(new MockLoginRequest { Password = request.Password, Email = request.Email });
+            var hashRequest = new MockLoginRequest()
+            {
+                Password = request.Password,
+                Email = request.Email
+            };
 
             var newUser = new MockUser()
             {
                 Fullname = request.Fullname,
                 Email = request.Email,
-                Password = password,
                 Modified = DateTime.Now
             };
+
+            DB.MockUsers.Add(newUser);
+
+            var password = HashedPassword(hashRequest);
+            newUser.Password = password.hashedPassword;
+            newUser.confirmPassword = password.hashedSalt;
+
 
             //Add role
 
@@ -91,7 +121,6 @@ namespace frinno_infrastructure.Repostories.MockRepos
             }
 
             //Persist user
-            DB.MockUsers.Add(newUser);
             DB.SaveChanges();
 
             user.Fullname = newUser.Fullname;
@@ -104,16 +133,27 @@ namespace frinno_infrastructure.Repostories.MockRepos
             throw new NotImplementedException();
         }
 
-        public bool ValidateUser(MockUser request)
+        public PasswordHasModel HashedPassword(MockLoginRequest request)
         {
-            var user = DB.MockUsers.FirstOrDefault(u=>u.Password == request.Password);
+            var salt = RandomNumberGenerator.GetBytes(hashKeySize);
 
-            if(user is null)
-            {
-                return false;
-            }
+            var hash = Rfc2898DeriveBytes.Pbkdf2(
+                Encoding.UTF8.GetBytes(request.Password),
+                salt,
+                hashIterations,
+                hashAlgorithm,
+                hashKeySize
+            );
 
-            return true;
+            return new PasswordHasModel{ hashedPassword = Convert.ToHexString(hash), hashedSalt = salt };
+        }
+
+        public bool ValidateUserPassword(MockLoginRequest loginRequest, MockUser user)
+        {
+            var compare = Rfc2898DeriveBytes
+            .Pbkdf2(loginRequest.Password, user.confirmPassword, hashIterations, hashAlgorithm, hashKeySize);
+
+            return compare.SequenceEqual(Convert.FromHexString(user.Password));
         }
     }
 }
