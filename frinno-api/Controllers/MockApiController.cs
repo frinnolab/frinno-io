@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Generics;
 using frinno_core.Entities.MockModels;
+using frinno_core.Entities.MockModels.MockDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
@@ -13,9 +15,11 @@ namespace frinno_api.Controllers
     public class MockApiController : ControllerBase
     {
         private readonly IMockingDataService mockingService;
-        public MockApiController(IMockingDataService service)
+        private readonly IMockAuthService mockingAuthService;
+        public MockApiController(IMockingDataService service, IMockAuthService auth)
         {
             mockingService = service;
+            mockingAuthService = auth;
         }
         [HttpGet]
         public ActionResult<MockArticle> GetAll()
@@ -44,6 +48,7 @@ namespace frinno_api.Controllers
         }
 
         [HttpPost]
+        [Authorize()]
         public ActionResult<MockArticle> Create(MockArticle article)
         {
             if(ModelState.IsValid)
@@ -57,6 +62,7 @@ namespace frinno_api.Controllers
             }
         }
 
+        [Authorize()]
         [HttpPost("Mocks/AddBulk")]
         public ActionResult<List<object>> AddBulk(List<MockArticle> datas)
         {
@@ -69,6 +75,79 @@ namespace frinno_api.Controllers
             else{
                 return BadRequest();
             }
+        }
+
+        //Auth Endpoints
+        [HttpPost("Auth/Register")]
+        public ActionResult<MockRegisterResponse> Register(MockRegisterRequest request)
+        {
+            var newUser = new MockRegisterResponse();
+
+            if(request is null)
+            {
+                return BadRequest();
+            }
+            //Validate User
+            var role = MockRoles.MockUser;
+            newUser = mockingAuthService.RegisterUser(request, role);
+
+            return Ok(newUser);
+        }
+
+        [HttpPost("Auth/Author/Register")]
+        public ActionResult<MockRegisterResponse> RegisterAuthor(MockRegisterRequest request)
+        {
+            var newUser = new MockRegisterResponse();
+
+            if(request is null)
+            {
+                return BadRequest();
+            }
+            //Validate User
+            var role = MockRoles.MockAuthor;
+            newUser = mockingAuthService.RegisterUser(request, role);
+
+            return Ok(newUser);
+        }
+
+        [HttpPost("Auth/Login")]
+        public ActionResult<MockLoginResponse> Login(MockLoginRequest request)
+        {
+            var user = mockingAuthService.GetMockUserByEmail(request.Email);
+
+            if(user is null)
+            {
+                return BadRequest();
+            }
+
+            var IsValid  = mockingAuthService.ValidateUser(user);
+
+            if(!IsValid)
+            {
+                return BadRequest("Passwords dont match");
+            }
+
+            var loggedUser = mockingAuthService.AuthenticateUser(user);
+
+            return Ok(loggedUser);
+        }
+
+        [HttpPost("Auth/{userId}Logout")]
+        public ActionResult<string> Logout(int userId)
+        {
+
+            return Ok();
+        }
+        //Mock Users
+        [HttpGet("/Users")]
+        public ActionResult<List<MockUser>> ListUsers()
+        {
+            var users = mockingAuthService.GetMockUsers();
+            if(users is null)
+            {
+                return NoContent();
+            }
+            return Ok(users);
         }
     }
 }

@@ -2,6 +2,7 @@ using frinno_application.Generics;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
+using frinno_infrastructure.Repostories.MockRepos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
 
 builder.Services.AddScoped<IMockingDataService ,MockRepository>();
+builder.Services.AddScoped<IMockAuthService ,MockAuthRepository>();
 
 var app = builder.Build();
 
