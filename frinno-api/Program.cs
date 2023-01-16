@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(authOptions => {
         ValidateIssuerSigningKey = true,
         ValidAudience = "FrinnoIO",
         ValidIssuer = "FrinnoIO",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key ?? "5HMQ@FbiMTkWu6m"))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m"))
     };
 });
 

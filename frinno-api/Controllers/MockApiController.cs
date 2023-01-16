@@ -22,8 +22,8 @@ namespace frinno_api.Controllers
             mockingAuthService = auth;
         }
 
-        
-        [AllowAnonymous]
+
+        [Authorize]
         [HttpGet]
         public ActionResult<MockArticle> GetAll()
         {
@@ -147,6 +147,7 @@ namespace frinno_api.Controllers
             return Ok();
         }
         //Mock Users
+        [Authorize]
         [HttpGet("/Users")]
         public ActionResult<List<MockUser>> ListUsers()
         {

@@ -40,14 +40,14 @@ namespace frinno_infrastructure.Repostories.MockRepos
 
         public MockTokenResponse CreateToken(MockUser user)
         {
-            var randomTokn = "ajgaAy6e7weAnamaIa9982";
+            var randomTokn = "5HMQ@FbiMTkWu6m";
             var response = new MockTokenResponse();
 
             var sKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(randomTokn));
 
             var sCreds = new SigningCredentials(sKey, SecurityAlgorithms.HmacSha256);
 
-                var tokeOptions = new JwtSecurityToken(
+            var tokeOptions = new JwtSecurityToken(
                 issuer: "https://localhost:5001",
                 audience: "https://localhost:5001",
                 claims: new List<Claim>(),
