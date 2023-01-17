@@ -77,6 +77,7 @@ namespace frinno_infrastructure.Repostories.MockRepos
         public MockRegisterResponse RegisterUser(MockRegisterRequest request, MockRoles role)
         {
             var user  = new MockRegisterResponse();
+            
 
             //Hash pasword
 

@@ -84,34 +84,19 @@ namespace frinno_api.Controllers
         //Auth Endpoints
         [AllowAnonymous]
         [HttpPost("Auth/Register")]
-        public ActionResult<MockRegisterResponse> Register(MockRegisterRequest request)
+        public ActionResult<MockRegisterResponse> Register([FromBody] MockRegisterRequest request, [FromQuery] MockRoles role)
         {
             var newUser = new MockRegisterResponse();
+            
+            var userRole = MockRoles.MockUser;
 
             if(request is null)
             {
                 return BadRequest();
             }
+
             //Validate User
-            var role = MockRoles.MockUser;
-            newUser = mockingAuthService.RegisterUser(request, role);
-
-            return Ok(newUser);
-        }
-
-        [AllowAnonymous]
-        [HttpPost("Auth/Author/Register")]
-        public ActionResult<MockRegisterResponse> RegisterAuthor(MockRegisterRequest request)
-        {
-            var newUser = new MockRegisterResponse();
-
-            if(request is null)
-            {
-                return BadRequest();
-            }
-            //Validate User
-            var role = MockRoles.MockAuthor;
-            newUser = mockingAuthService.RegisterUser(request, role);
+            newUser = mockingAuthService.RegisterUser(request, userRole);
 
             return Ok(newUser);
         }
@@ -147,7 +132,7 @@ namespace frinno_api.Controllers
             return Ok();
         }
         //Mock Users
-        [Authorize]
+        //[Authorize]
         [HttpGet("/Users")]
         public ActionResult<List<MockUser>> ListUsers()
         {
