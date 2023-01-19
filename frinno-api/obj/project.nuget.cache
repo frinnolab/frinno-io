@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jn46UYJnB9ZRk8W35ne3w0Z5gDxlfgaPFfWN3Qz1u1AQ8x3mI8SqkDWRc0LgeznJfibeXPGwHS+jOmQFkY3x8A==",
+  "dgSpecHash": "plRICr2gTkFqA0Re4a41CR332/pqya3wXQexjZgoKONNkXCcXNNKobw26J/5LpSQ4WAgpUpzvm7q5KHuyhYE+w==",
   "success": true,
-  "projectFilePath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-api\\frinno-api.csproj",
+  "projectFilePath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-api\\frinno-api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Frinno-LAB\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

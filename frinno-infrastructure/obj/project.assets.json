@@ -1445,11 +1445,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectUniqueName": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "projectName": "frinno-infrastructure",
-      "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-      "outputPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
+      "outputPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1463,17 +1463,19 @@
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "d:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj": {
-              "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj"
+            "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj": {
+              "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj"
             },
-            "d:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj": {
-              "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj"
+            "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj": {
+              "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-core\\frinno-core.csproj"
             }
           }
         }

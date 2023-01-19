@@ -13,6 +13,11 @@ namespace frinno_infrastructure.Repostories
     public class AuthRepository : IAuthService
     {
         private readonly DataContext DB;
+
+        public AuthRepository(DataContext data)
+        {
+            DB = data;
+        }
         public UserResponse FindUserByEmail(string email)
         {
             var user = DB.Profiles.FirstOrDefault(u=>u.User.Email == email);

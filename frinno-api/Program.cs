@@ -1,8 +1,10 @@
 using System.Text;
+using frinno_application.Authentication;
 using frinno_application.Generics;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
+using frinno_infrastructure.Repostories.AuthRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +20,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
 // builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
+
+builder.Services.AddScoped<IAuthService, AuthRepository>();
+builder.Services.AddScoped<ITokenService, TokenRepository>();
 
 // builder.Services.AddIdentity<MockUser, IdentityRole>()
 //     .AddEntityFrameworkStores<MockUserContext>()
