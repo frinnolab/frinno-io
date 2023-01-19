@@ -3,8 +3,8 @@ using frinno_application.Generics;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
-using frinno_infrastructure.Repostories.MockRepos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,11 +18,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
-builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
+// //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
+// builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
 
-builder.Services.AddScoped<IMockingDataService ,MockRepository>();
-builder.Services.AddScoped<IMockAuthService ,MockAuthRepository>();
+// builder.Services.AddIdentity<MockUser, IdentityRole>()
+//     .AddEntityFrameworkStores<MockUserContext>()
+//     .AddDefaultTokenProviders();
 
 //Setup Auth
 builder.Services.AddAuthentication(authOptions => {

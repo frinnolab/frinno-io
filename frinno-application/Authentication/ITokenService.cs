@@ -6,11 +6,10 @@ using frinno_core.DTOs;
 
 namespace frinno_application.Authentication
 {
-    public interface IRegisterService
+    public interface ITokenService
     {
-        RegisterResponse Register(RegisterRequest request);
-        void Forgotten();
-        void Recovery();
+        string Generate(UserResponse user);
 
+        int? Validate(string token);
     }
 }
