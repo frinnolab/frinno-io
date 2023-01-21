@@ -20,7 +20,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
+//builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
+builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
 // builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
 
 builder.Services.AddScoped<IAuthService, AuthRepository>();

@@ -11,6 +11,8 @@ namespace frinno_application.Authentication
     {
         UserResponse FindUserByEmail(string email);
         UserResponse FindUserById(int userId);
+
+        bool UserExists(string email);
     }
 
 }

@@ -13,16 +13,22 @@ namespace frinno_infrastructure.Repostories
     public class AuthRepository : IAuthService
     {
         private readonly DataContext DB;
+        private ITokenService tokenService;
 
-        public AuthRepository(DataContext data)
+        public AuthRepository(DataContext data, ITokenService tService)
         {
             DB = data;
+            tokenService = tService;
         }
         public UserResponse FindUserByEmail(string email)
         {
-            var user = DB.Profiles.FirstOrDefault(u=>u.User.Email == email);
+            
+            var user = DB.Profiles.First(u=>u.User.Email == email );
 
-            var userResult = new UserResponse { Id = user.ID, Email = user.User.Email, FirstName = user.FirstName };
+            if(user == null)
+            return null;
+
+            var userResult = new UserResponse () { Id = user.ID, Email = user.User.Email, FirstName = user.FirstName };
 
             return userResult;
         }
@@ -41,14 +47,17 @@ namespace frinno_infrastructure.Repostories
             throw new NotImplementedException();
         }
 
-        public void Login()
-        {
-            throw new NotImplementedException();
-        }
-
         public void LogOut()
         {
-            throw new NotImplementedException();
+
+        }
+
+        public LoginResponse Login(LoginRequest request)
+        {
+            //var tokenUser = tokenService.Generate()
+
+            var tokenRespnse = new LoginResponse {};
+            return tokenRespnse;
         }
 
         public void Recovery()
@@ -68,6 +77,13 @@ namespace frinno_infrastructure.Repostories
             var userResponse = new RegisterResponse { Fullname = newUser.FirstName, Email = newUser.User.Email, Id = newUser.ID };
 
             return userResponse;
+        }
+
+        public bool UserExists(string email)
+        {
+            var user = DB.Profiles.Any(u=>u.User.Email == email);
+
+            return user;
         }
     }
 }

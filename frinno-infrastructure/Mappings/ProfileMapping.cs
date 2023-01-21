@@ -12,6 +12,11 @@ namespace frinno_infrastructure.Mappings
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Profile> builder)
         {
+            // //Configure Owns Properties
+            // builder.Property<string>("Email");
+            // builder.Property<string>("Password");
+            // builder.Property<string>("Mobile");
+            // builder.Property<string>("City");
             //Configure Owns
             builder.OwnsOne(c=>c.User);
             builder.OwnsOne(c=>c.Address);

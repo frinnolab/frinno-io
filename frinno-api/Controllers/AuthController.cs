@@ -18,14 +18,22 @@ namespace frinno_api.Controllers
             authService = authServices;
         }
 
+        //Login
+        [HttpPost("Login")]
+        public ActionResult<LoginResponse> Login()
+        {
+            
+            return Ok();
+        }
+
 
         //Register
         [HttpPost("Register")]
-        public ActionResult<RegisterResponse> Register(RegisterRequest request)
+        public ActionResult<RegisterResponse> Register( [FromBody] RegisterRequest request)
         {
-            var userExists = authService.FindUserByEmail(request.Email);
+            var userExists = authService.UserExists(request.Email);
 
-            if(userExists!=null)
+            if(userExists)
             {
                 return BadRequest(new {message = "Profile Already Exists"});
             }
@@ -42,9 +50,9 @@ namespace frinno_api.Controllers
 
         //Get Single User/Profile
         [HttpGet("Profile/{Id}")]
-        public ActionResult<UserResponse> GetProfile(int profileId)
+        public ActionResult<UserResponse> GetProfile(int Id)
         {
-            var user = authService.FindUserById(profileId);
+            var user = authService.FindUserById(Id);
 
             if(user == null)
             {
