@@ -20,30 +20,48 @@ namespace frinno_api.Controllers
 
         //Login
         [HttpPost("Login")]
-        public ActionResult<LoginResponse> Login()
+        public ActionResult<LoginResponse> Login(LoginRequest request)
         {
-            
-            return Ok();
+
+            var userExists = authService.UserExists(request.Email);
+
+            if (!userExists)
+            {
+                return BadRequest(new { message = "User does not exist.!" });
+            }
+
+            var user = authService.FindUserByEmail(request.Email);
+
+            //Validate Password
+            var isMatched = authService.VerifyPassord(request.Password, user.hashedPassword);
+
+            if (!isMatched)
+            {
+                return BadRequest(new { message = "Passowrds don't match!" });
+            }
+            //Login
+            var loggedUser = authService.Login(user);
+            return Ok(new {loggedUser});
         }
 
 
         //Register
         [HttpPost("Register")]
-        public ActionResult<RegisterResponse> Register( [FromBody] RegisterRequest request)
+        public ActionResult<RegisterResponse> Register([FromBody] RegisterRequest request)
         {
             var userExists = authService.UserExists(request.Email);
 
-            if(userExists)
+            if (userExists)
             {
-                return BadRequest(new {message = "Profile Already Exists"});
+                return BadRequest(new { message = "Profile Already Exists" });
             }
 
             var userResponse = authService.Register(request);
 
 
-            if(userResponse!=null)
+            if (userResponse != null)
             {
-                return Created(nameof(GetProfile), new {Id = userResponse.Id});
+                return Created(nameof(GetProfile), new { Id = userResponse.Id });
             }
             return Ok();
         }
@@ -54,11 +72,11 @@ namespace frinno_api.Controllers
         {
             var user = authService.FindUserById(Id);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
-            return Ok(new{user});
+            return Ok(new { user });
         }
     }
 }

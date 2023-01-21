@@ -22,13 +22,8 @@ namespace frinno_infrastructure.Repostories
         }
         public UserResponse FindUserByEmail(string email)
         {
-            
             var user = DB.Profiles.First(u=>u.User.Email == email );
-
-            if(user == null)
-            return null;
-
-            var userResult = new UserResponse () { Id = user.ID, Email = user.User.Email, FirstName = user.FirstName };
+            var userResult = new UserResponse () { Id = user.ID, Email = user.User.Email, FirstName = user.FirstName, hashedPassword = user.User.Password };
 
             return userResult;
         }
@@ -52,11 +47,10 @@ namespace frinno_infrastructure.Repostories
 
         }
 
-        public LoginResponse Login(LoginRequest request)
+        public LoginResponse Login(UserResponse user)
         {
-            //var tokenUser = tokenService.Generate()
-
-            var tokenRespnse = new LoginResponse {};
+            var userToken = tokenService.Generate(user);
+            var tokenRespnse = new LoginResponse { Email = user.Email, Fullname = user.FirstName, Token = userToken};
             return tokenRespnse;
         }
 
@@ -84,6 +78,13 @@ namespace frinno_infrastructure.Repostories
             var user = DB.Profiles.Any(u=>u.User.Email == email);
 
             return user;
+        }
+
+        public bool VerifyPassord(string password, string hashedPassword)
+        {
+            var isMatched = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+
+            return isMatched;
         }
     }
 }

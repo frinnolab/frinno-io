@@ -8,7 +8,9 @@ namespace frinno_application.Authentication
 {
     public interface ILoginService
     {
-        LoginResponse Login(LoginRequest request);
+        LoginResponse Login(UserResponse user);
         void LogOut();
+
+        bool VerifyPassord(string password, string hashedPassword);
     }
 }
