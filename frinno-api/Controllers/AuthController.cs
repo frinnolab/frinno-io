@@ -59,11 +59,11 @@ namespace frinno_api.Controllers
             var userResponse = authService.Register(request);
 
 
-            if (userResponse != null)
+            if (userResponse == null)
             {
-                return Created(nameof(GetProfile), new { Id = userResponse.Id });
+                return BadRequest("Failed to create profile");
             }
-            return Ok();
+            return Created(nameof(GetProfile), new { Id = userResponse.Id });
         }
 
         //Get Single User/Profile
