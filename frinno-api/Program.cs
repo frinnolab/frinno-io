@@ -1,7 +1,9 @@
 using System.Text;
+using frinno_application.Articles;
 using frinno_application.Authentication;
 using frinno_application.Generics;
 using frinno_application.Profiles;
+using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
@@ -29,6 +31,7 @@ builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabas
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();
 builder.Services.AddScoped<IProfileService<Profile>, ProfilesRepository>();
+builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 
 // builder.Services.AddIdentity<MockUser, IdentityRole>()
 //     .AddEntityFrameworkStores<MockUserContext>()
