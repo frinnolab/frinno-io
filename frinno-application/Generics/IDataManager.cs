@@ -6,7 +6,7 @@ using frinno_core.Entities;
 
 namespace frinno_application.Generics
 {
-    public interface IDataManager<T> where T : class
+    public interface IDataManager<T>
     {
         T AddNew(T newData);
         T Update(T updateData);
