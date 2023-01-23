@@ -67,7 +67,7 @@ namespace frinno_infrastructure.Repostories
         public Profile Update(Profile updateData)
         {
             var response = DB.Profiles.Update(updateData);
-
+            DB.SaveChanges();
             return response.Entity;
         }
 

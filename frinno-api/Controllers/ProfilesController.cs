@@ -27,8 +27,8 @@ namespace frinno_api.Controllers
             //New Profile instance
             var newProfile = new Profile
             {
-                FirstName = request.Fullname.Split(" ")[0],
-                LastName = request.Fullname.Split(" ")[1],
+                FirstName = request.Fullname.Split(" ").ToArray()[0],
+                LastName = request.Fullname.Split(" ").ToArray()[1],
                 User = new frinno_core.Entities.user.User 
                 {
                     Email = request.Email,
@@ -72,8 +72,8 @@ namespace frinno_api.Controllers
                 return NotFound();
             }
 
-            currentProfile.FirstName = request.Fullname.Split(" ")[0];
-            currentProfile.LastName = request.Fullname.Split(" ")[1];
+            currentProfile.FirstName = request.Fullname.Split(" ").ToArray()[0];
+            currentProfile.LastName = request.Fullname.Split(" ").ToArray()[1];
             currentProfile.User.Email = request.Email;
             currentProfile.User.Password = request.Password;
             currentProfile.Address.City = request.AddressInfo.City;
@@ -116,19 +116,14 @@ namespace frinno_api.Controllers
             {
                 return NotFound();
             }
-            var response = new ProfileInfoResponse 
-            { 
+            var response = new ProfileInfoResponse (){ 
                 Id = profileInfo.ID, 
                 Fullname = $"{profileInfo.FirstName} {profileInfo.LastName}", 
                 Email = profileInfo.User.Email,
-                AddressInfo = new ProfileAddressInfo 
-                {
+                AddressInfo = new ProfileAddressInfo (){
                     City = profileInfo.Address.City,
                     Mobile = profileInfo.Address.Mobile
                 },
-                TotalArticles = profileInfo.ProfileArticles.Count,
-                TotalProjects = profileInfo.Projects.Count,
-                TotalResumes = profileInfo.Resumes.Count
             };
             return Ok(response);
         }
@@ -141,12 +136,12 @@ namespace frinno_api.Controllers
 
             var listResponse = new DataListResponse<ProfileInfoResponse>();
 
-            if(listResponse == null)
+            if(profiles == null)
             {
                 return NoContent();
             }
 
-            return Ok(listResponse);
+            return Ok(profiles);
 
         }
     }
