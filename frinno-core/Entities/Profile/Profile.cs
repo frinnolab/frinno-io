@@ -19,8 +19,5 @@ namespace frinno_core.Entities.Profiles
         public List<ProfileArticles> ProfileArticles { get; set; }
         public List<Projects.Project> Projects { get; set; }
         public List<Resumes.Resume> Resumes { get; set; }
-
-
-
     }
 }
