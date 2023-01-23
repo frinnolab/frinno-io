@@ -6,7 +6,7 @@ using frinno_application.Generics;
 
 namespace frinno_application.Projects
 {
-    public interface IProjectsManager <Projects> : IMasterService<frinno_core.Entities.Projects.Project>
+    public interface IProjectsManager <Project> : IMasterService<frinno_core.Entities.Projects.Project>
     {
         
     }

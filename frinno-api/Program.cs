@@ -1,14 +1,17 @@
 using System.Text;
 using frinno_application.Articles;
 using frinno_application.Authentication;
+using frinno_application.Skills;
 using frinno_application.Generics;
 using frinno_application.Profiles;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
+using frinno_core.Entities.Skill;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
 using frinno_infrastructure.Repostories.AuthRepositories;
+using frinno_infrastructure.Repostories.SkillsRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +35,8 @@ builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();
 builder.Services.AddScoped<IProfileService<Profile>, ProfilesRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
+builder.Services.AddScoped<ISkillsService, SkillsRepository>();
+
 
 // builder.Services.AddIdentity<MockUser, IdentityRole>()
 //     .AddEntityFrameworkStores<MockUserContext>()
