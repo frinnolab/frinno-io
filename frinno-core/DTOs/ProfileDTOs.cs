@@ -24,8 +24,7 @@ namespace frinno_core.DTOs
     //Profile Single Resource Request
     public record ProfileInfoRequest
     {
-        [Required]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string? Fullname { get; set; }
         public string? Email { get; set; }
     }

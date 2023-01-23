@@ -27,31 +27,31 @@ namespace frinno_api.Controllers
         }
 
         //Updates a Profile Resource
-        [HttpPut("Id")]
-        public ActionResult<ProfileInfoResponse> UpdateProfile([FromQuery] UpdateProfileRequest request)
+        [HttpPut("{Id}")]
+        public ActionResult<ProfileInfoResponse> UpdateProfile(int Id, [FromBody] UpdateProfileRequest request)
         {
-            var response = new ProfileInfoResponse { Id = request.Id, Email = request.Email, Fullname = request.Fullname };
+            var response = new ProfileInfoResponse { Id = Id, Email = request.Email, Fullname = request.Fullname };
             return Ok(response);
         }
 
         //Removes Single Profile Resource
-        [HttpDelete("Id")]
-        public ActionResult<ProfileInfoResponse> DeleteProfile([FromQuery] ProfileInfoRequest query)
+        [HttpDelete("{Id}")]
+        public ActionResult<ProfileInfoResponse> DeleteProfile(int Id)
         {
             return Ok();
         }
 
         //Returns a Profile Resource
-        [HttpGet("Id")]
-        public ActionResult<ProfileInfoResponse> GetSingle([FromQuery] ProfileInfoRequest query)
+        [HttpGet("{Id}")]
+        public ActionResult<ProfileInfoResponse> GetSingle(int Id, [FromQuery] ProfileInfoRequest query)
         {
-            var response = new ProfileInfoResponse { Id = query.Id, Fullname = query.Fullname, Email = query.Email };
+            var response = new ProfileInfoResponse { Id = Id, Fullname = query.Fullname, Email = query.Email };
             return Ok(response);
         }
         
         //Gets All Profiles
         [HttpGet()]
-        public ActionResult<DataListResponse<ProfileInfoResponse>> GetAllProfiles([FromQuery] ProfileInfoRequest query)
+        public ActionResult<DataListResponse<ProfileInfoResponse>> GetAllProfiles([FromQuery] ProfileInfoRequest? query)
         {
 
             var listResponse = new DataListResponse<ProfileInfoResponse>();
