@@ -4,13 +4,19 @@ D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\appsettings.j
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.runtimeconfig.json
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\frinno-api.pdb
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\BCrypt.Net-Core.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\IdentityModel.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.DotNet.PlatformAbstractions.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.InMemory.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.Caching.Memory.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Identity.Client.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
@@ -19,6 +25,7 @@ D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Ide
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

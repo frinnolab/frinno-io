@@ -66,3 +66,10 @@ D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\frinno-infrastructure.dl
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\frinno-core.pdb
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\frinno-application.pdb
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\frinno-infrastructure.pdb
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\BCrypt.Net-Core.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\IdentityModel.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\FRINNOLAB\Projects\frn\frinno-api\bin\Release\net6.0\Newtonsoft.Json.dll
