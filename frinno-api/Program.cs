@@ -18,6 +18,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using frinno_application.Projects;
 using frinno_core.Entities.Projects;
+using frinno_infrastructure.Repostories.ProjectsRepositories;
+using frinno_infrastructure.Repostories.ProfilesRepositories;
+using frinno_infrastructure.Repostories.ArticlesRepositories;
+using frinno_infrastructure.Repostories.SkillsRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +38,7 @@ builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabas
 
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();
-builder.Services.AddScoped<IProfileService<Profile>, ProfilesRepository>();
+builder.Services.AddScoped<IProfileService<Profile>, ProfileRepository>();
 builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 builder.Services.AddScoped<ISkillsService, SkillsRepository>();

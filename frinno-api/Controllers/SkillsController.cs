@@ -36,88 +36,9 @@ namespace frinno_api.Controllers
         [HttpPost()]
         public ActionResult<CreateNewSkillResponse> CreateNewSkill(CreateNewSkillRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var newSkill = new Skill
-            {
-                Name = request.Name,
-            };
-
-            //Tools
-
-            var skillTools = new List<SkillTool>();
-
-            request.SkillTools.ForEach((t) =>
-            {
-                var tool = new SkillTool
-                {
-                    Name = t.Name,
-                    Usage = t.Usage
-                };
-                skillTools.Add(tool);
-            });
-
-            newSkill.Tools = skillTools;
-
-            //Profile
-            if (request.ProfileId > 0)
-            {
-                var skillProfile = profileService.GetSingleById(request.ProfileId);
-                if (skillProfile == null)
-                {
-                    return NotFound("Profile Not Found!.");
-                }
-
-                newSkill.Profile = skillProfile;
-            }
-
-            //Project
-            if (request.ProjectId > 0)
-            {
-                var skillProject = projectsService.GetSingleById(request.ProjectId);
-                if (skillProject == null)
-                {
-                    return NotFound("Profile Not Found!.");
-                }
-
-                newSkill.Project = skillProject;
-            }
-
-            var skillResponse = skillService.AddNew(newSkill);
-
-            if (skillResponse == null)
-            {
-                return BadRequest("Could not Create Skill");
-            }
-
-            var response = new CreateNewSkillResponse
-            {
-                ID = skillResponse.ID,
-                // ProfileId = skillResponse.Profile.ID,
-                // ProjectId = skillResponse.Project.ID,
-            };
-            var toolsResponse = skillResponse.Tools.ToList();
-            var toolsList = new List<CreateSkillTools>();
-            if (toolsResponse != null)
-            {
-                foreach (var item in toolsResponse)
-                {
-                    var itemTool = new CreateSkillTools
-                    {
-                        ID = item.ID,
-                        Name = item.Name,
-                        Usage = item.Usage
-                    };
-                    toolsList.Add(itemTool);
-                }
-            }
-
-            response.SkillTools = toolsList;
+            
             //NewSkill
-            return Created(nameof(GetSingleSkill), new {Id = response.ID});
+            return Ok();
         }
 
 
@@ -125,39 +46,8 @@ namespace frinno_api.Controllers
         [HttpGet("{Id}")]
         public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
         {
-            var skillInfo = skillService.GetSingleById(Id);
 
-            if(skillInfo==null)
-            {
-                return NotFound("Skill Not Found!.");
-            }
-
-            var skillResponse = new SkillInfoResponse 
-            {
-                ID = skillInfo.ID,
-                Name = skillInfo.Name,
-                ProfileId = skillInfo.Profile.ID,
-                ProjectId = skillInfo.Project.ID,
-            };
-
-            var skillTools = new List<CreateSkillTools>();
-            var toolsList = skillInfo.Tools.ToList();
-
-            foreach (var item in toolsList)
-            {
-                var tool = new CreateSkillTools 
-                {
-                    ID = item.ID,
-                    Name = item.Name,
-                    Usage = item.Usage
-                };
-
-                skillTools.Add(tool);
-            }
-
-            skillResponse.SkillTools = skillTools;
-
-            return Ok(skillResponse);
+            return Ok();
         }
 
     }
