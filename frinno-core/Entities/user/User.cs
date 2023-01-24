@@ -14,8 +14,8 @@ namespace frinno_core.Entities.user
         public string Email { get; set; }
         [Column]
         public string Password { get; set; }
-        [NotMapped]
-        public string coPassword { get; set; }
+        //[NotMapped]
+        //public string coPassword { get; set; }
 
         //[NotMapped]
         //public Profiles.Profile Profile { get; set; }

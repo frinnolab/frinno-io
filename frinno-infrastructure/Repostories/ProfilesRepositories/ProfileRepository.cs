@@ -15,9 +15,11 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             DB = data;
         }
-        public void AddNew(Profile newData)
+        public Profile AddNew(Profile newData)
         {
-            DB.Profiles.Add(newData);
+            var data = DB.Profiles.Add(newData);
+            SaveContextChanges();
+            return data.Entity;
         }
 
         public IEnumerable<Profile> FetchAll()
@@ -35,10 +37,16 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             return DB.Profiles.Find(dataId);
         }
 
-        public void Remove(int dataId)
+        public bool ProfileExists(Profile profile)
         {
-            var data = DB.Profiles.Find(dataId);
+            return DB.Profiles.Any((p)=> p.User.Email == profile.User.Email);
+        }
+
+        public void Remove(Profile data)
+        {
+            DB.Profiles.Find(data);
             DB.Profiles.Remove(data);
+            SaveContextChanges();
         }
 
         public void RemoveProfileImage()
@@ -51,9 +59,11 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             DB.SaveChanges();
         }
 
-        public void Update(Profile updateData)
+        public Profile Update(Profile updateData)
         {
-            DB.Profiles.Update(updateData);
+            var data = DB.Profiles.Update(updateData);
+            SaveContextChanges();
+            return data.Entity;
         }
 
         public void UploadProfileImage()

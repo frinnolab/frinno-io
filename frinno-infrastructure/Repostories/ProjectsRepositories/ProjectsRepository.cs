@@ -16,9 +16,11 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             DB = data;
         }
-        public void AddNew(Project newData)
+        public Project AddNew(Project newData)
         {
-            DB.Projects.Add(newData);
+            var data = DB.Projects.Add(newData);
+            SaveContextChanges();
+            return data.Entity;
         }
 
         public IEnumerable<Project> FetchAll()
@@ -36,10 +38,10 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
             return DB.Projects.Find(dataId);
         }
 
-        public void Remove(int dataId)
+        public void Remove(Project data)
         {
-            var data = DB.Projects.Find(dataId);
             DB.Projects.Remove(data);
+            SaveContextChanges();
         }
 
         public void SaveContextChanges()
@@ -47,9 +49,11 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
             DB.SaveChanges();
         }
 
-        public void Update(Project updateData)
+        public Project Update(Project updateData)
         {
-            DB.Projects.Update(updateData);
+            var data = DB.Projects.Update(updateData);
+            SaveContextChanges();
+            return data.Entity;
         }
     }
 }

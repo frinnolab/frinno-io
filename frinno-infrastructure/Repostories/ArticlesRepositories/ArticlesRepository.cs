@@ -16,9 +16,17 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         {
             DB = data;
         }
-        public void AddNew(Article newData)
+        public Article AddNew(Article newData)
         {
-            DB.Articles.Add(newData);
+            var data = DB.Articles.Add(newData);
+            SaveContextChanges();
+
+            return data.Entity;
+        }
+
+        public bool Exists(Article data)
+        {
+            return DB.Articles.Any((a)=>a==data);
         }
 
         // public Article CreateAticlesWithTag(int articleId, Tag tag)
@@ -51,10 +59,10 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             return DB.Articles.Find(dataId);
         }
 
-        public void Remove(int dataId)
+        public void Remove(Article data)
         {
-            var data = DB.Articles.Find(dataId);
             DB.Articles.Remove(data);
+            SaveContextChanges();
         }
 
         public void SaveContextChanges()
@@ -62,9 +70,12 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             DB.SaveChanges();
         }
 
-        public void Update(Article updateData)
+        public Article Update(Article updateData)
         {
-            DB.Articles.Update(updateData);
+            var data = DB.Articles.Update(updateData);
+            SaveContextChanges();
+
+            return data.Entity;
         }
     }
 }

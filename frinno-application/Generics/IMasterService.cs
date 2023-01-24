@@ -9,5 +9,6 @@ namespace frinno_application.Generics
 {
     public interface IMasterService <T> : IDataManager<T>, IDataCollection<T>  where T : class 
     {
+        
     }
 }

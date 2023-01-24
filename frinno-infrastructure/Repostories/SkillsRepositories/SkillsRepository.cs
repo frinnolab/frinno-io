@@ -15,9 +15,12 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
         {
             DB = data;
         }
-        public void AddNew(Skill newData)
+        public Skill AddNew(Skill newData)
         {
-            DB.Skills.Add(newData);
+            var data = DB.Skills.Add(newData);
+            SaveContextChanges();
+
+            return data.Entity;
         }
 
         public IEnumerable<Skill> FetchAll()
@@ -35,10 +38,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             return DB.Skills.Find(dataId);
         }
 
-        public void Remove(int dataId)
+        public void Remove(Skill data)
         {
-            var data = DB.Skills.Find(dataId);
             DB.Skills.Remove(data);
+            SaveContextChanges();
         }
 
         public void SaveContextChanges()
@@ -46,9 +49,11 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             DB.SaveChanges();
         }
 
-        public void Update(Skill updateData)
+        public Skill Update(Skill updateData)
         {
-            DB.Skills.Update(updateData);
+            var data  = DB.Skills.Update(updateData);
+            SaveContextChanges();
+            return data.Entity;
         }
     }
 }

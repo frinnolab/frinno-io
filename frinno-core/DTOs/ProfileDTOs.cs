@@ -10,7 +10,8 @@ namespace frinno_core.DTOs
     
     public record CreateAProfileRequest
     {
-        public string Fullname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public ProfileAddressInfo AddressInfo { get; set; }
@@ -25,8 +26,9 @@ namespace frinno_core.DTOs
     public record ProfileInfoRequest
     {
         public int? Id { get; set; }
-        public string? Fullname { get; set; }
-        public string? Email { get; set; }
+        public string Fullname { get; set; }
+        public string Email { get; set; }
+        
     }
 
     //Profile Response.
