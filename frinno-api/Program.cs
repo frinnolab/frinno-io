@@ -11,7 +11,6 @@ using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
 using frinno_infrastructure.Repostories.AuthRepositories;
-using frinno_infrastructure.Repostories.SkillsRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +18,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using frinno_application.Projects;
 using frinno_core.Entities.Projects;
-using frinno_infrastructure.Repostories.ProjectsRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
