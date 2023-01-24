@@ -96,8 +96,8 @@ namespace frinno_api.Controllers
             var response = new CreateNewSkillResponse
             {
                 ID = skillResponse.ID,
-                ProfileId = skillResponse.Profile.ID,
-                ProjectId = skillResponse.Project.ID,
+                // ProfileId = skillResponse.Profile.ID,
+                // ProjectId = skillResponse.Project.ID,
             };
             var toolsResponse = skillResponse.Tools.ToList();
             var toolsList = new List<CreateSkillTools>();

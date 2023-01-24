@@ -19,64 +19,64 @@ namespace frinno_api.Controllers
         }
 
         //Login
-        [HttpPost("Login")]
-        public ActionResult<LoginResponse> Login(LoginRequest request)
-        {
+        // [HttpPost("Login")]
+        // public ActionResult<LoginResponse> Login(LoginRequest request)
+        // {
 
-            var userExists = authService.UserExists(request.Email);
+        //     var userExists = authService.UserExists(request.Email);
 
-            if (!userExists)
-            {
-                return BadRequest(new { message = "User does not exist.!" });
-            }
+        //     if (!userExists)
+        //     {
+        //         return BadRequest(new { message = "User does not exist.!" });
+        //     }
 
-            var user = authService.FindUserByEmail(request.Email);
+        //     var user = authService.FindUserByEmail(request.Email);
 
-            //Validate Password
-            var isMatched = authService.VerifyPassord(request.Password, user.hashedPassword);
+        //     //Validate Password
+        //     var isMatched = authService.VerifyPassord(request.Password, user.hashedPassword);
 
-            if (!isMatched)
-            {
-                return BadRequest(new { message = "Passowrds don't match!" });
-            }
-            //Login
-            var loggedUser = authService.Login(user);
-            return Ok(new {loggedUser});
-        }
+        //     if (!isMatched)
+        //     {
+        //         return BadRequest(new { message = "Passowrds don't match!" });
+        //     }
+        //     //Login
+        //     var loggedUser = authService.Login(user);
+        //     return Ok(new {loggedUser});
+        // }
 
 
         //Register
-        [HttpPost("Register")]
-        public ActionResult<RegisterResponse> Register([FromBody] RegisterRequest request)
-        {
-            var userExists = authService.UserExists(request.Email);
+        // [HttpPost("Register")]
+        // public ActionResult<RegisterResponse> Register([FromBody] RegisterRequest request)
+        // {
+        //     var userExists = authService.UserExists(request.Email);
 
-            if (userExists)
-            {
-                return BadRequest(new { message = "Profile Already Exists" });
-            }
+        //     if (userExists)
+        //     {
+        //         return BadRequest(new { message = "Profile Already Exists" });
+        //     }
 
-            var userResponse = authService.Register(request);
+        //     var userResponse = authService.Register(request);
 
 
-            if (userResponse == null)
-            {
-                return BadRequest("Failed to create profile");
-            }
-            return Created(nameof(GetProfile), new { Id = userResponse.Id });
-        }
+        //     if (userResponse == null)
+        //     {
+        //         return BadRequest("Failed to create profile");
+        //     }
+        //     return Created(nameof(GetProfile), new { Id = userResponse.Id });
+        // }
 
         //Get Single User/Profile
-        [HttpGet("Profile/{Id}")]
-        public ActionResult<UserResponse> GetProfile(int Id)
-        {
-            var user = authService.FindUserById(Id);
+        // [HttpGet("Profile/{Id}")]
+        // public ActionResult<UserResponse> GetProfile(int Id)
+        // {
+        //     var user = authService.FindUserById(Id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(new { user });
-        }
+        //     if (user == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     return Ok(new { user });
+        // }
     }
 }
