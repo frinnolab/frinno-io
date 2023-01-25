@@ -1,8 +1,27 @@
+using System.Text;
+using frinno_application.Articles;
+using frinno_application.Authentication;
+using frinno_application.Skills;
 using frinno_application.Generics;
+using frinno_application.Profiles;
+using frinno_core.Entities.Articles;
+using frinno_core.Entities.Profiles;
+using frinno_core.Entities.Skill;
 using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
+using frinno_infrastructure.Repostories.AuthRepositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using frinno_application.Projects;
+using frinno_core.Entities.Projects;
+using frinno_infrastructure.Repostories.ProjectsRepositories;
+using frinno_infrastructure.Repostories.ProfilesRepositories;
+using frinno_infrastructure.Repostories.ArticlesRepositories;
+using frinno_infrastructure.Repostories.SkillsRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +33,67 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
-builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
+builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+// builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
 
-builder.Services.AddScoped<IMockingDataService ,MockRepository>();
+builder.Services.AddScoped<IAuthService, AuthRepository>();
+builder.Services.AddScoped<ITokenService, TokenRepository>();
+builder.Services.AddScoped<IProfileService<Profile>, ProfileRepository>();
+builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
+builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
+builder.Services.AddScoped<ISkillsService, SkillsRepository>();
+
+
+// builder.Services.AddIdentity<MockUser, IdentityRole>()
+//     .AddEntityFrameworkStores<MockUserContext>()
+//     .AddDefaultTokenProviders();
+
+//Setup Auth
+builder.Services.AddAuthentication(authOptions => {
+    authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(jwtOptions=>{
+    var key = builder.Configuration.GetSection("MockSettings:MockApiKey").ToString();
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters ()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidAudience = "FrinnoIO",
+        ValidIssuer = "FrinnoIO",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m"))
+    };
+});
+
+
+builder.Services.AddSwaggerGen(c=>{
+        // Include 'SecurityScheme' to use JWT Authentication
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
+
 
 var app = builder.Build();
 
@@ -38,6 +115,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -10,7 +10,6 @@ namespace frinno_api.Controllers
     [Route("api/[controller]")]
     public class ArticlesController : ControllerBase
     {
-
         
     }
 }
