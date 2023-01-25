@@ -9,6 +9,7 @@ using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace frinno_api.Controllers
 {
     [ApiController]
@@ -178,27 +179,58 @@ namespace frinno_api.Controllers
             }
 
             //Format response
+            var profileInfos = profiles.ToList();
+            // Select((p) =>
+            // new ProfileInfoResponse
+            // {
+            //     Id = p.ID,
+            //     Fullname = $"{p.FirstName} {p.LastName}",
+            //     TotalArticles = p.ProfileArticles.Count,
+            //     TotalProjects = p.Projects.Count,
+            //     TotalResumes = p.Resumes.Count,
+            //     AddressInfo = new ProfileAddressInfo
+            //     {
+            //         Mobile = p.Address.Mobile,
+            //         City = p.Address.City
+            //     }
+            // })
+            // .ToList();
 
             var response = new DataListResponse<ProfileInfoResponse>();
-            response.Data = new List<ProfileInfoResponse>();
-
-            foreach (var profile in profiles)
+            response.Data = profileInfos.Select((p)=> new ProfileInfoResponse 
             {
-                var infoResponse = new ProfileInfoResponse
+                Id = p.ID,
+                Fullname = $"{p.FirstName} {p.LastName}",
+                TotalArticles = p.ProfileArticles.Count,
+                TotalProjects = p.Projects.Count,
+                TotalResumes = p.Resumes.Count,
+                AddressInfo = new ProfileAddressInfo
                 {
-                    Id = profile.ID,
-                    Fullname = $"{profile.FirstName} {profile.LastName}",
-                    Email = profile.User.Email,
-                    AddressInfo = new ProfileAddressInfo
-                    {
-                        City = profile.Address.City,
-                        Mobile = profile.Address.Mobile
-                    }
-                };
+                    Mobile = p.Address.Mobile,
+                    City = p.Address.City
+                }
+            } ).ToList();
+            response.TotalItems = response.Data.Count;
 
-                response.Data.Add(infoResponse);
+
+
+            // foreach (var profile in profiles)
+            // {
+            //     var infoResponse = new ProfileInfoResponse
+            //     {
+            //         Id = profile.ID,
+            //         Fullname = $"{profile.FirstName} {profile.LastName}",
+            //         Email = profile.User.Email,
+            //         AddressInfo = new ProfileAddressInfo
+            //         {
+            //             City = profile.Address.City,
+            //             Mobile = profile.Address.Mobile
+            //         }
+            //     };
+
+            //     response.Data.Add(infoResponse);
                 
-            }
+            // }
             return Ok(response);
 
         }
