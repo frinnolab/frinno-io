@@ -36,7 +36,6 @@ namespace frinno_api.Controllers
         [HttpPost()]
         public ActionResult<CreateNewSkillResponse> CreateNewSkill(CreateNewSkillRequest request)
         {
-            
             //NewSkill
             return Ok();
         }
@@ -46,8 +45,54 @@ namespace frinno_api.Controllers
         [HttpGet("{Id}")]
         public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
         {
-
             return Ok();
+        }
+
+        //Get All Skills
+        [HttpGet()]
+        public ActionResult<DataListResponse<SkillInfoResponse>> GetAllSkills()
+        {
+            var skills = skillService.FetchAll();
+
+            if(skills == null)
+            {
+                return NoContent();
+            }
+
+            var response = new DataListResponse<SkillInfoResponse>()
+            {
+                TotalItems = skills.Count(),
+            };
+
+            var skillInfosList = new List<SkillInfoResponse>();
+            var skillToolsList = new List<CreateSkillTools>();
+
+            foreach (var skill in skills)
+            {
+                var skillInfo = new SkillInfoResponse 
+                {
+                    ID = skill.ID,
+                    Name = skill.Name,
+                };
+
+                foreach (var skillItem in skill.Tools)
+                {                    
+                    var item = new CreateSkillTools
+                    {
+                        ID = skillItem.ID,
+                        Name = skillItem.Name,
+                        Usage = skillItem.Usage
+                    };
+
+                    skillToolsList.Add(item);
+                }
+                skillInfo.SkillTools = skillToolsList;
+                skillInfosList.Add(skillInfo);
+
+            }
+
+            response.Data = skillInfosList;
+            return Ok(new {response});
         }
 
     }

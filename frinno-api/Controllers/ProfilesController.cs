@@ -180,6 +180,7 @@ namespace frinno_api.Controllers
             //Format response
 
             var response = new DataListResponse<ProfileInfoResponse>();
+            response.Data = new List<ProfileInfoResponse>();
 
             foreach (var profile in profiles)
             {

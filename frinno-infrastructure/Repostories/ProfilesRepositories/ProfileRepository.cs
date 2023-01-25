@@ -44,7 +44,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
 
         public void Remove(Profile data)
         {
-            DB.Profiles.Find(data);
+            DB.Profiles.Find(data.ID);
             DB.Profiles.Remove(data);
             SaveContextChanges();
         }
