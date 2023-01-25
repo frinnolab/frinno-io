@@ -36,16 +36,123 @@ namespace frinno_api.Controllers
         [HttpPost()]
         public ActionResult<CreateNewSkillResponse> CreateNewSkill(CreateNewSkillRequest request)
         {
-            //NewSkill
-            return Ok();
-        }
+            var skillProfileId = 0;
+            var skillProjectId = 0;
+            //Find Profile
+            var skillProfile = new Profile();
+            if(request.ProfileId>0)
+            {
+                skillProfile = profileService.FetchSingleById(request.ProfileId);
+            }
 
+            //Find Project
+            var skillProject = new Project();
+            if(request.ProjectId>0)
+            {
+                skillProject = projectsService.FetchSingleById(request.ProjectId);
+            }
+
+            //NewSkill
+            var newSkill = new Skill
+            {
+                Name = request.Name   
+            };
+
+            //Add Skill to profile.
+            if(skillProfile!=null)
+            {
+                newSkill.Profile = skillProfile;
+                skillProfileId = skillProfile.ID;
+            };
+
+            //Add Skill to project
+            if(skillProject != null)
+            {
+                newSkill.Project = skillProject;
+                skillProfileId = skillProject.ID;
+            };
+            
+            var skillTools = new List<SkillTool>();
+            
+            //Add Skill Tools used
+            if(request.SkillTools != null && request.SkillTools.Count >  0)
+            {
+                foreach (var skItem in request.SkillTools)
+                {
+                    var item = new SkillTool 
+                    {
+                        Name = skItem.Name,
+                        Usage = skItem.Usage
+                    };
+
+                    skillTools.Add(item);
+                }
+            }
+
+            //Add Tools to Skill
+            if(skillTools != null && skillTools.Count>0)
+            {
+                newSkill.Tools = skillTools;
+            };
+
+            try
+            {
+                var skillResponse = skillService.AddNew(newSkill);
+                newSkill = skillResponse;
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(new{ Message = $"{ex.Message}" });
+            }
+
+            var response = new CreateNewSkillResponse
+            {
+                ID = newSkill.ID,
+                Name = newSkill.Name,
+                ProfileId = skillProfileId,
+                ProjectId = skillProjectId
+            };
+            return Created(nameof(GetSingleSkill), new { Id = response.ID});
+        }
 
         //Get Single Skill
         [HttpGet("{Id}")]
         public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
         {
-            return Ok();
+            var skillProfileId  = 0;
+            var skillProjectId  = 0;
+            var skill = skillService.FetchSingleById(Id);
+
+            if(skill == null)
+            {
+                return NotFound("Resource Not Found.!");
+            }
+
+            //Find Profile with this Skill
+            var skillProfile = skill.Profile;
+
+            if(skillProfile != null)
+            {
+                skillProfileId = skillProfile.ID;
+            }
+
+            //Find Project with this skill
+            var skillProject = skill.Project;
+
+            if(skillProject != null)
+            {
+                skillProjectId = skillProject.ID;
+            }
+
+            //Format response
+            var response = new SkillInfoResponse
+            {
+                ID = skill.ID,
+                Name = skill.Name,
+                ProfileId = skillProfileId,
+                ProjectId = skillProjectId
+            };
+            return Ok(response);
         }
 
         //Get All Skills
@@ -67,32 +174,37 @@ namespace frinno_api.Controllers
             var skillInfosList = new List<SkillInfoResponse>();
             var skillToolsList = new List<CreateSkillTools>();
 
-            foreach (var skill in skills)
-            {
-                var skillInfo = new SkillInfoResponse 
-                {
-                    ID = skill.ID,
-                    Name = skill.Name,
-                };
+            // foreach (var skill in skills)
+            // {
+            //     var skillInfo = new SkillInfoResponse 
+            //     {
+            //         ID = skill.ID,
+            //         Name = skill.Name,
+            //     };
 
-                foreach (var skillItem in skill.Tools)
-                {                    
-                    var item = new CreateSkillTools
-                    {
-                        ID = skillItem.ID,
-                        Name = skillItem.Name,
-                        Usage = skillItem.Usage
-                    };
+            //     var skillTools = skill.Tools.ToList();
+            //     if (skillTools != null)
+            //     {
+            //         foreach (var skillItem in skillTools)
+            //         {
+            //             var item = new CreateSkillTools
+            //             {
+            //                 ID = skillItem.ID,
+            //                 Name = skillItem.Name,
+            //                 Usage = skillItem.Usage
+            //             };
 
-                    skillToolsList.Add(item);
-                }
-                skillInfo.SkillTools = skillToolsList;
-                skillInfosList.Add(skillInfo);
+            //             skillToolsList.Add(item);
+            //         }
+            //     }
+               
+            //     skillInfo.SkillTools = skillToolsList;
+            //     skillInfosList.Add(skillInfo);
 
-            }
+            // }
 
-            response.Data = skillInfosList;
-            return Ok(new {response});
+            // response.Data = skillInfosList;
+            return Ok(skills);
         }
 
     }
