@@ -8,6 +8,7 @@ namespace frinno_application.Profiles
 {
     public interface IProfileService<Profile> : IMasterService<frinno_core.Entities.Profiles.Profile>
     {
+        bool ProfileExists(Profile profile);
         void UploadProfileImage();
         void RemoveProfileImage();
     }

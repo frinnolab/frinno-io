@@ -10,7 +10,7 @@ namespace frinno_application.Articles
 {
     public interface IArticlesService <Article> : IMasterService<frinno_core.Entities.Articles.Article>
     {
-        Article CreateAticlesWithTag(int articleId, Tag tag);
-        Article CreateAticlesWithTags(int articleId, Tag[] tags);
+        // Article CreateAticlesWithTag(int articleId, Tag tag);
+        // Article CreateAticlesWithTags(int articleId, Tag[] tags);
     }
 }

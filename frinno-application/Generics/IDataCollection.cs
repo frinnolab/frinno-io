@@ -6,10 +6,10 @@ using frinno_core.Entities;
 
 namespace frinno_application.Generics
 {
-    public interface IDataCollection <T> where T : BaseEntity
+    public interface IDataCollection <T>
     {
-        T GetSingle(T data);
-        T GetSingleById(int dataId);
-        IEnumerable<T> GetAll();
+        T FetchSingle(T data);
+        T FetchSingleById(int dataId);
+        IEnumerable<T> FetchAll();
     }
 }

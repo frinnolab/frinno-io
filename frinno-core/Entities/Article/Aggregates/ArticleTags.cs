@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace frinno_core.Entities.Article.Aggregates
 {
-    public class ArticleTags
+    public class ArticleTags : BaseEntity
     {
         public int ArticelId{ get; set; }
         public Articles.Article Article { get; set; }

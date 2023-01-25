@@ -7,8 +7,8 @@ using frinno_core.Entities;
 
 namespace frinno_application.Generics
 {
-    public interface IMasterService <T> : IDataManager<T>, IDataCollection<T>  where T : BaseEntity 
+    public interface IMasterService <T> : IDataManager<T>, IDataCollection<T>  where T : class 
     {
-        IEnumerable<T> GetAllBy(Expression<Func<T, bool>> predicate);
+        
     }
 }
