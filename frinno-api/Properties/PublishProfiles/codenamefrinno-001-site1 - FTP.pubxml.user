@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
     <_PublishTargetUrl>ftp://win5097.site4now.net:21/frinnoapi</_PublishTargetUrl>
-    <History>False|2023-01-25T07:59:50.4054669Z;True|2023-01-25T10:57:37.8175995+03:00;True|2023-01-24T17:22:48.8214506+03:00;</History>
+    <History>True|2023-01-25T08:02:32.6346289Z;False|2023-01-25T10:59:50.4054669+03:00;True|2023-01-25T10:57:37.8175995+03:00;True|2023-01-24T17:22:48.8214506+03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -22,16 +22,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/20/2018 18:32:44</publishTime>
     </File>
     <File Include="frinno-api.deps.json">
-      <publishTime>01/25/2023 10:58:49</publishTime>
+      <publishTime>01/25/2023 11:01:21</publishTime>
     </File>
     <File Include="frinno-api.dll">
-      <publishTime>01/25/2023 10:55:26</publishTime>
+      <publishTime>01/25/2023 11:01:19</publishTime>
     </File>
     <File Include="frinno-api.exe">
-      <publishTime>01/25/2023 10:58:47</publishTime>
+      <publishTime>01/25/2023 11:01:19</publishTime>
     </File>
     <File Include="frinno-api.pdb">
-      <publishTime>01/25/2023 10:58:47</publishTime>
+      <publishTime>01/25/2023 11:01:19</publishTime>
     </File>
     <File Include="frinno-api.runtimeconfig.json">
       <publishTime>01/23/2023 17:10:28</publishTime>
@@ -184,7 +184,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 11:56:52</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>01/25/2023 10:58:49</publishTime>
+      <publishTime>01/25/2023 11:01:21</publishTime>
     </File>
   </ItemGroup>
 </Project>
