@@ -115,6 +115,45 @@ namespace frinno_api.Controllers
             return Created(nameof(GetSingleSkill), new { Id = response.ID});
         }
 
+        //Updte Single Skill
+        [HttpPut("{Id}")]
+        public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request)
+        {
+            var skill = skillService.FetchSingleById(request.ID);
+            if(skill == null)
+            {
+                return NotFound("Resource not found!.");
+            }
+
+            if(request==null)
+            {
+                return BadRequest();
+            }
+
+            skill.Name = request.Name;
+
+            var skillResponse = skillService.Update(skill);
+            var response = new UpdateSkillResponse 
+            {
+                ID = skillResponse.ID,
+                Name = skillResponse.Name
+            };
+
+            return Created(nameof(GetSingleSkill), new { Id = response.ID });
+        }
+        
+        //Remove Skill
+        [HttpDelete("Id")]
+        public ActionResult<bool> RemoveSkill(int Id)
+        {
+            var skill = skillService.FetchSingleById(Id);
+            if(skill == null)
+            {
+                return NotFound();
+            }
+            skillService.Remove(skill);
+            return NoContent();
+        }
         //Get Single Skill
         [HttpGet("{Id}")]
         public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
