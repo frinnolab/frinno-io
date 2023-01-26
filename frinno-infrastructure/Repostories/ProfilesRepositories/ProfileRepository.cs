@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.Entities.Profiles;
 using frinno_infrastructure.Data;
-
+using System.Linq;
 namespace frinno_infrastructure.Repostories.ProfilesRepositories
 {
     public class ProfileRepository : IProfileService<Profile>

@@ -12,13 +12,13 @@ namespace frinno_core.Entities.Profiles
 {
     public class Profile : BaseEntity
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public User User { get; set; }
-        public Address Address { get; set; }
-        public List<ProfileArticles> ProfileArticles { get; set; }
-        public List<Projects.Project> Projects { get; set; }
-        public List<Skill.Skill> Skills { get; set; }
-        public List<Resumes.Resume> Resumes { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
+        public virtual User User { get; set; }
+        public virtual Address Address { get; set; }
+        public virtual ICollection<ProfileArticles> ProfileArticles { get; set; }
+        public virtual ICollection<Projects.Project> Projects { get; set; }
+        public virtual ICollection<Skill.Skill> Skills { get; set; }
+        public virtual ICollection<Resumes.Resume> Resumes { get; set; }
     }
 }
