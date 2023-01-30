@@ -9,6 +9,7 @@ using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Projects;
 using frinno_core.Entities.Resumes;
 using frinno_core.Entities.Skill;
+using frinno_core.Entities.Tags;
 using frinno_core.Entities.user;
 using frinno_infrastructure.Mappings;
 using frinno_infrastructure.Mappings.SkillsMapping;
@@ -42,6 +43,7 @@ namespace frinno_infrastructure.Data
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Resume> Resumes { get; set; }
 
