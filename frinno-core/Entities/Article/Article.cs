@@ -11,6 +11,8 @@ namespace frinno_core.Entities.Articles
     {
         public string Title { get; set; }
 
+        public string LongText { get; set; }
+
         public List<ProfileArticles> ProfileArticles { get; set; }
         public List<ArticleTags> ArticleTags { get; set; }
     }

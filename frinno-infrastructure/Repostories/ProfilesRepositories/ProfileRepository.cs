@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.Entities.Profiles;
 using frinno_infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 namespace frinno_infrastructure.Repostories.ProfilesRepositories
 {
@@ -19,17 +20,28 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             var data = DB.Profiles.Add(newData);
             SaveContextChanges();
-            return data.Entity;
+            return data.Entity;;
         }
 
         public IEnumerable<Profile> FetchAll()
         {
-            return DB.Profiles.ToList();
+            return DB.Profiles
+            .Include(x=>x.User)
+            .Include(x=>x.Address)
+            .Include(x=>x.ProfileArticles)
+            .Include(x=>x.Projects)
+            .Include(x=>x.Resumes)
+            .ToList();
         }
 
         public Profile FetchSingle(Profile data)
         {
-            return DB.Profiles.FirstOrDefault((p)=>p==data);
+            return DB.Profiles
+            .Include(x=>x.User)
+            .Include(x=>x.Address)
+            .Include(x=>x.ProfileArticles)
+            .Include(x=>x.Projects)
+            .Include(x=>x.Resumes).FirstOrDefault((p)=>p==data);
         }
 
         public Profile FetchSingleById(int dataId)
