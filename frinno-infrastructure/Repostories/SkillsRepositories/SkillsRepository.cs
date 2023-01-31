@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Skills;
 using frinno_core.Entities.Skill;
 using frinno_infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace frinno_infrastructure.Repostories.SkillsRepositories
 {
@@ -25,17 +26,32 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
 
         public IEnumerable<Skill> FetchAll()
         {
-            return DB.Skills.ToList();
+            return DB.Skills
+            .Include(pf=>pf.Profile)
+            .Include(pr=>pr.Project)
+            .Include(t=>t.Tools)
+            .ThenInclude(st=>st.Select(tt=>tt.Skill)).ToList()
+            .ToList();
         }
 
         public Skill FetchSingle(Skill data)
         {
-            return DB.Skills.FirstOrDefault((s)=>s==data);
+            return DB.Skills
+            .Include(pf=>pf.Profile)
+            .Include(pr=>pr.Project)
+            .Include(t=>t.Tools)
+            .ThenInclude(st=>st.Select(tt=>tt.Skill)).ToList()
+            .Single((s)=>s==data);
         }
 
         public Skill FetchSingleById(int dataId)
         {
-            return DB.Skills.Find(dataId);
+            return DB.Skills
+            .Include(pf=>pf.Profile)
+            .Include(pr=>pr.Project)
+            .Include(t=>t.Tools)
+            .ThenInclude(st=>st.Select(tt=>tt.Skill)).ToList()
+            .Single(x=>x.ID == dataId);
         }
 
         public void Remove(Skill data)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Projects;
 using frinno_core.Entities.Projects;
 using frinno_infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace frinno_infrastructure.Repostories.ProjectsRepositories
 {
@@ -25,17 +26,41 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
 
         public IEnumerable<Project> FetchAll()
         {
-            return DB.Projects.ToList();
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .Include(sts=>sts.Status)
+            .Include(sk=>sk.Skills)
+            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .ToList();
+        }
+
+        public List<Project> FetchAllByProfileId(int profileId)
+        {
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .Include(sk=>sk.Skills)
+            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .ToList();
         }
 
         public Project FetchSingle(Project data)
         {
-            return DB.Projects.FirstOrDefault((x)=>x==data);
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .Include(sts=>sts.Status)
+            .Include(sk=>sk.Skills)
+            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .Single((x)=>x==data);
         }
 
         public Project FetchSingleById(int dataId)
         {
-            return DB.Projects.Find(dataId);
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .Include(sts=>sts.Status)
+            .Include(sk=>sk.Skills)
+            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .Single(x=>x.ID==dataId);
         }
 
         public void Remove(Project data)

@@ -62,14 +62,12 @@ namespace frinno_api.Controllers
             if(skillProfile!=null)
             {
                 newSkill.Profile = skillProfile;
-                skillProfileId = skillProfile.ID;
             };
 
             //Add Skill to project
             if(skillProject != null)
             {
                 newSkill.Project = skillProject;
-                skillProfileId = skillProject.ID;
             };
             
             var skillTools = new List<SkillTool>();
@@ -98,7 +96,6 @@ namespace frinno_api.Controllers
             try
             {
                 var skillResponse = skillService.AddNew(newSkill);
-                newSkill = skillResponse;
             }
             catch (System.Exception ex)
             {

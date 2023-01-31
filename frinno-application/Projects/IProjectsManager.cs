@@ -8,6 +8,6 @@ namespace frinno_application.Projects
 {
     public interface IProjectsManager <Project> : IMasterService<frinno_core.Entities.Projects.Project>
     {
-        
+        List<Project> FetchAllByProfileId(int profileId);
     }
 }

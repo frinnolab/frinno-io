@@ -22,6 +22,9 @@ using frinno_infrastructure.Repostories.ProjectsRepositories;
 using frinno_infrastructure.Repostories.ProfilesRepositories;
 using frinno_infrastructure.Repostories.ArticlesRepositories;
 using frinno_infrastructure.Repostories.SkillsRepositories;
+using frinno_application.Tags;
+using frinno_core.Entities.Tags;
+using frinno_infrastructure.Repostories.TagsRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +45,7 @@ builder.Services.AddScoped<IProfileService<Profile>, ProfileRepository>();
 builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 builder.Services.AddScoped<ISkillsService, SkillsRepository>();
+builder.Services.AddScoped<ITagsService<Tag>, TagsRepository>();
 
 
 // builder.Services.AddIdentity<MockUser, IdentityRole>()
