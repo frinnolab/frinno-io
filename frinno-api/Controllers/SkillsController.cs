@@ -38,12 +38,25 @@ namespace frinno_api.Controllers
         {
             var skillProfileId = 0;
             var skillProjectId = 0;
+            
+            //NewSkill
+            var newSkill = new Skill
+            {
+                Name = request.Name   
+            };
             //Find Profile
             var skillProfile = new Profile();
             if(profileId>0)
             {
                 skillProfile = profileService.FetchSingleById(profileId);
             }
+
+            if(skillProfile ==null)
+            {
+                return NotFound("Profile not found.");
+            }
+
+            newSkill.Profile = skillProfile;
 
             //Find Project
             var skillProject = new Project();
@@ -52,17 +65,6 @@ namespace frinno_api.Controllers
                 skillProject = projectsService.FetchSingleById(request.ProjectId);
             }
 
-            //NewSkill
-            var newSkill = new Skill
-            {
-                Name = request.Name   
-            };
-
-            //Add Skill to profile.
-            if(skillProfile!=null)
-            {
-                newSkill.Profile = skillProfile;
-            };
 
             //Add Skill to project
             if(skillProject != null)
@@ -93,13 +95,24 @@ namespace frinno_api.Controllers
                 newSkill.Tools = skillTools;
             };
 
+            var skillResponse = new Skill();
+
             try
             {
-                var skillResponse = skillService.AddNew(newSkill);
+                skillResponse = skillService.AddNew(newSkill);
             }
             catch (System.Exception ex)
             {
                 return BadRequest(new{ Message = $"{ex.Message}" });
+            }
+
+            //Format Response
+
+            var skillToolsResponse = new List<CreateSkillTools>();
+
+            foreach (var tool in skillResponse.Tools)
+            {
+                skillToolsResponse.Add(new CreateSkillTools() { ID = tool.ID, Name = tool.Name, Usage = tool.Usage });
             }
 
             var response = new CreateNewSkillResponse
@@ -107,9 +120,11 @@ namespace frinno_api.Controllers
                 ID = newSkill.ID,
                 Name = newSkill.Name,
                 ProfileId = skillProfileId,
-                ProjectId = skillProjectId
+                ProjectId = skillProjectId,
+                SkillTools = skillToolsResponse
+        
             };
-            return Created(nameof(GetSingleSkill), new { Id = response.ID});
+            return Created("", response);
         }
 
         //Updte Single Skill
@@ -206,40 +221,6 @@ namespace frinno_api.Controllers
             {
                 TotalItems = skills.Count(),
             };
-
-            var skillInfosList = new List<SkillInfoResponse>();
-            var skillToolsList = new List<CreateSkillTools>();
-
-            // foreach (var skill in skills)
-            // {
-            //     var skillInfo = new SkillInfoResponse 
-            //     {
-            //         ID = skill.ID,
-            //         Name = skill.Name,
-            //     };
-
-            //     var skillTools = skill.Tools.ToList();
-            //     if (skillTools != null)
-            //     {
-            //         foreach (var skillItem in skillTools)
-            //         {
-            //             var item = new CreateSkillTools
-            //             {
-            //                 ID = skillItem.ID,
-            //                 Name = skillItem.Name,
-            //                 Usage = skillItem.Usage
-            //             };
-
-            //             skillToolsList.Add(item);
-            //         }
-            //     }
-               
-            //     skillInfo.SkillTools = skillToolsList;
-            //     skillInfosList.Add(skillInfo);
-
-            // }
-
-            // response.Data = skillInfosList;
             return Ok(skills);
         }
 
