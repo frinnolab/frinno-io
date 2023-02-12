@@ -42,18 +42,21 @@ namespace frinno_api.Controllers
                 Name = request.Name   
             };
             //Find Profile
+            var skillProfileExists = false;
             var skillProfile = new Profile();
             if(profileId>0)
             {
+                skillProfileExists = profileService.ProfileExists(new Profile { ID = profileId });
+
+                if(!skillProfileExists)
+                {
+                    return NotFound("Profile not found.");
+                }
+
                 skillProfile = profileService.FetchSingleById(profileId);
-            }
 
-            if(skillProfile ==null)
-            {
-                return NotFound("Profile not found.");
+                newSkill.Profile = skillProfile;
             }
-
-            newSkill.Profile = skillProfile;
 
             //Find Project
             var skillProjects = new List<Project>();
@@ -110,12 +113,18 @@ namespace frinno_api.Controllers
                 skillToolsResponse.Add(new CreateSkillTools() { ID = tool.ID, Name = tool.Name, Usage = tool.Usage });
             }
 
+            var projectIdsResponse = new List<int>();
+
+            foreach (var project in skillResponse.Projects)
+            {
+                projectIdsResponse.Add(project.ID);
+            }
             var response = new CreateNewSkillResponse
             {
                 ID = skillResponse.ID,
                 Name = skillResponse.Name,
                 ProfileId = skillResponse.Profile.ID,
-                // ProjectIds = 
+                ProjectIds = projectIdsResponse.ToArray(),
                 SkillTools = skillToolsResponse
         
             };
@@ -126,42 +135,124 @@ namespace frinno_api.Controllers
         [HttpPut("{Id}/{profileId}")]
         public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, int Id, int profileId)
         {
+            
+            if(request==null)
+            {
+                return BadRequest();
+            }
+
+            var skill = skillService.FetchSingleById(Id);// To Add Where Query
+
+            if(skill == null)
+            {
+                return NotFound("Skill not found!.");
+            }
+
             //Find Profile
             var skillProfile = new Profile();
 
             if(profileId>0)
             {
                 skillProfile = profileService.FetchSingleById(profileId);
+                if(skillProfile ==null)
+                {
+                    return NotFound("Profile not found.");
+                }
+
+                skill.Profile = skillProfile;
+
             }
 
-            if(skillProfile ==null)
+
+            //Skill Projects
+            var skillProjects = new List<Project>();
+
+            if (request.ProjectIds.Length > 0)
             {
-                return NotFound("Profile not found.");
+                foreach (var projectId in request.ProjectIds)
+                {
+                    if(projectId>0)
+                    {
+                        var skP = skill.Projects.Find(p=>p.ID ==projectId);
+                        //New Updated Project
+                        if( skP == null && projectId>0)
+                        {
+                            var activeProject = projectsService.FetchSingleById(projectId);
+
+                            if (activeProject != null)
+                            {
+                                skillProjects.Add(activeProject);
+                            }
+                        }
+                    }
+                };
+
+                skill.Projects = skillProjects;
+
             }
 
-            var skill = skillService.FetchSingleById(Id);// To Add Where Query
+            //Skill Tools
 
-            skill.Profile = skillProfile;
-
-            if(skill == null)
+            var skillTools = new List<SkillTool>();
+            
+            //Add Skill Tools used
+            if(request.SkillTools != null && request.SkillTools.Count >  0)
             {
-                return NotFound("Resource not found!.");
+                foreach (var skItem in request.SkillTools)
+                {
+                    //find skillItem
+                    if(skItem.ID>0)
+                    {
+                        var skItemUpdate = skill.Tools.Single(x=>x.ID == skItem.ID);
+                        skItemUpdate.Name = skItem.Name;
+                        skItemUpdate.Usage = skItem.Usage;
+                    }
+                    else{
+                        var item = new SkillTool 
+                        {
+                            Name = skItem.Name,
+                            Usage = skItem.Usage
+                        };
+                        skillTools.Add(item);
+                    }
+
+                }
+
+                skill.Tools = skillTools;
             }
 
-            if(request==null)
-            {
-                return BadRequest();
-            }
+                //Add Tools to Skill
 
+            //Update Skill
+            skill.ID = request.ID;
             skill.Name = request.Name;
-
+            
             var skillResponse = skillService.Update(skill);
-            var response = new UpdateSkillResponse 
+
+            //Format Response
+
+            var skillToolsResponse = new List<CreateSkillTools>();
+
+            foreach (var tool in skillResponse.Tools)
+            {
+                skillToolsResponse.Add(new CreateSkillTools() { ID = tool.ID, Name = tool.Name, Usage = tool.Usage });
+            }
+
+            var projectIdsResponse = new List<int>();
+
+            foreach (var project in skillResponse.Projects)
+            {
+                projectIdsResponse.Add(project.ID);
+            }
+            var response = new CreateNewSkillResponse
             {
                 ID = skillResponse.ID,
-                Name = skillResponse.Name
+                Name = skillResponse.Name,
+                ProfileId = skillResponse.Profile.ID,
+                ProjectIds = projectIdsResponse.ToArray(),
+                SkillTools = skillToolsResponse
+        
             };
-
             return Created(nameof(GetSingleSkill), new { Id = response.ID });
         }
         
@@ -182,7 +273,6 @@ namespace frinno_api.Controllers
         public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
         {
             var skillProfileId  = 0;
-            var skillProjectId  = 0;
             var skill = skillService.FetchSingleById(Id);
 
             if(skill == null)
