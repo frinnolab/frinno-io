@@ -129,22 +129,23 @@ namespace frinno_api.Controllers
 
             var profileResponse = profileService.Update(profile);
 
-            // var response = new ProfileInfoResponse
-            // {
-            //     Id = profileResponse.ID,
-            //     Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
-            //     Email = profileResponse.User.Email,
-            //     // TotalArticles = profileArticles.Count,
-            //     // TotalProjects = profileProjects.Count,
-            //     // TotalResumes = profileResumes.Count,
-            //     AddressInfo = new ProfileAddressInfo
-            //     {
-            //         City = profileResponse.Address.City,
-            //         Mobile = profileResponse.Address.Mobile
-            //     }
-            // };
+                       var infoAddress = new ProfileAddressInfo ()
+            {
+                Mobile = profileResponse.Address.Mobile,
+                City = profileResponse.Address.City   
+            };
+            var response = new ProfileInfoResponse
+            {
+                Id = profileResponse.ID,
+                AddressInfo = infoAddress,
+                Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
+                Email = profileResponse.User.Email,
+                TotalArticles = profileResponse.ProfileArticles.Count,
+                TotalProjects = profileResponse.Projects.Count,
+                TotalResumes = profileResponse.Resumes.Count
+            };
 
-            return Created(nameof(GetSingle), new { Message = $"Updated {profileResponse.ID}" });
+            return Created("",response);
         }
 
         //Removes Single Profile Resource
@@ -172,19 +173,21 @@ namespace frinno_api.Controllers
                 return NotFound("Profile NotFound");
             }
 
+            var infoAddress = new ProfileAddressInfo
+            {
+                City = profile.Address.City,
+                Mobile = profile.Address.Mobile
+            };
+
             var response = new ProfileInfoResponse
             {
                 Id = profile.ID,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
                 Email = profile.User.Email,
-                // TotalArticles = profileArticles.Count,
-                // TotalProjects = profileProjects.Count,
-                // TotalResumes = profileResumes.Count,
-                AddressInfo = new ProfileAddressInfo
-                {
-                    City = profile.Address.City,
-                    Mobile = profile.Address.Mobile
-                }
+                TotalArticles = profile.ProfileArticles.Count,
+                TotalProjects = profile.Projects.Count,
+                TotalResumes = profile.Resumes.Count,
+                AddressInfo = infoAddress
             };
             return Ok(response);
         }
@@ -220,7 +223,6 @@ namespace frinno_api.Controllers
             response.TotalItems = response.Data.Count;
 
             return Ok(response);
-
         }
     }
 }
