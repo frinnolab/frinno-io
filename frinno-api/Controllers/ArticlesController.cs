@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Articles;
 using frinno_core.DTOs;
 using frinno_core.Entities.Articles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
@@ -19,8 +20,8 @@ namespace frinno_api.Controllers
             articlesService = articles;
         }
         //Creates a New Article Resource
-        [HttpPost()]
-        public ActionResult<ArticleInfoResponse> CreateNew([FromBody] CreateArticleRequest request)
+        [HttpPost("{profileId}")]
+        public ActionResult<ArticleInfoResponse> CreateNew([FromBody] CreateArticleRequest request, int profileId)
         {
             //Todo, Add Article Specific Validations
             var newArticle = new Article
@@ -54,8 +55,8 @@ namespace frinno_api.Controllers
         }
 
         //Updates a Article Resource
-        [HttpPut("{Id}")]
-        public ActionResult<ArticleInfoResponse> UpdateArticle(int Id, [FromBody] UpdateArticleRequest request)
+        [HttpPut("{Id}/{profileId}")]
+        public ActionResult<ArticleInfoResponse> UpdateArticle(int Id,int profileId, [FromBody] UpdateArticleRequest request)
         {
             var Article = articlesService.FetchSingleById(Id);
 
@@ -78,8 +79,8 @@ namespace frinno_api.Controllers
         }
 
         //Removes Single Article Resource
-        [HttpDelete("{Id}")]
-        public ActionResult<string> DeleteArticle(int Id)
+        [HttpDelete("{Id}/{profileId}")]
+        public ActionResult<string> DeleteArticle(int Id, int profileId)
         {
             var data = articlesService.FetchSingleById(Id);
 
@@ -113,7 +114,8 @@ namespace frinno_api.Controllers
 
         //Gets All Articles
         [HttpGet()]
-        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query)
+        [AllowAnonymous]
+        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query, int profileId)
         {
             var Articles = articlesService.FetchAll();
             if (Articles == null)

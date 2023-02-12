@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
     <_PublishTargetUrl>ftp://win5097.site4now.net:21/frinnoapi</_PublishTargetUrl>
-    <History>True|2023-01-25T08:02:32.6346289Z;False|2023-01-25T10:59:50.4054669+03:00;True|2023-01-25T10:57:37.8175995+03:00;True|2023-01-24T17:22:48.8214506+03:00;</History>
+    <History>True|2023-01-31T07:12:08.9611014Z;True|2023-01-25T11:02:32.6346289+03:00;False|2023-01-25T10:59:50.4054669+03:00;True|2023-01-25T10:57:37.8175995+03:00;True|2023-01-24T17:22:48.8214506+03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -16,43 +16,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/11/2023 15:32:44</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>01/19/2023 21:30:25</publishTime>
+      <publishTime>01/25/2023 11:16:30</publishTime>
     </File>
     <File Include="BCrypt.Net-Core.dll">
       <publishTime>12/20/2018 18:32:44</publishTime>
     </File>
     <File Include="frinno-api.deps.json">
-      <publishTime>01/25/2023 11:01:21</publishTime>
+      <publishTime>01/31/2023 10:09:25</publishTime>
     </File>
     <File Include="frinno-api.dll">
-      <publishTime>01/25/2023 11:01:19</publishTime>
+      <publishTime>01/31/2023 10:08:41</publishTime>
     </File>
     <File Include="frinno-api.exe">
-      <publishTime>01/25/2023 11:01:19</publishTime>
+      <publishTime>01/31/2023 10:08:41</publishTime>
     </File>
     <File Include="frinno-api.pdb">
-      <publishTime>01/25/2023 11:01:19</publishTime>
+      <publishTime>01/31/2023 10:08:41</publishTime>
     </File>
     <File Include="frinno-api.runtimeconfig.json">
-      <publishTime>01/23/2023 17:10:28</publishTime>
+      <publishTime>01/31/2023 10:08:43</publishTime>
     </File>
     <File Include="frinno-application.dll">
-      <publishTime>01/24/2023 17:12:02</publishTime>
+      <publishTime>01/31/2023 10:08:31</publishTime>
     </File>
     <File Include="frinno-application.pdb">
-      <publishTime>01/24/2023 17:12:02</publishTime>
+      <publishTime>01/31/2023 10:08:31</publishTime>
     </File>
     <File Include="frinno-core.dll">
-      <publishTime>01/24/2023 17:12:00</publishTime>
+      <publishTime>01/31/2023 10:08:27</publishTime>
     </File>
     <File Include="frinno-core.pdb">
-      <publishTime>01/24/2023 17:12:00</publishTime>
+      <publishTime>01/31/2023 10:08:27</publishTime>
     </File>
     <File Include="frinno-infrastructure.dll">
-      <publishTime>01/25/2023 10:55:22</publishTime>
+      <publishTime>01/31/2023 10:08:34</publishTime>
     </File>
     <File Include="frinno-infrastructure.pdb">
-      <publishTime>01/25/2023 10:55:22</publishTime>
+      <publishTime>01/31/2023 10:08:34</publishTime>
     </File>
     <File Include="IdentityModel.dll">
       <publishTime>12/26/2021 13:44:52</publishTime>
@@ -184,7 +184,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 11:56:52</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>01/25/2023 11:01:21</publishTime>
+      <publishTime>01/31/2023 10:09:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

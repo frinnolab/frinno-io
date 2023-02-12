@@ -42,26 +42,26 @@ namespace frinno_api.Controllers
                 LastName = request.LastName,
                 User = new User { Email = request.Email, Password = request.Password },
                 Address = new Address { City = request.AddressInfo.City, Mobile = request.AddressInfo.Mobile },
-                ProfileArticles = new List<ProfileArticles>(){
-                    new ProfileArticles { Article = new Article { Title = "Test Artile 0", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags>()
-                    {
-                        new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag0" } },
-                        new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag1" } },
-                        new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag2" } },
-                    } }  },
-                    new ProfileArticles { Article = new Article { Title = "Test Artile 1", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
-                    {
-                                                new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag2" } },
-                    } }  },
-                    new ProfileArticles { Article = new Article { Title = "Test Artile 2", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
-                    {
-                                                new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag3" } },
-                    } }  },
-                    new ProfileArticles { Article = new Article { Title = "Test Artile 3", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
-                    {
-                                                new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag4" } },
-                    } }  },
-                }
+                // ProfileArticles = new List<ProfileArticles>(){
+                //     new ProfileArticles { Article = new Article { Title = "Test Artile 0", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags>()
+                //     {
+                //         new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag0" } },
+                //         new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag1" } },
+                //         new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag2" } },
+                //     } }  },
+                //     new ProfileArticles { Article = new Article { Title = "Test Artile 1", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
+                //     {
+                //                                 new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag2" } },
+                //     } }  },
+                //     new ProfileArticles { Article = new Article { Title = "Test Artile 2", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
+                //     {
+                //                                 new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag3" } },
+                //     } }  },
+                //     new ProfileArticles { Article = new Article { Title = "Test Artile 3", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
+                //     {
+                //                                 new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag4" } },
+                //     } }  },
+                // }
 
             };
 
@@ -214,25 +214,6 @@ namespace frinno_api.Controllers
             } ).ToList();
             response.TotalItems = response.Data.Count;
 
-
-
-            foreach (var profile in profiles)
-            {
-                var infoResponse = new ProfileInfoResponse
-                {
-                    Id = profile.ID,
-                    Fullname = $"{profile.FirstName} {profile.LastName}",
-                    Email = profile.User.Email,
-                    AddressInfo = new ProfileAddressInfo
-                    {
-                        City = profile.Address.City,
-                        Mobile = profile.Address.Mobile
-                    }
-                };
-
-                response.Data.Add(infoResponse);
-
-            }
             return Ok(response);
 
         }
