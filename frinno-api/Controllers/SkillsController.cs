@@ -33,16 +33,16 @@ namespace frinno_api.Controllers
         }
 
         //Create a New Skill
-        [HttpPost()]
-        public ActionResult<CreateNewSkillResponse> CreateNewSkill(CreateNewSkillRequest request)
+        [HttpPost("{profileId}")]
+        public ActionResult<CreateNewSkillResponse> CreateNewSkill(int profileId, CreateNewSkillRequest request)
         {
             var skillProfileId = 0;
             var skillProjectId = 0;
             //Find Profile
             var skillProfile = new Profile();
-            if(request.ProfileId>0)
+            if(profileId>0)
             {
-                skillProfile = profileService.FetchSingleById(request.ProfileId);
+                skillProfile = profileService.FetchSingleById(profileId);
             }
 
             //Find Project
@@ -113,10 +113,10 @@ namespace frinno_api.Controllers
         }
 
         //Updte Single Skill
-        [HttpPut("{Id}")]
-        public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request)
+        [HttpPut("{Id}/{profileId}")]
+        public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, int Id, int profileId)
         {
-            var skill = skillService.FetchSingleById(request.ID);
+            var skill = skillService.FetchSingleById(Id);
             if(skill == null)
             {
                 return NotFound("Resource not found!.");
@@ -140,8 +140,8 @@ namespace frinno_api.Controllers
         }
         
         //Remove Skill
-        [HttpDelete("Id")]
-        public ActionResult<bool> RemoveSkill(int Id)
+        [HttpDelete("Id/{profileId}")]
+        public ActionResult<bool> RemoveSkill(int Id, int profileId)
         {
             var skill = skillService.FetchSingleById(Id);
             if(skill == null)
@@ -193,7 +193,7 @@ namespace frinno_api.Controllers
 
         //Get All Skills
         [HttpGet()]
-        public ActionResult<DataListResponse<SkillInfoResponse>> GetAllSkills()
+        public ActionResult<DataListResponse<SkillInfoResponse>> GetAllSkills(int profileId, int projectId)
         {
             var skills = skillService.FetchAll();
 
