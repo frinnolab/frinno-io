@@ -36,9 +36,6 @@ namespace frinno_api.Controllers
         [HttpPost("{profileId}")]
         public ActionResult<CreateNewSkillResponse> CreateNewSkill(int profileId, CreateNewSkillRequest request)
         {
-            var skillProfileId = 0;
-            var skillProjectId = 0;
-            
             //NewSkill
             var newSkill = new Skill
             {
@@ -59,19 +56,20 @@ namespace frinno_api.Controllers
             newSkill.Profile = skillProfile;
 
             //Find Project
-            var skillProject = new Project();
-            if(request.ProjectId>0)
+            var skillProjects = new List<Project>();
+            if(request.ProjectIds.Length>0)
             {
-                skillProject = projectsService.FetchSingleById(request.ProjectId);
+                foreach (var projectId in request.ProjectIds)
+                {
+                    if(projectId>0){
+                        var activeProject = projectsService.FetchSingleById(projectId);
+                        if(activeProject!=null){
+                            skillProjects.Add(activeProject);
+                        }
+                    }
+                };
             }
 
-
-            //Add Skill to project
-            if(skillProject != null)
-            {
-                newSkill.Project = skillProject;
-            };
-            
             var skillTools = new List<SkillTool>();
             
             //Add Skill Tools used
@@ -87,13 +85,10 @@ namespace frinno_api.Controllers
 
                     skillTools.Add(item);
                 }
+                //Add Tools to Skill
+                newSkill.Tools = skillTools;
             }
 
-            //Add Tools to Skill
-            if(skillTools != null && skillTools.Count>0)
-            {
-                newSkill.Tools = skillTools;
-            };
 
             var skillResponse = new Skill();
 
@@ -117,10 +112,10 @@ namespace frinno_api.Controllers
 
             var response = new CreateNewSkillResponse
             {
-                ID = newSkill.ID,
-                Name = newSkill.Name,
-                ProfileId = skillProfileId,
-                ProjectId = skillProjectId,
+                ID = skillResponse.ID,
+                Name = skillResponse.Name,
+                ProfileId = skillResponse.Profile.ID,
+                // ProjectIds = 
                 SkillTools = skillToolsResponse
         
             };
@@ -131,7 +126,23 @@ namespace frinno_api.Controllers
         [HttpPut("{Id}/{profileId}")]
         public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, int Id, int profileId)
         {
-            var skill = skillService.FetchSingleById(Id);
+            //Find Profile
+            var skillProfile = new Profile();
+
+            if(profileId>0)
+            {
+                skillProfile = profileService.FetchSingleById(profileId);
+            }
+
+            if(skillProfile ==null)
+            {
+                return NotFound("Profile not found.");
+            }
+
+            var skill = skillService.FetchSingleById(Id);// To Add Where Query
+
+            skill.Profile = skillProfile;
+
             if(skill == null)
             {
                 return NotFound("Resource not found!.");
@@ -187,13 +198,13 @@ namespace frinno_api.Controllers
                 skillProfileId = skillProfile.ID;
             }
 
-            //Find Project with this skill
-            var skillProject = skill.Project;
+            // //Find Project with this skill
+            // var skillProject = skill.Project;
 
-            if(skillProject != null)
-            {
-                skillProjectId = skillProject.ID;
-            }
+            // if(skillProject != null)
+            // {
+            //     skillProjectId = skillProject.ID;
+            // }
 
             //Format response
             var response = new SkillInfoResponse
@@ -201,7 +212,7 @@ namespace frinno_api.Controllers
                 ID = skill.ID,
                 Name = skill.Name,
                 ProfileId = skillProfileId,
-                ProjectId = skillProjectId
+                // ProjectId = skillProjectId
             };
             return Ok(response);
         }
