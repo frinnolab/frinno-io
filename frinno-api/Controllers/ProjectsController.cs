@@ -61,9 +61,6 @@ namespace frinno_api.Controllers
                     break;
             }
 
-
-            //Add Profile if not null
-
             var ProjectResponse = new Project();
 
             try
@@ -76,7 +73,7 @@ namespace frinno_api.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
 
-            if (newProject == null)
+            if (ProjectResponse == null)
             {
                 return BadRequest("Failed to Create a Project!.");
             }
@@ -84,8 +81,14 @@ namespace frinno_api.Controllers
             var response = new ProjectInfoResponse
             {
                 Id = ProjectResponse.ID,
+                ProfileId = ProjectResponse.Profile.ID,
+                Title = ProjectResponse.Title,
+                Description = ProjectResponse.Description,
+                Url = ProjectResponse.ProjectUrl,
+                SkillsEarned = ProjectResponse.Skills.Count,
+                Status = ProjectResponse.Status
             };
-            return Created(nameof(GetSingle), new { Message = $"Project Created with ID: {response.Id}" });
+            return Created("", response);
         }
 
         //Updates a Project Resource
@@ -124,9 +127,35 @@ namespace frinno_api.Controllers
                 
             }
 
-            var ProjectResponse = projectsService.Update(Project);
+            var ProjectResponse = new Project();
 
-            return Created(nameof(GetSingle), new { Message = $"Updated {ProjectResponse.ID}" });
+            try
+            {
+                ProjectResponse = projectsService.Update(Project);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+
+            if (ProjectResponse == null)
+            {
+                return BadRequest("Failed to Update Project!.");
+            }
+
+            var response = new ProjectInfoResponse
+            {
+                Id = ProjectResponse.ID,
+                ProfileId = ProjectResponse.Profile.ID,
+                Title = ProjectResponse.Title,
+                Description = ProjectResponse.Description,
+                Url = ProjectResponse.ProjectUrl,
+                SkillsEarned = ProjectResponse.Skills.Count,
+                Status = ProjectResponse.Status
+            };
+
+            return Created("", response);
         }
 
         //Removes Single Project Resource
