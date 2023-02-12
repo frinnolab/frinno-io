@@ -19,12 +19,28 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/FRINNOLAB/Projects/frn/frinno-ui/Pages/About/About.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXRcQWJvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/FRINNOLAB/Projects/frn/frinno-ui/Pages/Home/HomePage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxIb21lUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/FRINNOLAB/Projects/frn/frinno-ui/Pages/Home/Home_Widgets/HeroSection.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxIb21lX1dpZGdldHNcSGVyb1NlY3Rpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FRINNOLAB/Projects/frn/frinno-ui/Pages/Home/Home_Widgets/TopFeatured.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxIb21lX1dpZGdldHNcVG9wRmVhdHVyZWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/FRINNOLAB/Projects/frn/frinno-ui/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/FRINNOLAB/Projects/frn/frinno-ui/Shared/Nav/Nav.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdlxOYXYucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/FRINNOLAB/Projects/frn/frinno-ui/_Imports.razor]

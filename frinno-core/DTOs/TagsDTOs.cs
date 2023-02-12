@@ -10,18 +10,16 @@ namespace frinno_core.DTOs
     public record CreateTagRequest
     {
         public string Name { get; set; } = string.Empty;
-        public int? ProfileId { get; set; }
     }
     //Create a Tag Response
     
-    public record CreateTagResponse
+    public record CreateTagResponse : CreateTagRequest
     {
         public int Id { get; set; }
     }
     //Tag Single Resource Request
     public record TagInfoRequest
     {
-        public int? Id { get; set; }
         public string Name { get; set; } = string.Empty;
     }
         

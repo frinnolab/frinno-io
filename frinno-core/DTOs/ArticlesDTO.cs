@@ -21,7 +21,6 @@ namespace frinno_core.DTOs
     //Article Single Resource Request
     public record ArticleInfoRequest
     {
-        public int? Id { get; set; }
         public string Title { get; set; } = string.Empty;
     }
 

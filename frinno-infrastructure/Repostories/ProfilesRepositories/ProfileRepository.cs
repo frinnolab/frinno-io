@@ -46,7 +46,18 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
 
         public Profile FetchSingleById(int dataId)
         {
-            return DB.Profiles.Find(dataId);
+            return DB.Profiles
+            .Include(u=>u.User)
+            .Include(a=>a.Address)
+            .Include(x=>x.ProfileArticles)
+            .Include(x=>x.Projects)
+            .Include(x=>x.Resumes)
+            .Single(x=>x.ID ==dataId);
+        }
+
+        public Profile FindByEmail(string email)
+        {
+            return DB.Profiles.Include(x=>x.User).SingleOrDefault((p=>p.User.Email == email));
         }
 
         public bool ProfileExists(Profile profile)
