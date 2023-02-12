@@ -89,12 +89,23 @@ namespace frinno_api.Controllers.MockAuth
                 return BadRequest();
             }
 
-            var response = new ProfileInfoResponse()
+            //Format Response
+            var infoAddress = new ProfileAddressInfo ()
             {
-                Id = data.ID,
+                Mobile = data.Address.Mobile,
+                City = data.Address.City   
             };
 
-            return Created("",new { message = $"Profile Created with ID: {response.Id}" });
+            var response = new ProfileInfoResponse()
+            {
+                Fullname = $"{data.FirstName} {data.LastName}",
+                Id = data.ID,
+                AddressInfo = infoAddress,
+                Email = data.User.Email
+
+            };
+
+            return Created("",response);
         }
     }
 }

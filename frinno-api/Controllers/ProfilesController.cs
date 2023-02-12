@@ -40,30 +40,28 @@ namespace frinno_api.Controllers
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                User = new User { Email = request.Email, Password = request.Password },
                 Address = new Address { City = request.AddressInfo.City, Mobile = request.AddressInfo.Mobile },
-                // ProfileArticles = new List<ProfileArticles>(){
-                //     new ProfileArticles { Article = new Article { Title = "Test Artile 0", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags>()
-                //     {
-                //         new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag0" } },
-                //         new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag1" } },
-                //         new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag2" } },
-                //     } }  },
-                //     new ProfileArticles { Article = new Article { Title = "Test Artile 1", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
-                //     {
-                //                                 new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag2" } },
-                //     } }  },
-                //     new ProfileArticles { Article = new Article { Title = "Test Artile 2", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
-                //     {
-                //                                 new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag3" } },
-                //     } }  },
-                //     new ProfileArticles { Article = new Article { Title = "Test Artile 3", ArticleTags = new List<frinno_core.Entities.Article.Aggregates.ArticleTags> ()
-                //     {
-                //                                 new frinno_core.Entities.Article.Aggregates.ArticleTags { Tag = new frinno_core.Entities.Tags.Tag { Name = "Test Tag4" } },
-                //     } }  },
-                // }
 
             };
+
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+            var newUser = new User()
+            {
+                Email = request.Email,
+                Password = hashedPassword
+            };
+
+            newProfile.User = newUser;
+
+            var newAddress = new Address()
+            {
+                Mobile = request.AddressInfo.Mobile,
+                City = request.AddressInfo.City
+            };
+
+            newProfile.Address = newAddress;
+
 
             var profileResponse = new Profile();
 
@@ -77,20 +75,27 @@ namespace frinno_api.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
 
-            if (newProfile == null)
+            if (profileResponse == null)
             {
                 return BadRequest("Failed to Create a profile!.");
             }
 
-            // var profileProjects = profileResponse.Projects.Select((p)=>p.Profile == profileResponse).ToList();
-            // var profileArticles = profileResponse.ProfileArticles.Select((p)=>p.Profile == profileResponse).ToList();
-            // var profileResumes = profileResponse.Resumes.Select((p)=>p.Profile == profileResponse).ToList();
-
+            var infoAddress = new ProfileAddressInfo ()
+            {
+                Mobile = profileResponse.Address.Mobile,
+                City = profileResponse.Address.City   
+            };
             var response = new ProfileInfoResponse
             {
                 Id = profileResponse.ID,
+                AddressInfo = infoAddress,
+                Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
+                Email = profileResponse.User.Email,
+                TotalArticles = profileResponse.ProfileArticles.Count,
+                TotalProjects = profileResponse.Projects.Count,
+                TotalResumes = profileResponse.Resumes.Count
             };
-            return Created(nameof(GetSingle), new { Message = $"Profile Created with: {response.Id}" });
+            return Created("", response);
         }
 
         //Updates a Profile Resource
