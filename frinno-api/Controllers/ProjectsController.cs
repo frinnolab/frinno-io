@@ -145,8 +145,8 @@ namespace frinno_api.Controllers
         }
 
         //Returns a Project Resource
-        [HttpGet("{Id}/{ProfileId:int}")]
-        public ActionResult<ProjectInfoResponse> GetSingle(int Id, int ProfileId, [FromQuery] ProjectInfoRequest query)
+        [HttpGet("{Id}")]
+        public ActionResult<ProjectInfoResponse> GetSingle(int Id, [FromQuery] ProjectInfoRequest query)
         {
             var Project = projectsService.FetchSingleById(Id);
             if (Project == null)
@@ -166,7 +166,7 @@ namespace frinno_api.Controllers
         }
 
         //Gets All Projects
-        [HttpGet("{ProfileId:int}")]
+        [HttpGet()]
         public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects(int ProfileId, [FromQuery] ProjectInfoRequest? query)
         {
             var Projects = projectsService.FetchAllByProfileId(ProfileId);
