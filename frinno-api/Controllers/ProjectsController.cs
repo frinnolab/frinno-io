@@ -52,11 +52,9 @@ namespace frinno_api.Controllers
                 Status = request.Status
             };
 
-            var ProjectResponse = new Project();
-
             try
             {
-                ProjectResponse = projectsService.AddNew(newProject);
+                projectsService.AddNew(newProject);
 
             }
             catch (System.Exception ex)
@@ -66,35 +64,39 @@ namespace frinno_api.Controllers
 
             var response = new CreateProjectResponse
             {
-                Id = ProjectResponse.ID,
-                Title = ProjectResponse.Title,
-                ProfileId = ProjectResponse.Profile.ID
+                Id = newProject.ID,
+                Title = newProject.Title,
+                ProfileId = newProject.Profile.ID
             };
             return Created("", new {response} );
         }
 
         //Updates a Project Resource
         [HttpPut("{Id}/{ProfileId:int}")]
-        public ActionResult<ProjectInfoResponse> UpdateProject(int Id, [FromBody] UpdateProjectRequest request)
+        public ActionResult<ProjectInfoResponse> UpdateProject(int Id, int ProfileId, [FromBody] UpdateProjectRequest request)
         {
+
+            if (ProfileId > 0)
+            {
+                var profileExists = profilesService.ProfileExists(new Profile { ID = ProfileId });
+
+                if (!profileExists)
+                {
+                    return NotFound($"Profile Not found!.");
+                }
+            }
+            
             var Project = projectsService.FetchSingleById(Id);
 
             if (Project == null)
             {
                 return NotFound($"Project: {Id} NotFound!.");
             }
-
-            if (request == null)
-            {
-                return BadRequest();
-            }
-
         
             Project.Title = request.Title;
             Project.Description = request.Description;
             Project.ProjectUrl = request.Url;
             Project.Status = request.Status;
-        
 
             var ProjectResponse = new Project();
 
@@ -129,8 +131,17 @@ namespace frinno_api.Controllers
 
         //Removes Single Project Resource
         [HttpDelete("{Id}/{ProfileId:int}")]
-        public ActionResult<string> DeleteProject(int Id)
+        public ActionResult<bool> DeleteProject(int Id, int ProfileId)
         {
+            if (ProfileId > 0)
+            {
+                var profileExists = profilesService.ProfileExists(new Profile { ID = ProfileId });
+
+                if (!profileExists)
+                {
+                    return NotFound($"Profile Not found!.");
+                }
+            }
             var data = projectsService.FetchSingleById(Id);
 
             if (data == null)
@@ -167,12 +178,12 @@ namespace frinno_api.Controllers
 
         //Gets All Projects
         [HttpGet()]
-        public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects(int ProfileId)
+        public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects([FromQuery] ProjectInfoRequest query)
         {
             var projects = new List<Project>();;
-            if(ProfileId>0)
+            if(query.ProfileId>0)
             {
-                projects = projectsService.FetchAllByProfileId(ProfileId);
+                projects = projectsService.FetchAllByProfileId(query.ProfileId);
             }
             else{
                 projects = projectsService.FetchAll().ToList();
