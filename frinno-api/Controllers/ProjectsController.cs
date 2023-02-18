@@ -155,6 +155,8 @@ namespace frinno_api.Controllers
             var response = new ProjectInfoResponse
             {
                 Id = Project.ID,
+                ProfileId = Project.Profile.ID,
+                Description = Project.Description,
                 Title = Project.Title,
                 SkillsEarned = Project.Skills.Count,
                 Status = Project.Status,
@@ -186,9 +188,11 @@ namespace frinno_api.Controllers
             response.Data = projects.Select((p)=> new ProjectInfoResponse 
             {
                 Id = p.ID,
+                ProfileId = p.Profile.ID,
                 Title = p.Title,
-                Description = p.Description,
                 Status = p.Status,
+                Url = p.ProjectUrl,
+                Description = p.Description,
                 SkillsEarned = p.Skills.Count
             } ).ToList();
             response.TotalItems = response.Data.Count;
