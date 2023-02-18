@@ -48,21 +48,9 @@ namespace frinno_api.Controllers
                 Title = request.Title,
                 Description = request.Description,
                 ProjectUrl = request.Url, 
-                Profile = profile
+                Profile = profile,
+                Status = request.Status
             };
-
-            switch(request.Status)
-            {
-                case ProjectStatus.Completed:
-                    newProject.Status = ProjectStatus.Completed;
-                    break;
-                case ProjectStatus.Ongoing:
-                    newProject.Status = ProjectStatus.Ongoing;
-                    break;
-                default:
-                    newProject.Status = ProjectStatus.NotStarted;
-                    break;
-            }
 
             var ProjectResponse = new Project();
 
@@ -105,21 +93,8 @@ namespace frinno_api.Controllers
             Project.Title = request.Title;
             Project.Description = request.Description;
             Project.ProjectUrl = request.Url;
+            Project.Status = request.Status;
         
-
-            switch(request.Status)
-            {
-                case ProjectStatus.Completed:
-                    Project.Status = ProjectStatus.Completed;
-                    break;
-                case ProjectStatus.Ongoing:
-                    Project.Status = ProjectStatus.Ongoing;
-                    break;
-                default:
-                    Project.Status = ProjectStatus.NotStarted;
-                    break;
-                
-            }
 
             var ProjectResponse = new Project();
 
@@ -190,19 +165,25 @@ namespace frinno_api.Controllers
 
         //Gets All Projects
         [HttpGet()]
-        public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects(int ProfileId, [FromQuery] ProjectInfoRequest? query)
+        public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects(int ProfileId)
         {
-            var Projects = projectsService.FetchAllByProfileId(ProfileId);
-            if (Projects == null)
+            var projects = new List<Project>();;
+            if(ProfileId>0)
+            {
+                projects = projectsService.FetchAllByProfileId(ProfileId);
+            }
+            else{
+                projects = projectsService.FetchAll().ToList();
+            }
+
+            if (projects == null)
             {
                 return NoContent();
             }
 
-            //Format response
-            var ProjectInfos = Projects.ToList();
-
+            //Format response)
             var response = new DataListResponse<ProjectInfoResponse>();
-            response.Data = ProjectInfos.Select((p)=> new ProjectInfoResponse 
+            response.Data = projects.Select((p)=> new ProjectInfoResponse 
             {
                 Id = p.ID,
                 Title = p.Title,
@@ -211,8 +192,7 @@ namespace frinno_api.Controllers
                 SkillsEarned = p.Skills.Count
             } ).ToList();
             response.TotalItems = response.Data.Count;
-           return Ok(response);
-
+           return Ok( new {response});
         }
     }
 }
