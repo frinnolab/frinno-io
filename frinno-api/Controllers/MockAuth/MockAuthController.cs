@@ -48,7 +48,7 @@ namespace frinno_api.Controllers.MockAuth
             return Ok(response);
         }
         [HttpPost("register")]
-        public ActionResult<ProfileInfoResponse> Register(CreateAProfileRequest request)
+        public ActionResult<CreateAProfileResponse> Register(CreateAProfileRequest request)
         {
             var exists = profileService.ProfileExists(new Profile{User = new User { Email = request.Email }});
 
@@ -93,9 +93,10 @@ namespace frinno_api.Controllers.MockAuth
                 City = data.Address.City   
             };
 
-            var response = new ProfileInfoResponse()
+            var response = new CreateAProfileResponse()
             {
-                Fullname = $"{data.FirstName} {data.LastName}",
+                FirstName = data.FirstName,
+                LastName =data.LastName,
                 Id = data.ID,
                 AddressInfo = infoAddress,
                 Email = data.User.Email

@@ -26,7 +26,7 @@ namespace frinno_api.Controllers
         }
         //Creates a New Profile Resource
         [HttpPost()]
-        public ActionResult<ProfileInfoResponse> CreateNew([FromBody] CreateAProfileRequest request)
+        public ActionResult<CreateAProfileResponse> CreateNew([FromBody] CreateAProfileRequest request)
         {
             //Todo, Add Profile Specific Validations
             var exists = profileService
@@ -34,7 +34,7 @@ namespace frinno_api.Controllers
 
             if (exists)
             {
-                return BadRequest("Profile Already Exists");
+                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
             }
             var newProfile = new Profile
             {
@@ -84,22 +84,20 @@ namespace frinno_api.Controllers
                 Mobile = profileResponse.Address.Mobile,
                 City = profileResponse.Address.City   
             };
-            var response = new ProfileInfoResponse
+            var response = new CreateAProfileResponse
             {
                 Id = profileResponse.ID,
                 AddressInfo = infoAddress,
-                Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
+                FirstName = profileResponse.FirstName,
+                LastName =profileResponse.LastName,
                 Email = profileResponse.User.Email,
-                // TotalArticles = profileResponse.ProfileArticles.Count,
-                // TotalProjects = profileResponse.Projects.Count,
-                // TotalResumes = profileResponse.Resumes.Count
             };
             return Created("", response);
         }
 
         //Updates a Profile Resource
         [HttpPut("{Id}")]
-        public ActionResult<ProfileInfoResponse> UpdateProfile(int Id, [FromBody] UpdateProfileRequest request)
+        public ActionResult<CreateAProfileResponse> UpdateProfile(int Id, [FromBody] UpdateProfileRequest request)
         {
             var profile = profileService.FetchSingleById(Id);
 
@@ -108,16 +106,18 @@ namespace frinno_api.Controllers
                 return NotFound($"Profile: {Id} NotFound!.");
             }
 
-            if (request == null)
+            var profileExists = profileService.ProfileExists(new Profile { User =  new User{ Email = request.Email }});
+
+            if(profileExists)
             {
-                return BadRequest();
+                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
             }
 
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
             profile.User = new User
             {
-                Email = request.Email,
+                Email =  request.Email,
                 Password = request.Password
             };
             profile.Address = new Address
@@ -126,22 +126,21 @@ namespace frinno_api.Controllers
                 Mobile = request.AddressInfo.Mobile
             };
 
+
             var profileResponse = profileService.Update(profile);
 
-                       var infoAddress = new ProfileAddressInfo ()
+            var infoAddress = new ProfileAddressInfo ()
             {
                 Mobile = profileResponse.Address.Mobile,
                 City = profileResponse.Address.City   
             };
-            var response = new ProfileInfoResponse
+            var response = new CreateAProfileResponse
             {
                 Id = profileResponse.ID,
                 AddressInfo = infoAddress,
-                Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
-                Email = profileResponse.User.Email,
-                TotalArticles = profileResponse.ProfileArticles.Count,
-                TotalProjects = profileResponse.Projects.Count,
-                TotalResumes = profileResponse.Resumes.Count
+                FirstName = profileResponse.FirstName,
+                LastName =profileResponse.LastName,
+                Email = profileResponse.User.Email
             };
 
             return Created("",response);

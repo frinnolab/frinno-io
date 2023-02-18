@@ -8,6 +8,7 @@ using frinno_core.DTOs;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Project.ValueObjects;
 using frinno_core.Entities.Projects;
+using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
@@ -27,17 +28,19 @@ namespace frinno_api.Controllers
         }
         //Creates a New Project Resource
         [HttpPost("{ProfileId:int}")]
-        public ActionResult<ProjectInfoResponse> CreateNew(int ProfileId, [FromBody] CreateProjectRequest request)
+        public ActionResult<CreateProjectResponse> CreateNew(int ProfileId, [FromBody] CreateProjectRequest request)
         {
+            
             if(ProfileId>0)
             {
-                var profileExists = profilesService.ProfileExists( new Profile { ID =  ProfileId});
+                var profileExists = profilesService.ProfileExists(new Profile { ID = ProfileId});
 
                 if(!profileExists)
                 {
                     return NotFound($"Profile Not found!.");
                 }
             }
+            
             var profile = profilesService.FetchSingleById(ProfileId);
             //Todo, Add Project Specific Validations
             var newProject = new Project
@@ -73,20 +76,13 @@ namespace frinno_api.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
 
-            if (ProjectResponse == null)
-            {
-                return BadRequest("Failed to Create a Project!.");
-            }
-
-            var response = new ProjectInfoResponse
+            var response = new CreateProjectResponse
             {
                 Id = ProjectResponse.ID,
                 Title = ProjectResponse.Title,
-                Description = ProjectResponse.Description,
-                Url = ProjectResponse.ProjectUrl,
-                Status = ProjectResponse.Status
+                ProfileId = ProjectResponse.Profile.ID
             };
-            return Created("", response);
+            return Created("", new {response} );
         }
 
         //Updates a Project Resource
