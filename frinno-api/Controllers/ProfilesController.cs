@@ -40,7 +40,6 @@ namespace frinno_api.Controllers
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Address = new Address { City = request.AddressInfo.City, Mobile = request.AddressInfo.Mobile },
 
             };
 
@@ -91,9 +90,9 @@ namespace frinno_api.Controllers
                 AddressInfo = infoAddress,
                 Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
                 Email = profileResponse.User.Email,
-                TotalArticles = profileResponse.ProfileArticles.Count,
-                TotalProjects = profileResponse.Projects.Count,
-                TotalResumes = profileResponse.Resumes.Count
+                // TotalArticles = profileResponse.ProfileArticles.Count,
+                // TotalProjects = profileResponse.Projects.Count,
+                // TotalResumes = profileResponse.Resumes.Count
             };
             return Created("", response);
         }

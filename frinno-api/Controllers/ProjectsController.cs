@@ -29,22 +29,22 @@ namespace frinno_api.Controllers
         [HttpPost("{ProfileId:int}")]
         public ActionResult<ProjectInfoResponse> CreateNew(int ProfileId, [FromBody] CreateProjectRequest request)
         {
-            var profile = new Profile();
             if(ProfileId>0)
             {
-                profile = profilesService.FetchSingleById(ProfileId);
+                var profileExists = profilesService.ProfileExists( new Profile { ID =  ProfileId});
 
-                if(profile==null)
+                if(!profileExists)
                 {
                     return NotFound($"Profile Not found!.");
                 }
             }
+            var profile = profilesService.FetchSingleById(ProfileId);
             //Todo, Add Project Specific Validations
             var newProject = new Project
             {
                 Title = request.Title,
                 Description = request.Description,
-                ProjectUrl = request.Url,
+                ProjectUrl = request.Url, 
                 Profile = profile
             };
 
@@ -81,11 +81,9 @@ namespace frinno_api.Controllers
             var response = new ProjectInfoResponse
             {
                 Id = ProjectResponse.ID,
-                ProfileId = ProjectResponse.Profile.ID,
                 Title = ProjectResponse.Title,
                 Description = ProjectResponse.Description,
                 Url = ProjectResponse.ProjectUrl,
-                SkillsEarned = ProjectResponse.Skills.Count,
                 Status = ProjectResponse.Status
             };
             return Created("", response);

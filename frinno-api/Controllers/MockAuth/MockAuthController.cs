@@ -56,9 +56,6 @@ namespace frinno_api.Controllers.MockAuth
             {
                 return BadRequest("Profile already exists.");
             }
-            else{
-                Console.WriteLine(exists);
-            }
 
             var newProfile = new Profile {
                 FirstName = request.FirstName,

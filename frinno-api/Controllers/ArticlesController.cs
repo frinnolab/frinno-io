@@ -20,7 +20,7 @@ namespace frinno_api.Controllers
             articlesService = articles;
         }
         //Creates a New Article Resource
-        [HttpPost("{profileId}")]
+        [HttpPost()]
         public ActionResult<ArticleInfoResponse> CreateNew([FromBody] CreateArticleRequest request, int profileId)
         {
             //Todo, Add Article Specific Validations
@@ -55,7 +55,7 @@ namespace frinno_api.Controllers
         }
 
         //Updates a Article Resource
-        [HttpPut("{Id}/{profileId}")]
+        [HttpPut()]
         public ActionResult<ArticleInfoResponse> UpdateArticle(int Id,int profileId, [FromBody] UpdateArticleRequest request)
         {
             var Article = articlesService.FetchSingleById(Id);
@@ -79,7 +79,7 @@ namespace frinno_api.Controllers
         }
 
         //Removes Single Article Resource
-        [HttpDelete("{Id}/{profileId}")]
+        [HttpDelete("{Id}")]
         public ActionResult<string> DeleteArticle(int Id, int profileId)
         {
             var data = articlesService.FetchSingleById(Id);

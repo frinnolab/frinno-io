@@ -76,7 +76,7 @@ namespace frinno_api.Controllers
             var skillTools = new List<SkillTool>();
             
             //Add Skill Tools used
-            if(request.SkillTools != null && request.SkillTools.Count >  0)
+            if(request.SkillTools.Count >  0)
             {
                 foreach (var skItem in request.SkillTools)
                 {
