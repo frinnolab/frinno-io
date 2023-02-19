@@ -86,12 +86,14 @@ namespace frinno_api.Controllers
                 }
             }
             
-            var Project = projectsService.FetchSingleById(Id);
+            var exists = projectsService.Exists(Id);
 
-            if (Project == null)
+            if (!exists)
             {
                 return NotFound($"Project: {Id} NotFound!.");
             }
+
+            var Project = projectsService.FetchSingleById(Id);
         
             Project.Title = request.Title;
             Project.Description = request.Description;
@@ -122,7 +124,6 @@ namespace frinno_api.Controllers
                 Title = ProjectResponse.Title,
                 Description = ProjectResponse.Description,
                 Url = ProjectResponse.ProjectUrl,
-                SkillsEarned = ProjectResponse.Skills.Count,
                 Status = ProjectResponse.Status
             };
 
@@ -142,12 +143,14 @@ namespace frinno_api.Controllers
                     return NotFound($"Profile Not found!.");
                 }
             }
-            var data = projectsService.FetchSingleById(Id);
 
-            if (data == null)
+            var exists = projectsService.Exists(Id);
+
+            if (!exists)
             {
-                return NotFound("Project Not found");
+                return NotFound($"Project: {Id} NotFound!.");
             }
+            var data = projectsService.FetchSingleById(Id);
 
             projectsService.Remove(data);
             return Ok("Project Delete Success.!");
@@ -157,11 +160,14 @@ namespace frinno_api.Controllers
         [HttpGet("{Id}")]
         public ActionResult<ProjectInfoResponse> GetSingle(int Id, [FromQuery] ProjectInfoRequest query)
         {
-            var Project = projectsService.FetchSingleById(Id);
-            if (Project == null)
+            var exists = projectsService.Exists(Id);
+
+            if (!exists)
             {
-                return NotFound("Project NotFound");
+                return NotFound($"Project: {Id} NotFound!.");
             }
+
+            var Project = projectsService.FetchSingleById(Id);
 
             var response = new ProjectInfoResponse
             {
@@ -169,7 +175,6 @@ namespace frinno_api.Controllers
                 ProfileId = Project.Profile.ID,
                 Description = Project.Description,
                 Title = Project.Title,
-                SkillsEarned = Project.Skills.Count,
                 Status = Project.Status,
                 Url = Project.ProjectUrl
             };
@@ -204,7 +209,6 @@ namespace frinno_api.Controllers
                 Status = p.Status,
                 Url = p.ProjectUrl,
                 Description = p.Description,
-                SkillsEarned = p.Skills.Count
             } ).ToList();
             response.TotalItems = response.Data.Count;
            return Ok( new {response});

@@ -148,7 +148,7 @@ namespace frinno_api.Controllers
 
         //Removes Single Profile Resource
         [HttpDelete("{Id}")]
-        public ActionResult<string> DeleteProfile(int Id)
+        public ActionResult<bool> DeleteProfile(int Id)
         {
             var data = profileService.FetchSingleById(Id);
 
@@ -185,6 +185,7 @@ namespace frinno_api.Controllers
                 TotalArticles = profile.ProfileArticles.Count,
                 TotalProjects = profile.Projects.Count,
                 TotalResumes = profile.Resumes.Count,
+                TotalSkills = profile.Skills.Count,
                 AddressInfo = infoAddress
             };
             return Ok(response);
@@ -212,6 +213,7 @@ namespace frinno_api.Controllers
                 TotalArticles = p.ProfileArticles.Count,
                 TotalProjects = p.Projects.Count,
                 TotalResumes = p.Resumes.Count,
+                TotalSkills = p.Skills.Count,
                 AddressInfo = new ProfileAddressInfo
                 {
                     Mobile = p.Address.Mobile,
