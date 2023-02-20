@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Articles;
+using frinno_application.Profiles;
 using frinno_core.DTOs;
 using frinno_core.Entities.Articles;
+using frinno_core.Entities.Profiles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +17,32 @@ namespace frinno_api.Controllers
     public class ArticlesController : ControllerBase
     {
         private readonly IArticlesService<Article> articlesService;
-        public ArticlesController(IArticlesService<Article> articles)
+        private readonly IProfileService<Profile> profileService;
+        public ArticlesController(IArticlesService<Article> articles,IProfileService<Profile> profiles)
         {
             articlesService = articles;
+            profileService = profiles;
         }
         //Creates a New Article Resource
-        [HttpPost()]
-        public ActionResult<ArticleInfoResponse> CreateNew([FromBody] CreateArticleRequest request, int profileId)
+        [HttpPost("{profileId:int}")]
+        public ActionResult<CreateArticleResponse> CreateNew([FromBody] CreateArticleRequest request, int profileId)
         {
+            var profileExists = profileService.ProfileExists(new Profile{ ID = profileId});
+
+            if(!profileExists)
+            {
+                return NotFound(new { Message = "Author not Found!." });
+            }
+
+            var author = profileService.FetchSingleById(profileId);
+
+
             //Todo, Add Article Specific Validations
             var newArticle = new Article
             {
                 Title = request.Title,
-                LongText = request.LongText
+                LongText = request.LongText,
+                Author = author
             };
 
             var ArticleResponse = new Article();
@@ -47,17 +62,28 @@ namespace frinno_api.Controllers
                 return BadRequest("Failed to Create a Article!.");
             }
 
-            var response = new ArticleInfoResponse
+            var response = new CreateArticleResponse
             {
                 Id = ArticleResponse.ID,
+                AuthorId = ArticleResponse.Author.ID,
+                Title = ArticleResponse.Title
+
             };
-            return Created(nameof(GetSingle), new { Message = $"Article Created with ID: {response.Id}" });
+            return Created("", new { response });
         }
 
         //Updates a Article Resource
-        [HttpPut()]
+        [HttpPut("{Id:int}/{profileId:int}")]
         public ActionResult<ArticleInfoResponse> UpdateArticle(int Id,int profileId, [FromBody] UpdateArticleRequest request)
         {
+            var profileExists = profileService.ProfileExists(new Profile{ ID = profileId});
+
+            if(!profileExists)
+            {
+                return NotFound(new { Message = "Author not Found!." });
+            }
+
+            var author = profileService.FetchSingleById(profileId);
             var Article = articlesService.FetchSingleById(Id);
 
             if (Article == null)
@@ -82,6 +108,14 @@ namespace frinno_api.Controllers
         [HttpDelete("{Id}")]
         public ActionResult<string> DeleteArticle(int Id, int profileId)
         {
+            var profileExists = profileService.ProfileExists(new Profile{ ID = profileId});
+
+            if(!profileExists)
+            {
+                return NotFound(new { Message = "Author not Found!." });
+            }
+
+            var author = profileService.FetchSingleById(profileId);
             var data = articlesService.FetchSingleById(Id);
 
             if (data == null)
@@ -106,6 +140,7 @@ namespace frinno_api.Controllers
             var response = new ArticleInfoResponse
             {
                 Id = Article.ID,
+                AuthorId = Article.Author.ID,
                 Title = Article.Title,
                 LongText = Article.LongText
             };
@@ -130,9 +165,9 @@ namespace frinno_api.Controllers
             response.Data = ArticleInfos.Select((p)=> new ArticleInfoResponse 
             {
                 Id = p.ID,
+                AuthorId = p.Author.ID,
                 Title = p.Title,
                 LongText = p.LongText,
-                TotalArticlesTags = p.ArticleTags.Count
             } ).ToList();
             response.TotalItems = response.Data.Count;
            return Ok(response);
