@@ -24,10 +24,10 @@ namespace frinno_api.Controllers
             profileService = profiles;
         }
         //Creates a New Article Resource
-        [HttpPost("{profileId:int}")]
-        public ActionResult<CreateArticleResponse> CreateNew([FromBody] CreateArticleRequest request, int profileId)
+        [HttpPost("{profileId}")]
+        public ActionResult<CreateArticleResponse> CreateNew([FromBody] CreateArticleRequest request, string profileId)
         {
-            var profileExists = profileService.ProfileExists(new Profile{ ID = profileId});
+            var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
 
             if(!profileExists)
             {
@@ -64,8 +64,8 @@ namespace frinno_api.Controllers
 
             var response = new CreateArticleResponse
             {
-                Id = ArticleResponse.ID,
-                AuthorId = ArticleResponse.Author.ID,
+                Id = ArticleResponse.Id,
+                AuthorId = ArticleResponse.Author.Id,
                 Title = ArticleResponse.Title
 
             };
@@ -73,10 +73,10 @@ namespace frinno_api.Controllers
         }
 
         //Updates a Article Resource
-        [HttpPut("{Id:int}/{profileId:int}")]
-        public ActionResult<ArticleInfoResponse> UpdateArticle(int Id,int profileId, [FromBody] UpdateArticleRequest request)
+        [HttpPut("{Id}/{profileId}")]
+        public ActionResult<ArticleInfoResponse> UpdateArticle(string Id,string profileId, [FromBody] UpdateArticleRequest request)
         {
-            var profileExists = profileService.ProfileExists(new Profile{ ID = profileId});
+            var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
 
             if(!profileExists)
             {
@@ -101,14 +101,14 @@ namespace frinno_api.Controllers
 
             var ArticleResponse = articlesService.Update(Article);
 
-            return Created(nameof(GetSingle), new { Message = $"Updated {ArticleResponse.ID}" });
+            return Created(nameof(GetSingle), new { Message = $"Updated {ArticleResponse.Id}" });
         }
 
         //Removes Single Article Resource
-        [HttpDelete("{Id}")]
-        public ActionResult<string> DeleteArticle(int Id, int profileId)
+        [HttpDelete("{Id}/{profileId}")]
+        public ActionResult<string> DeleteArticle(string Id, string profileId)
         {
-            var profileExists = profileService.ProfileExists(new Profile{ ID = profileId});
+            var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
 
             if(!profileExists)
             {
@@ -129,7 +129,7 @@ namespace frinno_api.Controllers
 
         //Returns a Article Resource
         [HttpGet("{Id}")]
-        public ActionResult<ArticleInfoResponse> GetSingle(int Id, [FromQuery] ArticleInfoRequest query)
+        public ActionResult<ArticleInfoResponse> GetSingle(string Id, [FromQuery] ArticleInfoRequest query)
         {
             var Article = articlesService.FetchSingleById(Id);
             if (Article == null)
@@ -139,8 +139,8 @@ namespace frinno_api.Controllers
 
             var response = new ArticleInfoResponse
             {
-                Id = Article.ID,
-                AuthorId = Article.Author.ID,
+                Id = Article.Id,
+                AuthorId = Article.Author.Id,
                 Title = Article.Title,
                 LongText = Article.LongText
             };
@@ -150,7 +150,7 @@ namespace frinno_api.Controllers
         //Gets All Articles
         [HttpGet()]
         [AllowAnonymous]
-        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query, int profileId)
+        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query, string profileId)
         {
             var Articles = articlesService.FetchAll();
             if (Articles == null)
@@ -164,8 +164,8 @@ namespace frinno_api.Controllers
             var response = new DataListResponse<ArticleInfoResponse>();
             response.Data = ArticleInfos.Select((p)=> new ArticleInfoResponse 
             {
-                Id = p.ID,
-                AuthorId = p.Author.ID,
+                Id = p.Id,
+                AuthorId = p.Author.Id,
                 Title = p.Title,
                 LongText = p.LongText,
             } ).ToList();

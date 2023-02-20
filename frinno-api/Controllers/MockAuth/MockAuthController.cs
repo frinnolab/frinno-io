@@ -39,7 +39,7 @@ namespace frinno_api.Controllers.MockAuth
             var dummyToken = BCrypt.Net.BCrypt.HashPassword(profile.FirstName+profile.LastName);
             var response = new LoginResponse()
             {
-                Id = profile.ID,
+                Id = profile.Id,
                 Email = profile.User.Email,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
                 Token = dummyToken
@@ -97,7 +97,7 @@ namespace frinno_api.Controllers.MockAuth
             {
                 FirstName = data.FirstName,
                 LastName =data.LastName,
-                Id = data.ID,
+                Id = data.Id,
                 AddressInfo = infoAddress,
                 Email = data.User.Email
 

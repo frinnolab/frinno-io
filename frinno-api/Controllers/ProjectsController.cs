@@ -27,13 +27,13 @@ namespace frinno_api.Controllers
             profilesService = profiles;
         }
         //Creates a New Project Resource
-        [HttpPost("{ProfileId:int}")]
-        public ActionResult<CreateProjectResponse> CreateNew(int ProfileId, [FromBody] CreateProjectRequest request)
+        [HttpPost("{ProfileId}")]
+        public ActionResult<CreateProjectResponse> CreateNew(string ProfileId, [FromBody] CreateProjectRequest request)
         {
             
-            if(ProfileId>0)
+            if(ProfileId != string.Empty)
             {
-                var profileExists = profilesService.ProfileExists(new Profile { ID = ProfileId});
+                var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId});
 
                 if(!profileExists)
                 {
@@ -64,21 +64,21 @@ namespace frinno_api.Controllers
 
             var response = new CreateProjectResponse
             {
-                Id = newProject.ID,
+                Id = newProject.Id,
                 Title = newProject.Title,
-                ProfileId = newProject.Profile.ID
+                ProfileId = newProject.Profile.Id
             };
             return Created("", new {response} );
         }
 
         //Updates a Project Resource
-        [HttpPut("{Id}/{ProfileId:int}")]
-        public ActionResult<ProjectInfoResponse> UpdateProject(int Id, int ProfileId, [FromBody] UpdateProjectRequest request)
+        [HttpPut("{Id}/{ProfileId}")]
+        public ActionResult<ProjectInfoResponse> UpdateProject(string Id, string ProfileId, [FromBody] UpdateProjectRequest request)
         {
 
-            if (ProfileId > 0)
+            if (ProfileId != string.Empty)
             {
-                var profileExists = profilesService.ProfileExists(new Profile { ID = ProfileId });
+                var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId });
 
                 if (!profileExists)
                 {
@@ -119,8 +119,8 @@ namespace frinno_api.Controllers
 
             var response = new ProjectInfoResponse
             {
-                Id = ProjectResponse.ID,
-                ProfileId = ProjectResponse.Profile.ID,
+                Id = ProjectResponse.Id,
+                ProfileId = ProjectResponse.Profile.Id,
                 Title = ProjectResponse.Title,
                 Description = ProjectResponse.Description,
                 Url = ProjectResponse.ProjectUrl,
@@ -131,12 +131,12 @@ namespace frinno_api.Controllers
         }
 
         //Removes Single Project Resource
-        [HttpDelete("{Id}/{ProfileId:int}")]
-        public ActionResult<bool> DeleteProject(int Id, int ProfileId)
+        [HttpDelete("{Id}/{ProfileId}")]
+        public ActionResult<bool> DeleteProject(string Id, string ProfileId)
         {
-            if (ProfileId > 0)
+            if (ProfileId != string.Empty)
             {
-                var profileExists = profilesService.ProfileExists(new Profile { ID = ProfileId });
+                var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId });
 
                 if (!profileExists)
                 {
@@ -158,7 +158,7 @@ namespace frinno_api.Controllers
 
         //Returns a Project Resource
         [HttpGet("{Id}")]
-        public ActionResult<ProjectInfoResponse> GetSingle(int Id, [FromQuery] ProjectInfoRequest query)
+        public ActionResult<ProjectInfoResponse> GetSingle(string Id, [FromQuery] ProjectInfoRequest query)
         {
             var exists = projectsService.Exists(Id);
 
@@ -171,8 +171,8 @@ namespace frinno_api.Controllers
 
             var response = new ProjectInfoResponse
             {
-                Id = Project.ID,
-                ProfileId = Project.Profile.ID,
+                Id = Project.Id,
+                ProfileId = Project.Profile.Id,
                 Description = Project.Description,
                 Title = Project.Title,
                 Status = Project.Status,
@@ -186,7 +186,7 @@ namespace frinno_api.Controllers
         public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects([FromQuery] ProjectInfoRequest query)
         {
             var projects = new List<Project>();;
-            if(query.ProfileId>0)
+            if(query.ProfileId != string.Empty)
             {
                 projects = projectsService.FetchAllByProfileId(query.ProfileId);
             }
@@ -203,8 +203,8 @@ namespace frinno_api.Controllers
             var response = new DataListResponse<ProjectInfoResponse>();
             response.Data = projects.Select((p)=> new ProjectInfoResponse 
             {
-                Id = p.ID,
-                ProfileId = p.Profile.ID,
+                Id = p.Id,
+                ProfileId = p.Profile.Id,
                 Title = p.Title,
                 Status = p.Status,
                 Url = p.ProjectUrl,

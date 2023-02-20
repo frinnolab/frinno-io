@@ -20,9 +20,9 @@ namespace frinno_api.Controllers
         }
         //Creates a New Tag Resource
         [HttpPost()]
-        public ActionResult<TagInfoResponse> CreateNew([FromBody] CreateTagRequest request, int profileId, int articleId)
+        public ActionResult<TagInfoResponse> CreateNew([FromBody] CreateTagRequest request, string profileId, int articleId)
         {
-            //Todo, Add Tag Specific Validations
+            //Todo, Add Tag Specific ValIdations
             var newTag = new Tag
             {
                 Name = request.Name,
@@ -49,14 +49,14 @@ namespace frinno_api.Controllers
 
             var response = new TagInfoResponse
             {
-                Id = TagResponse.ID,
+                Id = TagResponse.Id,
             };
-            return Created(nameof(GetSingle), new { Message = $"Tag Created with ID: {response.Id}" });
+            return Created(nameof(GetSingle), new { Message = $"Tag Created with Id: {response.Id}" });
         }
 
         //Updates a Tag Resource
         [HttpPut("{Id}")]
-        public ActionResult<TagInfoResponse> UpdateTag(int Id, int profileId, int articleId,  [FromBody] UpdateTagRequest request)
+        public ActionResult<TagInfoResponse> UpdateTag(string Id, int profileId, int articleId,  [FromBody] UpdateTagRequest request)
         {
             var Tag = tagsService.FetchSingleById(Id);
 
@@ -74,12 +74,12 @@ namespace frinno_api.Controllers
 
             var TagResponse = tagsService.Update(Tag);
 
-            return Created(nameof(GetSingle), new { Message = $"Updated {TagResponse.ID}" });
+            return Created(nameof(GetSingle), new { Message = $"Updated {TagResponse.Id}" });
         }
 
         //Removes Single Tag Resource
         [HttpDelete("{Id}/{profileId}")]
-        public ActionResult<string> DeleteTag(int Id, int profileId)
+        public ActionResult<string> DeleteTag(string Id, int profileId)
         {
             var data = tagsService.FetchSingleById(Id);
 
@@ -94,7 +94,7 @@ namespace frinno_api.Controllers
 
         //Returns a Tag Resource
         [HttpGet("{Id}")]
-        public ActionResult<TagInfoResponse> GetSingle(int Id, [FromQuery] TagInfoRequest query)
+        public ActionResult<TagInfoResponse> GetSingle(string Id, [FromQuery] TagInfoRequest query)
         {
             var Tag = tagsService.FetchSingleById(Id);
             if (Tag == null)
@@ -104,7 +104,7 @@ namespace frinno_api.Controllers
 
             var response = new TagInfoResponse
             {
-                Id = Tag.ID,
+                Id = Tag.Id,
                 Name = Tag.Name,
                 TotalArtilcesUsed = Tag.ArticleTags.Select(a=>a.Article).ToList().Count
             };
@@ -127,7 +127,7 @@ namespace frinno_api.Controllers
             var response = new DataListResponse<TagInfoResponse>();
             response.Data = TagInfos.Select((p)=> new TagInfoResponse 
             {
-                Id = p.ID,
+                Id = p.Id,
                 Name = p.Name,
                 TotalArtilcesUsed = p.ArticleTags.Select(a=>a.Article).ToList().Count
             } ).ToList();

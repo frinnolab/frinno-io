@@ -86,7 +86,7 @@ namespace frinno_api.Controllers
             };
             var response = new CreateAProfileResponse
             {
-                Id = profileResponse.ID,
+                Id = profileResponse.Id,
                 AddressInfo = infoAddress,
                 FirstName = profileResponse.FirstName,
                 LastName =profileResponse.LastName,
@@ -97,8 +97,15 @@ namespace frinno_api.Controllers
 
         //Updates a Profile Resource
         [HttpPut("{Id}")]
-        public ActionResult<CreateAProfileResponse> UpdateProfile(int Id, [FromBody] UpdateProfileRequest request)
+        public ActionResult<CreateAProfileResponse> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
         {
+            var profileExists = profileService.ProfileExists(new Profile { User =  new User{ Email = request.Email }});
+
+            if(profileExists)
+            {
+                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
+            }
+
             var profile = profileService.FetchSingleById(Id);
 
             if (profile == null)
@@ -106,12 +113,6 @@ namespace frinno_api.Controllers
                 return NotFound($"Profile: {Id} NotFound!.");
             }
 
-            var profileExists = profileService.ProfileExists(new Profile { User =  new User{ Email = request.Email }});
-
-            if(profileExists)
-            {
-                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
-            }
 
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
@@ -136,7 +137,7 @@ namespace frinno_api.Controllers
             };
             var response = new CreateAProfileResponse
             {
-                Id = profileResponse.ID,
+                Id = profileResponse.Id,
                 AddressInfo = infoAddress,
                 FirstName = profileResponse.FirstName,
                 LastName =profileResponse.LastName,
@@ -148,7 +149,7 @@ namespace frinno_api.Controllers
 
         //Removes Single Profile Resource
         [HttpDelete("{Id}")]
-        public ActionResult<bool> DeleteProfile(int Id)
+        public ActionResult<bool> DeleteProfile(string Id)
         {
             var data = profileService.FetchSingleById(Id);
 
@@ -163,7 +164,7 @@ namespace frinno_api.Controllers
 
         //Returns a Profile Resource
         [HttpGet("{Id}")]
-        public ActionResult<ProfileInfoResponse> GetSingle(int Id, [FromQuery] ProfileInfoRequest query)
+        public ActionResult<ProfileInfoResponse> GetSingle(string Id, [FromQuery] ProfileInfoRequest query)
         {
             var profile = profileService.FetchSingleById(Id);
             if (profile == null)
@@ -179,7 +180,7 @@ namespace frinno_api.Controllers
 
             var response = new ProfileInfoResponse
             {
-                Id = profile.ID,
+                Id = profile.Id,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
                 Email = profile.User.Email,
                 TotalArticles = profile.ProfileArticles.Count,
@@ -207,7 +208,7 @@ namespace frinno_api.Controllers
             var response = new DataListResponse<ProfileInfoResponse>();
             response.Data = profileInfos.Select((p)=> new ProfileInfoResponse 
             {
-                Id = p.ID,
+                Id = p.Id,
                 Email = p.User.Email,
                 Fullname = $"{p.FirstName} {p.LastName}",
                 TotalArticles = p.ProfileArticles.Count,
@@ -223,6 +224,24 @@ namespace frinno_api.Controllers
             response.TotalItems = response.Data.Count;
 
             return Ok(response);
+        }
+
+
+        //Profile Image
+        //Upload
+        [HttpPost("{Id}/upload-avatar")]
+        public ActionResult<bool> UploadProfileImage(string Id, IFormFile file)
+        {
+
+            return Ok();
+        }
+
+
+        //Remove
+        [HttpDelete("{Id}/remove-avatar")]
+        public ActionResult<bool> RemoveProfileImage(string Id)
+        {
+            return Ok();
         }
     }
 }
