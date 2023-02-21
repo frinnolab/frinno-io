@@ -14,7 +14,7 @@ namespace frinno_core.DTOs
     //Login Response
     public record LoginResponse
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public string Fullname { get; set; }
         public string Token { get; set; }
@@ -22,7 +22,7 @@ namespace frinno_core.DTOs
     //User Response
     public record UserResponse
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string hashedPassword { get; set; }
@@ -38,7 +38,7 @@ namespace frinno_core.DTOs
     //Register Response
     public record RegisterResponse
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public string Fullname { get; set; }
     }

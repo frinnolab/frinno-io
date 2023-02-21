@@ -46,7 +46,7 @@ namespace frinno_infrastructure.Repostories.TagsRepository
             .Include(p=>p.ArticleTags)
             .ThenInclude(p=>p.Article)
             .Include(t=>t.Profile)
-            .Single(a=>a.ID == dataId);
+            .Single(a=>a.Id == dataId);
         }
 
         public void Remove(Tag data)

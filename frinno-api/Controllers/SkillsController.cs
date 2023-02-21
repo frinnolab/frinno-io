@@ -52,7 +52,7 @@ namespace frinno_api.Controllers
                     return NotFound("Profile not found.");
                 }
 
-                skillProfile = profileService.FetchSingleById(profileId);
+                skillProfile = profileService.FindById(profileId);
 
                 newSkill.Profile = skillProfile;
             }
@@ -63,7 +63,7 @@ namespace frinno_api.Controllers
             {
                 foreach (var projectId in request.ProjectIds)
                 {
-                    if(projectId!=string.Empty){
+                    if(projectId>0){
                         var projectExists = projectsService.Exists(projectId);
                         if(projectExists)
                         {
@@ -90,7 +90,7 @@ namespace frinno_api.Controllers
             //Format Response
 
 
-            var projectIdsResponse = new List<string>();
+            var projectIdsResponse = new List<int>();
 
             foreach (var project in skillResponse.Projects.ToList())
             {
@@ -109,7 +109,7 @@ namespace frinno_api.Controllers
 
         //Updte Single Skill
         [HttpPut("{Id}/{profileId}")]
-        public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, string Id, string profileId)
+        public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, int Id, string profileId)
         {
             var skill = new Skill();
             
@@ -124,7 +124,7 @@ namespace frinno_api.Controllers
                     return NotFound("Profile not found.");
                 }
 
-                skillProfile = profileService.FetchSingleById(profileId);
+                skillProfile = profileService.FindById(profileId);
 
                 skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
             }else{
@@ -146,11 +146,11 @@ namespace frinno_api.Controllers
             {
                 foreach (var projectId in request.ProjectIds)
                 {
-                    if(projectId!= string.Empty)
+                    if(projectId>0)
                     {
                         var skP = skill.Projects.Find(p=>p.Id ==projectId);
                         //New Updated Project
-                        if( skP == null && projectId != string.Empty)
+                        if( skP == null && projectId > 0)
                         {
                             var projectExists = projectsService.Exists(projectId);
 
@@ -171,7 +171,7 @@ namespace frinno_api.Controllers
 
             //Format Response
 
-            var projectIdsResponse = new List<string>();
+            var projectIdsResponse = new List<int>();
 
             foreach (var project in skillResponse.Projects)
             {
@@ -189,7 +189,7 @@ namespace frinno_api.Controllers
         
         //Remove Skill
         [HttpDelete("{Id}/{profileId}")]
-        public ActionResult<bool> RemoveSkill(string Id, string profileId)
+        public ActionResult<bool> RemoveSkill(int Id, string profileId)
         {
             var skill = new Skill();
             
@@ -204,7 +204,7 @@ namespace frinno_api.Controllers
                     return NotFound("Profile not found.");
                 }
 
-                skillProfile = profileService.FetchSingleById(profileId);
+                skillProfile = profileService.FindById(profileId);
 
                 skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
             }else{
@@ -220,7 +220,7 @@ namespace frinno_api.Controllers
         }
         //Get Single Skill
         [HttpGet("{Id}")]
-        public ActionResult<SkillInfoResponse> GetSingleSkill(string Id)
+        public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
         {
             var skill = skillService.FetchSingleById(Id);
 

@@ -30,6 +30,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             .Include(x=>x.Address)
             .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
+            .Include(x=>x.Skills)
             .Include(x=>x.Resumes)
             .ToList();
         }
@@ -41,10 +42,12 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             .Include(x=>x.Address)
             .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
-            .Include(x=>x.Resumes).FirstOrDefault((p)=>p==data);
+            .Include(x=>x.Resumes)
+            .Include(x=>x.Skills)
+            .FirstOrDefault((p)=>p==data);
         }
 
-        public Profile FetchSingleById(int dataId)
+        public Profile FindById(string dataId)
         {
             return DB.Profiles
             .Include(u=>u.User)
@@ -52,7 +55,8 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
             .Include(x=>x.Resumes)
-            .Single(x=>x.ID ==dataId);
+            .Include(x=>x.Skills)
+            .Single(x=>x.Id ==dataId);
         }
 
         public Profile FindByEmail(string email)
@@ -62,12 +66,20 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
 
         public bool ProfileExists(Profile profile)
         {
-            return DB.Profiles.Any((p)=> p.User.Email == profile.User.Email);
+            if(profile.User != null )
+            {
+                return DB.Profiles.Include(u=>u.User)
+                .Any((p)=> p.User.Email == profile.User.Email);
+            }
+            else
+            {
+                return DB.Profiles.Any((p)=> p.Id == profile.Id);
+            }
         }
 
         public void Remove(Profile data)
         {
-            DB.Profiles.Find(data.ID);
+            DB.Profiles.Find(data.Id);
             DB.Profiles.Remove(data);
             SaveContextChanges();
         }

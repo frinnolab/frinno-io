@@ -106,7 +106,7 @@ namespace frinno_api.Controllers
                 return BadRequest($"A Profile with the same email: {request.Email} already exists!");
             }
 
-            var profile = profileService.FetchSingleById(Id);
+            var profile = profileService.FindById(Id);
 
             if (profile == null)
             {
@@ -151,7 +151,7 @@ namespace frinno_api.Controllers
         [HttpDelete("{Id}")]
         public ActionResult<bool> DeleteProfile(string Id)
         {
-            var data = profileService.FetchSingleById(Id);
+            var data = profileService.FindById(Id);
 
             if (data == null)
             {
@@ -166,7 +166,7 @@ namespace frinno_api.Controllers
         [HttpGet("{Id}")]
         public ActionResult<ProfileInfoResponse> GetSingle(string Id, [FromQuery] ProfileInfoRequest query)
         {
-            var profile = profileService.FetchSingleById(Id);
+            var profile = profileService.FindById(Id);
             if (profile == null)
             {
                 return NotFound("Profile NotFound");

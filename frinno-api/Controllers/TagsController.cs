@@ -56,7 +56,7 @@ namespace frinno_api.Controllers
 
         //Updates a Tag Resource
         [HttpPut("{Id}")]
-        public ActionResult<TagInfoResponse> UpdateTag(string Id, int profileId, int articleId,  [FromBody] UpdateTagRequest request)
+        public ActionResult<TagInfoResponse> UpdateTag(int Id, string profileId, int articleId,  [FromBody] UpdateTagRequest request)
         {
             var Tag = tagsService.FetchSingleById(Id);
 
@@ -79,7 +79,7 @@ namespace frinno_api.Controllers
 
         //Removes Single Tag Resource
         [HttpDelete("{Id}/{profileId}")]
-        public ActionResult<string> DeleteTag(string Id, int profileId)
+        public ActionResult<string> DeleteTag(int Id, int profileId)
         {
             var data = tagsService.FetchSingleById(Id);
 
@@ -94,7 +94,7 @@ namespace frinno_api.Controllers
 
         //Returns a Tag Resource
         [HttpGet("{Id}")]
-        public ActionResult<TagInfoResponse> GetSingle(string Id, [FromQuery] TagInfoRequest query)
+        public ActionResult<TagInfoResponse> GetSingle(int Id, [FromQuery] TagInfoRequest query)
         {
             var Tag = tagsService.FetchSingleById(Id);
             if (Tag == null)

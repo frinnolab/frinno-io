@@ -8,7 +8,8 @@ namespace frinno_core.Entities
 {
     public class BaseEntity
     {
-        public int ID { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         public DateTime Created { get; set; }
 

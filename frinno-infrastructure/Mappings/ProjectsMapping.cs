@@ -14,7 +14,7 @@ namespace frinno_infrastructure.Mappings
         {
             //Config FKs
             builder.Property<string>("ProfileId");
-            builder.Property<int>("Status");
+            builder.Property<int>(p=>p.Status);
 
             builder.HasOne(p=>p.Profile)
             .WithMany(pr => pr.Projects)

@@ -13,15 +13,15 @@ namespace frinno_infrastructure.Mappings.SkillsMapping
         public void Configure(EntityTypeBuilder<Skill> builder)
         {
             //Config Indexes
-            builder.HasIndex(s=>s.ID);
+            builder.HasIndex(s=>s.Id);
             builder.HasIndex(s=>s.Name);
-            builder.HasIndex(s=>s.Profile.ID);
-            builder.HasIndex(s=>s.Project.ID);
+            builder.HasIndex(s=>s.Profile.Id);
+            builder.HasIndex("ProjectId");
             //Configure Fkeys
-            builder.Property<int>(pj=>pj.Project.ID)
+            builder.Property<string>("ProjectId")
             .HasColumnName("ProjectId");
 
-            builder.Property<int>(pr=>pr.Profile.ID)
+            builder.Property<string>(pr=> pr.Profile.Id)
             .HasColumnName("ProfileId");
 
             //M2Ms
@@ -30,15 +30,10 @@ namespace frinno_infrastructure.Mappings.SkillsMapping
             .WithMany(pr=>pr.Skills)
             .HasForeignKey("ProfileId");
 
-            //Project
-            builder.HasOne(s=>s.Project)
-            .WithMany(pr=>pr.Skills)
+            //Projects
+            builder.HasMany(pr=>pr.Projects)
+            .WithOne()
             .HasForeignKey("ProjectId");
-
-            //Tools
-            builder.HasMany(s=>s.Tools)
-            .WithOne(pr=>pr.Skill)
-            .HasForeignKey("ToolId");
         }
     }
 }

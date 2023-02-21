@@ -17,6 +17,8 @@ namespace frinno_core.DTOs
     public record CreateArticleResponse
     {
         public int Id { get; set; }
+        public string AuthorId { get; set; }
+        public string Title { get; set; }
     }
     //Article Single Resource Request
     public record ArticleInfoRequest
@@ -28,15 +30,15 @@ namespace frinno_core.DTOs
     public record ArticleInfoResponse
     {
         public int Id { get; set; }
+        public string AuthorId { get; set; }
         public string Title { get; set; }
         public string LongText { get; set; }
-        public int TotalArticlesTags { get; set; } = 0;
+
     }
 
     //Article Update Request
     public record UpdateArticleRequest : CreateArticleRequest
     {
-        public int? Id { get; set; }
-        public int? ProfileId { get; set; }
+        
     }
 }

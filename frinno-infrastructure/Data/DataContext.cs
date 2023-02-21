@@ -13,11 +13,12 @@ using frinno_core.Entities.Tags;
 using frinno_core.Entities.user;
 using frinno_infrastructure.Mappings;
 using frinno_infrastructure.Mappings.SkillsMapping;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace frinno_infrastructure.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<Profile>
     {
 
         public DataContext(DbContextOptions<DataContext> options):base(options)

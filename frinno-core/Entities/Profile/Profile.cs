@@ -8,10 +8,11 @@ using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Projects;
 using frinno_core.Entities.user;
+using Microsoft.AspNetCore.Identity;
 
 namespace frinno_core.Entities.Profiles
 {
-    public class Profile : BaseEntity
+    public class Profile : IdentityUser
     {
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }

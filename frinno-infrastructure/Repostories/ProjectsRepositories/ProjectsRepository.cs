@@ -28,18 +28,16 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .Include(sts=>sts.Status)
-            .Include(sk=>sk.Skills)
-            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .ThenInclude(pr=>pr.Skills)
             .ToList();
         }
 
-        public List<Project> FetchAllByProfileId(int profileId)
+        public List<Project> FetchAllByProfileId(string profileId)
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .Include(sk=>sk.Skills)
-            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .ThenInclude(pr=>pr.Skills)
+            .Where(p=>p.Profile.Id == profileId)
             .ToList();
         }
 
@@ -47,9 +45,7 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .Include(sts=>sts.Status)
-            .Include(sk=>sk.Skills)
-            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
+            .ThenInclude(pr=>pr.Skills)
             .Single((x)=>x==data);
         }
 
@@ -57,10 +53,13 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .Include(sts=>sts.Status)
-            .Include(sk=>sk.Skills)
-            .ThenInclude(st=>st.Select(st=>st.Tools)).ToList()
-            .Single(x=>x.ID==dataId);
+            .ThenInclude(pr=>pr.Skills)
+            .Single(x=>x.Id==dataId);
+        }
+
+        public bool Exists(int dataId)
+        {
+            return DB.Projects.Any(p=>p.Id ==dataId);
         }
 
         public void Remove(Project data)

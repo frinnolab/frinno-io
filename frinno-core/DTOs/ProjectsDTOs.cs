@@ -13,19 +13,21 @@ namespace frinno_core.DTOs
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; }
         public string Url { get; set; }
-        public ProjectStatus? Status { get; set; } = ProjectStatus.NotStarted;
+        public int Status { get; set; }
     }
     //Create a Project Response
     
     public record CreateProjectResponse
     {
+        public string Title { get; set; } 
         public int Id { get; set; }
+        public string ProfileId { get; set; }
     }
     //Project Single Resource Request
     public record ProjectInfoRequest
     {
         public string Title { get; set; }
-        public ProjectStatus? Status { get; set; } = ProjectStatus.NotStarted;
+        public string ProfileId { get; set; }
     }
         
 
@@ -33,17 +35,17 @@ namespace frinno_core.DTOs
     public record ProjectInfoResponse
     {
         public int Id { get; set; }
-        public int? ProfileId { get; set; }
+        public string ProfileId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
         public int? SkillsEarned { get; set; }
-        public ProjectStatus Status { get; set; } = ProjectStatus.NotStarted;
+        public int Status { get; set; }
     }
 
     //Project Update Request
     public record UpdateProjectRequest : CreateProjectRequest
     {
-     public int? Id { get; set; }
+     public int Id { get; set; }
     }
 }

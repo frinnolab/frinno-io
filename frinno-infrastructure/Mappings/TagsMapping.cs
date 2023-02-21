@@ -16,7 +16,7 @@ namespace frinno_infrastructure.Mappings
             builder.HasIndex(t=>t.Name);
 
             //Shadow FK
-            builder.Property<int>("ProfileId");
+            builder.Property<string>("ProfileId");
 
             //COnfigure FK
             builder.HasOne<Profile>(p=>p.Profile)

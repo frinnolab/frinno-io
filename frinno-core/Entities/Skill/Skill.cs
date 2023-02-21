@@ -11,8 +11,7 @@ namespace frinno_core.Entities.Skill
     {
         public string Name { get; set; }
         public Profiles.Profile Profile { get; set; }
-        public Projects.Project Project { get; set; }
-        public List<SkillTool> Tools { get; set; }
+        public List<Projects.Project> Projects { get; set; }
 
     }
 }

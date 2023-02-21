@@ -9,6 +9,7 @@ namespace frinno_application.Skills
 {
     public interface ISkillsService : IMasterService<Skill>
     {
-
+        IEnumerable<Skill> FetchAllByProfileId(string profileId);
+        Skill FetchSingleByProfileId(int id, string profileId);
     }
 }

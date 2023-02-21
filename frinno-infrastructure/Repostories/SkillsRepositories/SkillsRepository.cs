@@ -27,31 +27,49 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
         public IEnumerable<Skill> FetchAll()
         {
             return DB.Skills
-            .Include(pf=>pf.Profile)
-            .Include(pr=>pr.Project)
-            .Include(t=>t.Tools)
-            .ThenInclude(st=>st.Select(tt=>tt.Skill)).ToList()
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Include(s=>s.Projects)
+            .ToList();
+        }
+
+        public IEnumerable<Skill> FetchAllByProfileId(string profileId)
+        {
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(p=>p.Skills)
+            .Where(p=>p.Profile.Id == profileId)
+            .Include(pj=>pj.Projects)
+            .Include(s=>s.Projects)
             .ToList();
         }
 
         public Skill FetchSingle(Skill data)
         {
             return DB.Skills
-            .Include(pf=>pf.Profile)
-            .Include(pr=>pr.Project)
-            .Include(t=>t.Tools)
-            .ThenInclude(st=>st.Select(tt=>tt.Skill)).ToList()
-            .Single((s)=>s==data);
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Include(s=>s.Projects)
+            .FirstOrDefault((s)=>s==data);
         }
 
         public Skill FetchSingleById(int dataId)
         {
             return DB.Skills
-            .Include(pf=>pf.Profile)
-            .Include(pr=>pr.Project)
-            .Include(t=>t.Tools)
-            .ThenInclude(st=>st.Select(tt=>tt.Skill)).ToList()
-            .Single(x=>x.ID == dataId);
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Include(s=>s.Projects)
+            .FirstOrDefault(x=>x.Id == dataId);
+        }
+
+        public Skill FetchSingleByProfileId(int Id, string profileId)
+        {
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Where(p=>p.Profile.Id == profileId)
+            .Include(s=>s.Projects)
+            .FirstOrDefault(x=>x.Id == Id);
         }
 
         public void Remove(Skill data)

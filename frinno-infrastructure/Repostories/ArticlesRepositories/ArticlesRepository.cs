@@ -33,8 +33,7 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         public IEnumerable<Article> FetchAll()
         {
             return DB.Articles
-            .Include(p=>p.ProfileArticles)
-            .ThenInclude(p=>p.Profile)
+            .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
             .ToList();
         }
@@ -42,8 +41,7 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         public Article FetchSingle(Article data)
         {
             return DB.Articles
-            .Include(p=>p.ProfileArticles)
-            .ThenInclude(p=>p.Profile)
+            .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
             .Single((a)=>a==data);
         }
@@ -51,10 +49,9 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         public Article FetchSingleById(int dataId)
         {
             return DB.Articles
-            .Include(p=>p.ProfileArticles)
-            .ThenInclude(p=>p.Profile)
+            .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
-            .Single(a=>a.ID == dataId);
+            .Single(a=>a.Id == dataId);
         }
 
         public void Remove(Article data)

@@ -34,7 +34,7 @@ namespace frinno_api.Controllers
                 return NotFound(new { Message = "Author not Found!." });
             }
 
-            var author = profileService.FetchSingleById(profileId);
+            var author = profileService.FindById(profileId);
 
 
             //Todo, Add Article Specific Validations
@@ -74,7 +74,7 @@ namespace frinno_api.Controllers
 
         //Updates a Article Resource
         [HttpPut("{Id}/{profileId}")]
-        public ActionResult<ArticleInfoResponse> UpdateArticle(string Id,string profileId, [FromBody] UpdateArticleRequest request)
+        public ActionResult<ArticleInfoResponse> UpdateArticle(int Id,string profileId, [FromBody] UpdateArticleRequest request)
         {
             var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
 
@@ -83,7 +83,7 @@ namespace frinno_api.Controllers
                 return NotFound(new { Message = "Author not Found!." });
             }
 
-            var author = profileService.FetchSingleById(profileId);
+            var author = profileService.FindById(profileId);
             var Article = articlesService.FetchSingleById(Id);
 
             if (Article == null)
@@ -106,7 +106,7 @@ namespace frinno_api.Controllers
 
         //Removes Single Article Resource
         [HttpDelete("{Id}/{profileId}")]
-        public ActionResult<string> DeleteArticle(string Id, string profileId)
+        public ActionResult<string> DeleteArticle(int Id, string profileId)
         {
             var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
 
@@ -115,7 +115,7 @@ namespace frinno_api.Controllers
                 return NotFound(new { Message = "Author not Found!." });
             }
 
-            var author = profileService.FetchSingleById(profileId);
+            var author = profileService.FindById(profileId);
             var data = articlesService.FetchSingleById(Id);
 
             if (data == null)
@@ -129,7 +129,7 @@ namespace frinno_api.Controllers
 
         //Returns a Article Resource
         [HttpGet("{Id}")]
-        public ActionResult<ArticleInfoResponse> GetSingle(string Id, [FromQuery] ArticleInfoRequest query)
+        public ActionResult<ArticleInfoResponse> GetSingle(int Id, [FromQuery] ArticleInfoRequest query)
         {
             var Article = articlesService.FetchSingleById(Id);
             if (Article == null)

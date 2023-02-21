@@ -11,9 +11,7 @@ namespace frinno_core.DTOs
     public record CreateNewSkillRequest
     {
         public string Name { get; set; }
-        public int ProjectId { get; set; }
-
-        public List<CreateSkillTools> SkillTools { get; set; }
+        public int[] ProjectIds { get; set; }
     }
     public record CreateSkillTools
     {
@@ -25,20 +23,18 @@ namespace frinno_core.DTOs
     public record CreateNewSkillResponse : CreateNewSkillRequest
     {
         public int ID { get; set; }
-        public int ProfileId { get; set; }
+        public string ProfileId { get; set; }
     }
     public record SkillInfoResponse : CreateNewSkillResponse
     {
-
+        
     }
 
     //Update Skill
-    public record UpdateSkillRequest
+    public record UpdateSkillRequest : CreateNewSkillRequest
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public int ProjectId { get; set; }
-        public List<CreateSkillTools> SkillTools { get; set; }
+
     }
     public record UpdateSkillResponse : UpdateSkillRequest
     {

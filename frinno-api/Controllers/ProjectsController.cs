@@ -41,7 +41,7 @@ namespace frinno_api.Controllers
                 }
             }
             
-            var profile = profilesService.FetchSingleById(ProfileId);
+            var profile = profilesService.FindById(ProfileId);
             //Todo, Add Project Specific Validations
             var newProject = new Project
             {
@@ -73,7 +73,7 @@ namespace frinno_api.Controllers
 
         //Updates a Project Resource
         [HttpPut("{Id}/{ProfileId}")]
-        public ActionResult<ProjectInfoResponse> UpdateProject(string Id, string ProfileId, [FromBody] UpdateProjectRequest request)
+        public ActionResult<ProjectInfoResponse> UpdateProject(int Id, string ProfileId, [FromBody] UpdateProjectRequest request)
         {
 
             if (ProfileId != string.Empty)
@@ -132,7 +132,7 @@ namespace frinno_api.Controllers
 
         //Removes Single Project Resource
         [HttpDelete("{Id}/{ProfileId}")]
-        public ActionResult<bool> DeleteProject(string Id, string ProfileId)
+        public ActionResult<bool> DeleteProject(int Id, string ProfileId)
         {
             if (ProfileId != string.Empty)
             {
@@ -158,7 +158,7 @@ namespace frinno_api.Controllers
 
         //Returns a Project Resource
         [HttpGet("{Id}")]
-        public ActionResult<ProjectInfoResponse> GetSingle(string Id, [FromQuery] ProjectInfoRequest query)
+        public ActionResult<ProjectInfoResponse> GetSingle(int Id, [FromQuery] ProjectInfoRequest query)
         {
             var exists = projectsService.Exists(Id);
 
