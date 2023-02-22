@@ -14,6 +14,5 @@ namespace frinno_core.Entities.Article.Aggregates
 
         public int ArticleId { get; set; }
         public Articles.Article Article { get; set; }
-        //Restored
     }
 }
