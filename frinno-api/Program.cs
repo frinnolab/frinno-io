@@ -36,9 +36,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
-builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
-// builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+    // builder.Services.AddDbContext<DataContext>(options=>
+    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
+}
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDbContext<DataContext>(options=>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
+}
 
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();

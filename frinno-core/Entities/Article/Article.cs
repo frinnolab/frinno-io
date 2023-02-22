@@ -15,5 +15,9 @@ namespace frinno_core.Entities.Articles
 
         public Profiles.Profile Author { get; set; }
         public List<ArticleTags> ArticleTags { get; set; }
+
+        public ArticleLike Likes { get; set; }
+
+
     }
 }

@@ -12,6 +12,7 @@ using frinno_core.Entities.Skill;
 using frinno_core.Entities.Tags;
 using frinno_core.Entities.user;
 using frinno_infrastructure.Mappings;
+using frinno_infrastructure.Mappings.ArticlesMapping;
 using frinno_infrastructure.Mappings.SkillsMapping;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,8 @@ namespace frinno_infrastructure.Data
 
             //Configure ArticleTags MTM
             new ArticleTagsMapping().Configure(builder.Entity<ArticleTags>());
+
+            new ArticleLikesMapping().Configure(builder.Entity<ArticleLike>());
 
             //Configure Skills Mapping
             new SkillsMapping().Configure(builder.Entity<Skill>());

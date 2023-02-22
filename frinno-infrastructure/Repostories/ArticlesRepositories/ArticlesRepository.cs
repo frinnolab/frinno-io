@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Articles;
+using frinno_core.Entities.Article.Aggregates;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Tags;
 using frinno_infrastructure.Data;
@@ -34,6 +35,8 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         {
             return DB.Articles
             .Include(p=>p.Author)
+            .Include(p=>p.Likes)
+            .ThenInclude(p=>p.Profile)
             .Include(t=>t.ArticleTags)
             .ToList();
         }
@@ -43,6 +46,8 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             return DB.Articles
             .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
+            .Include(p=>p.Likes)
+            .ThenInclude(p=>p.Profile)
             .Single((a)=>a==data);
         }
 
@@ -51,6 +56,8 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             return DB.Articles
             .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
+            .Include(p=>p.Likes)
+            .ThenInclude(p=>p.Profile)
             .Single(a=>a.Id == dataId);
         }
 
@@ -71,6 +78,14 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             SaveContextChanges();
 
             return data.Entity;
+        }
+
+        public ArticleLike AddLikes(ArticleLike data)
+        {
+            var dataSave = DB.Add(data);
+            DB.SaveChanges();
+
+            return dataSave.Entity;
         }
     }
 }

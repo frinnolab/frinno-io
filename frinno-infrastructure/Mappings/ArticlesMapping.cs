@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using frinno_core.Entities.Articles;
 using Microsoft.EntityFrameworkCore;
 
-namespace frinno_infrastructure.Mappings
+namespace frinno_infrastructure.Mappings.ArticlesMapping
 {
     public class ArticlesMapping : IEntityTypeConfiguration<Article>
     {

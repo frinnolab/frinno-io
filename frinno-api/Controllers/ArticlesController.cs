@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Articles;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
+using frinno_core.Entities.Article.Aggregates;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
 using Microsoft.AspNetCore.Authorization;
@@ -150,7 +151,7 @@ namespace frinno_api.Controllers
         //Gets All Articles
         [HttpGet()]
         [AllowAnonymous]
-        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query, string profileId)
+        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query)
         {
             var Articles = articlesService.FetchAll();
             if (Articles == null)
@@ -168,10 +169,60 @@ namespace frinno_api.Controllers
                 AuthorId = p.Author.Id,
                 Title = p.Title,
                 LongText = p.LongText,
+                TotalLikes = p.Likes.Likes
+                
             } ).ToList();
             response.TotalItems = response.Data.Count;
            return Ok(response);
 
         }
+
+        // [HttpPost("{articleId}/{likedById}/likes")]
+        // public ActionResult<CreateArticleResponse> ArticleLikes(int articleId, string likedById, [FromBody] CreateArticleLikeRequest query)
+        // {
+        //     var profileExists = profileService.ProfileExists(new Profile{ Id = likedById});
+
+        //     if(!profileExists)
+        //     {
+        //         return NotFound(new { Message = "User not Found!." });
+        //     }
+
+        //     var user = profileService.FindById(likedById);
+
+        //     var author = profileService.FindById(likedById);
+        //     var data = articlesService.FetchSingleById(articleId);
+
+        //     if (data == null)
+        //     {
+        //         return NotFound("Article Not found");
+        //     }
+
+        //     data.Likes = new ArticleLike {
+        //         Likes = +1,
+        //         Profile = user,
+        //         Article = data
+        //     };
+
+            
+
+        //     var likesResponse = new Article();
+        //     try
+        //     {
+                
+        //         likesResponse = articlesService.Update(data);
+        //     }
+        //     catch (System.Exception)
+        //     {   
+        //         throw;
+        //     }
+
+        //     var response = new CreateArticleResponse {
+        //         Id  = likesResponse.Id ,
+        //         AuthorId = likesResponse.Author.Id,
+        //         Title = likesResponse.Title,
+        //         TotalLikes = likesResponse.Likes.Likes
+        //     };
+        //     return Created("", response);
+        // }
     }
 }
