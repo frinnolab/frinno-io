@@ -14,9 +14,9 @@ namespace frinno_core.Entities.Projects
         //Project Url
         public string ProjectUrl { get; set; }
         //Skills Used
-        public List<Skill.Skill> Skills { get; set; }
+        // public List<Skill.Skill> Skills { get; set; }
         //Status
-        public ProjectStatus Status { get; set; } = ProjectStatus.NotStarted;
+        public int Status { get; set; } = (int)ProjectStatus.NotStarted;
 
     }
 }

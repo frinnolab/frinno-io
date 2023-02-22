@@ -4,10 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
+using frinno_core.Entities.Articles;
+using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace frinno_api.Controllers
 {
@@ -22,82 +26,99 @@ namespace frinno_api.Controllers
         }
         //Creates a New Profile Resource
         [HttpPost()]
-        public ActionResult<ProfileInfoResponse> CreateNew([FromBody] CreateAProfileRequest request)
+        public ActionResult<CreateAProfileResponse> CreateNew([FromBody] CreateAProfileRequest request)
         {
             //Todo, Add Profile Specific Validations
             var exists = profileService
-            .ProfileExists(new Profile{ User = new User { Email = request.Email } });
+            .ProfileExists(new Profile { User = new User { Email = request.Email } });
 
-            if(exists)
+            if (exists)
             {
-                return BadRequest("Profile Already Exists");
+                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
             }
             var newProfile = new Profile
             {
-                FirstName = request.FirstName, 
-                LastName = request.LastName, 
-                User = new User { Email = request.Email, Password = request.Password },
-                Address = new Address { City = request.AddressInfo.City, Mobile = request.AddressInfo.Mobile },
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+
             };
+
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+            var newUser = new User()
+            {
+                Email = request.Email,
+                Password = hashedPassword
+            };
+
+            newProfile.User = newUser;
+
+            var newAddress = new Address()
+            {
+                Mobile = request.AddressInfo.Mobile,
+                City = request.AddressInfo.City
+            };
+
+            newProfile.Address = newAddress;
+
 
             var profileResponse = new Profile();
 
             try
             {
                 profileResponse = profileService.AddNew(newProfile);
+
             }
             catch (System.Exception ex)
             {
-                return BadRequest(new{ Message = ex.Message });
+                return BadRequest(new { Message = ex.Message });
             }
 
-            if(profileResponse==null)
+            if (profileResponse == null)
             {
                 return BadRequest("Failed to Create a profile!.");
             }
-            
-            // var profileProjects = profileResponse.Projects.Select((p)=>p.Profile == profileResponse).ToList();
-            // var profileArticles = profileResponse.ProfileArticles.Select((p)=>p.Profile == profileResponse).ToList();
-            // var profileResumes = profileResponse.Resumes.Select((p)=>p.Profile == profileResponse).ToList();
 
-            var response = new ProfileInfoResponse 
+            var infoAddress = new ProfileAddressInfo ()
             {
-                Id = newProfile.ID,
-                Fullname = $"{newProfile.FirstName} {newProfile.LastName}",
-                Email = newProfile.User.Email,
-                // TotalArticles = profileArticles.Count,
-                // TotalProjects = profileProjects.Count,
-                // TotalResumes = profileResumes.Count,
-                AddressInfo = new ProfileAddressInfo
-                {
-                    City = newProfile.Address.City,
-                    Mobile = newProfile.Address.Mobile
-                }
+                Mobile = profileResponse.Address.Mobile,
+                City = profileResponse.Address.City   
             };
-            return Created( nameof(GetSingle),new{ Message = $"Profile Created with: {response.Id}"});
+            var response = new CreateAProfileResponse
+            {
+                Id = profileResponse.Id,
+                AddressInfo = infoAddress,
+                FirstName = profileResponse.FirstName,
+                LastName =profileResponse.LastName,
+                Email = profileResponse.User.Email,
+            };
+            return Created("", response);
         }
 
         //Updates a Profile Resource
         [HttpPut("{Id}")]
-        public ActionResult<ProfileInfoResponse> UpdateProfile(int Id, [FromBody] UpdateProfileRequest request)
+        public ActionResult<CreateAProfileResponse> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
         {
-            var profile = profileService.FetchSingleById(Id);
+            var profileExists = profileService.ProfileExists(new Profile { User =  new User{ Email = request.Email }});
 
-            if(profile==null)
+            if(profileExists)
+            {
+                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
+            }
+
+            var profile = profileService.FindById(Id);
+
+            if (profile == null)
             {
                 return NotFound($"Profile: {Id} NotFound!.");
             }
 
-            if(request == null)
-            {
-                return BadRequest();
-            }
 
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
-            profile.User = new User 
+            profile.User = new User
             {
-                Email = request.Email,
+                Email =  request.Email,
                 Password = request.Password
             };
             profile.Address = new Address
@@ -106,33 +127,34 @@ namespace frinno_api.Controllers
                 Mobile = request.AddressInfo.Mobile
             };
 
+
             var profileResponse = profileService.Update(profile);
 
-            var response = new ProfileInfoResponse
+            var infoAddress = new ProfileAddressInfo ()
             {
-                Id = profileResponse.ID,
-                Fullname = $"{profileResponse.FirstName} {profileResponse.LastName}",
-                Email = profileResponse.User.Email,
-                // TotalArticles = profileArticles.Count,
-                // TotalProjects = profileProjects.Count,
-                // TotalResumes = profileResumes.Count,
-                AddressInfo = new ProfileAddressInfo
-                {
-                    City = profileResponse.Address.City,
-                    Mobile = profileResponse.Address.Mobile
-                }
+                Mobile = profileResponse.Address.Mobile,
+                City = profileResponse.Address.City   
+            };
+            var response = new CreateAProfileResponse
+            {
+                Id = profileResponse.Id,
+                AddressInfo = infoAddress,
+                FirstName = profileResponse.FirstName,
+                LastName =profileResponse.LastName,
+                Email = profileResponse.User.Email
             };
 
-            return Created(nameof(GetSingle),new{Message = $"Updated {response.Id}"});
+            return Created("",response);
         }
 
         //Removes Single Profile Resource
         [HttpDelete("{Id}")]
-        public ActionResult<string> DeleteProfile(int Id)
+        public ActionResult<bool> DeleteProfile(string Id)
         {
-            var data = profileService.FetchSingleById(Id);
+            var data = profileService.FindById(Id);
 
-            if(data == null){
+            if (data == null)
+            {
                 return NotFound("Profile Not found");
             }
 
@@ -142,65 +164,84 @@ namespace frinno_api.Controllers
 
         //Returns a Profile Resource
         [HttpGet("{Id}")]
-        public ActionResult<ProfileInfoResponse> GetSingle(int Id, [FromQuery] ProfileInfoRequest query)
+        public ActionResult<ProfileInfoResponse> GetSingle(string Id, [FromQuery] ProfileInfoRequest query)
         {
-            var profile = profileService.FetchSingleById(Id);
-            if(profile == null)
+            var profile = profileService.FindById(Id);
+            if (profile == null)
             {
                 return NotFound("Profile NotFound");
             }
 
+            var infoAddress = new ProfileAddressInfo
+            {
+                City = profile.Address.City,
+                Mobile = profile.Address.Mobile
+            };
+
             var response = new ProfileInfoResponse
             {
-                Id = profile.ID,
+                Id = profile.Id,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
                 Email = profile.User.Email,
-                // TotalArticles = profileArticles.Count,
-                // TotalProjects = profileProjects.Count,
-                // TotalResumes = profileResumes.Count,
-                AddressInfo = new ProfileAddressInfo
-                {
-                    City = profile.Address.City,
-                    Mobile = profile.Address.Mobile
-                }
+                TotalArticles = profile.ProfileArticles.Count,
+                TotalProjects = profile.Projects.Count,
+                TotalResumes = profile.Resumes.Count,
+                TotalSkills = profile.Skills.Count,
+                AddressInfo = infoAddress
             };
             return Ok(response);
         }
-        
+
         //Gets All Profiles
         [HttpGet()]
         public ActionResult<DataListResponse<ProfileInfoResponse>> GetAllProfiles([FromQuery] ProfileInfoRequest? query)
         {
             var profiles = profileService.FetchAll();
-            if(profiles==null)
+            if (profiles == null)
             {
                 return NoContent();
             }
 
             //Format response
+            var profileInfos = profiles.ToList();
 
             var response = new DataListResponse<ProfileInfoResponse>();
-            response.Data = new List<ProfileInfoResponse>();
-
-            foreach (var profile in profiles)
+            response.Data = profileInfos.Select((p)=> new ProfileInfoResponse 
             {
-                var infoResponse = new ProfileInfoResponse
+                Id = p.Id,
+                Email = p.User.Email,
+                Fullname = $"{p.FirstName} {p.LastName}",
+                TotalArticles = p.ProfileArticles.Count,
+                TotalProjects = p.Projects.Count,
+                TotalResumes = p.Resumes.Count,
+                TotalSkills = p.Skills.Count,
+                AddressInfo = new ProfileAddressInfo
                 {
-                    Id = profile.ID,
-                    Fullname = $"{profile.FirstName} {profile.LastName}",
-                    Email = profile.User.Email,
-                    AddressInfo = new ProfileAddressInfo
-                    {
-                        City = profile.Address.City,
-                        Mobile = profile.Address.Mobile
-                    }
-                };
+                    Mobile = p.Address.Mobile,
+                    City = p.Address.City
+                }
+            } ).ToList();
+            response.TotalItems = response.Data.Count;
 
-                response.Data.Add(infoResponse);
-                
-            }
             return Ok(response);
+        }
 
+
+        //Profile Image
+        //Upload
+        [HttpPost("{Id}/upload-avatar")]
+        public ActionResult<bool> UploadProfileImage(string Id, IFormFile file)
+        {
+
+            return Ok();
+        }
+
+
+        //Remove
+        [HttpDelete("{Id}/remove-avatar")]
+        public ActionResult<bool> RemoveProfileImage(string Id)
+        {
+            return Ok();
         }
     }
 }

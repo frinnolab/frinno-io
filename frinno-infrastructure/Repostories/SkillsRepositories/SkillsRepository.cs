@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Skills;
 using frinno_core.Entities.Skill;
 using frinno_infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace frinno_infrastructure.Repostories.SkillsRepositories
 {
@@ -25,17 +26,50 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
 
         public IEnumerable<Skill> FetchAll()
         {
-            return DB.Skills.ToList();
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Include(s=>s.Projects)
+            .ToList();
+        }
+
+        public IEnumerable<Skill> FetchAllByProfileId(string profileId)
+        {
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(p=>p.Skills)
+            .Where(p=>p.Profile.Id == profileId)
+            .Include(pj=>pj.Projects)
+            .Include(s=>s.Projects)
+            .ToList();
         }
 
         public Skill FetchSingle(Skill data)
         {
-            return DB.Skills.FirstOrDefault((s)=>s==data);
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Include(s=>s.Projects)
+            .FirstOrDefault((s)=>s==data);
         }
 
         public Skill FetchSingleById(int dataId)
         {
-            return DB.Skills.Find(dataId);
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Include(s=>s.Projects)
+            .FirstOrDefault(x=>x.Id == dataId);
+        }
+
+        public Skill FetchSingleByProfileId(int Id, string profileId)
+        {
+            return DB.Skills
+            .Include(p=>p.Profile)
+            .ThenInclude(x=>x.Skills)
+            .Where(p=>p.Profile.Id == profileId)
+            .Include(s=>s.Projects)
+            .FirstOrDefault(x=>x.Id == Id);
         }
 
         public void Remove(Skill data)

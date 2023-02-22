@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using frinno_core.Entities.Articles;
 using Microsoft.EntityFrameworkCore;
 
-namespace frinno_infrastructure.Mappings
+namespace frinno_infrastructure.Mappings.ArticlesMapping
 {
     public class ArticlesMapping : IEntityTypeConfiguration<Article>
     {
@@ -13,6 +13,14 @@ namespace frinno_infrastructure.Mappings
         {
             //Configure Indexes
             builder.HasIndex(a=>a.Title);
+
+            //Profile
+            builder.Property<string>(p=> p.Author.Id)
+            .HasColumnName("ProfileId");
+
+            builder.HasOne(p=>p.Author)
+            .WithMany()
+            .HasForeignKey("ProfileId");
         }
     }
 }

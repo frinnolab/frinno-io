@@ -23,16 +23,16 @@ namespace frinno_infrastructure.Repostories
         public UserResponse FindUserByEmail(string email)
         {
             var user = DB.Profiles.First(u=>u.User.Email == email );
-            var userResult = new UserResponse () { Id = user.ID, Email = user.User.Email, FirstName = user.FirstName, hashedPassword = user.User.Password };
+            var userResult = new UserResponse () { Id = user.Id, Email = user.User.Email, FirstName = user.FirstName, hashedPassword = user.User.Password };
 
             return userResult;
         }
 
-        public UserResponse FindUserById(int userId)
+        public UserResponse FindUserById(string userId)
         {
-            var user = DB.Profiles.FirstOrDefault(u=>u.ID == userId);
+            var user = DB.Profiles.FirstOrDefault(u=>u.Id == userId);
 
-            var userResult = new UserResponse{ Id = user.ID, FirstName = user.FirstName, Email = user.User.Email };
+            var userResult = new UserResponse{ Id = user.Id, FirstName = user.FirstName, Email = user.User.Email };
 
             return userResult;
         }
@@ -68,7 +68,7 @@ namespace frinno_infrastructure.Repostories
             DB.Profiles.Add(newUser);
             DB.SaveChanges();
 
-            var userResponse = new RegisterResponse { Fullname = newUser.FirstName, Email = newUser.User.Email, Id = newUser.ID };
+            var userResponse = new RegisterResponse { Fullname = newUser.FirstName, Email = newUser.User.Email, Id = newUser.Id };
 
             return userResponse;
         }

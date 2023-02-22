@@ -1,0 +1,4 @@
+prod: npx tailwindcss -i ./wwwroot/css/index.css -o ./wwwroot/css/core/app.css --minify
+
+
+dev: npx tailwindcss -i ./wwwroot/css/index.css -o ./wwwroot/css/core/app.css --watch

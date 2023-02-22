@@ -11,7 +11,13 @@ namespace frinno_core.Entities.Articles
     {
         public string Title { get; set; }
 
-        public List<ProfileArticles> ProfileArticles { get; set; }
+        public string LongText { get; set; }
+
+        public Profiles.Profile Author { get; set; }
         public List<ArticleTags> ArticleTags { get; set; }
+
+        public ArticleLike Likes { get; set; }
+
+
     }
 }

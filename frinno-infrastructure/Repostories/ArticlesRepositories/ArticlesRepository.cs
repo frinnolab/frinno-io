@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Articles;
+using frinno_core.Entities.Article.Aggregates;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Tags;
 using frinno_infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace frinno_infrastructure.Repostories.ArticlesRepositories
 {
@@ -29,34 +31,34 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             return DB.Articles.Any((a)=>a==data);
         }
 
-        // public Article CreateAticlesWithTag(int articleId, Tag tag)
-        // {
-        //     var article = new Article();
-
-        //     if(articleId>0)
-        //     {
-        //         article = DB.Articles.Find(articleId);
-        //     }
-        // }
-
-        // public Article CreateAticlesWithTags(int articleId, Tag[] tags)
-        // {
-        //     throw new NotImplementedException();
-        // }
-
         public IEnumerable<Article> FetchAll()
         {
-            return DB.Articles.ToList();
+            return DB.Articles
+            .Include(p=>p.Author)
+            .Include(p=>p.Likes)
+            .ThenInclude(p=>p.Profile)
+            .Include(t=>t.ArticleTags)
+            .ToList();
         }
 
         public Article FetchSingle(Article data)
         {
-            return DB.Articles.FirstOrDefault((a)=>a==data);
+            return DB.Articles
+            .Include(p=>p.Author)
+            .Include(t=>t.ArticleTags)
+            .Include(p=>p.Likes)
+            .ThenInclude(p=>p.Profile)
+            .Single((a)=>a==data);
         }
 
         public Article FetchSingleById(int dataId)
         {
-            return DB.Articles.Find(dataId);
+            return DB.Articles
+            .Include(p=>p.Author)
+            .Include(t=>t.ArticleTags)
+            .Include(p=>p.Likes)
+            .ThenInclude(p=>p.Profile)
+            .Single(a=>a.Id == dataId);
         }
 
         public void Remove(Article data)
@@ -76,6 +78,14 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             SaveContextChanges();
 
             return data.Entity;
+        }
+
+        public ArticleLike AddLikes(ArticleLike data)
+        {
+            var dataSave = DB.Add(data);
+            DB.SaveChanges();
+
+            return dataSave.Entity;
         }
     }
 }

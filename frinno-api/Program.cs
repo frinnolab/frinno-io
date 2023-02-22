@@ -22,6 +22,10 @@ using frinno_infrastructure.Repostories.ProjectsRepositories;
 using frinno_infrastructure.Repostories.ProfilesRepositories;
 using frinno_infrastructure.Repostories.ArticlesRepositories;
 using frinno_infrastructure.Repostories.SkillsRepositories;
+using frinno_application.Tags;
+using frinno_core.Entities.Tags;
+using frinno_infrastructure.Repostories.TagsRepository;
+using frinno_core.Entities.user;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +36,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("name=ConnectionStrings:frinnordb"));
-builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
-// builder.Services.AddDbContext<MockDataContext>(options => options.UseInMemoryDatabase("FRINNODB"));// MockDB
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+    // builder.Services.AddDbContext<DataContext>(options=>
+    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
+}
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDbContext<DataContext>(options=>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
+}
 
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();
@@ -42,6 +55,7 @@ builder.Services.AddScoped<IProfileService<Profile>, ProfileRepository>();
 builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 builder.Services.AddScoped<ISkillsService, SkillsRepository>();
+builder.Services.AddScoped<ITagsService<Tag>, TagsRepository>();
 
 
 // builder.Services.AddIdentity<MockUser, IdentityRole>()
@@ -49,52 +63,53 @@ builder.Services.AddScoped<ISkillsService, SkillsRepository>();
 //     .AddDefaultTokenProviders();
 
 //Setup Auth
-builder.Services.AddAuthentication(authOptions => {
-    authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(jwtOptions=>{
-    var key = builder.Configuration.GetSection("MockSettings:MockApiKey").ToString();
-    jwtOptions.TokenValidationParameters = new TokenValidationParameters ()
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidAudience = "FrinnoIO",
-        ValidIssuer = "FrinnoIO",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m"))
-    };
-});
+// builder.Services.AddAuthentication(authOptions => {
+//     authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//     authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+// })
+// .AddJwtBearer(jwtOptions=>{
+//     var key = builder.Configuration.GetSection("MockSettings:MockApiKey").ToString();
+//     jwtOptions.TokenValidationParameters = new TokenValidationParameters ()
+//     {
+//         ValidateIssuer = true,
+//         ValidateAudience = true,
+//         ValidateLifetime = true,
+//         ValidateIssuerSigningKey = true,
+//         ValidAudience = "FrinnoIO",
+//         ValidIssuer = "FrinnoIO",
+//         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m"))
+//     };
+// });
 
 
-builder.Services.AddSwaggerGen(c=>{
-        // Include 'SecurityScheme' to use JWT Authentication
-    var jwtSecurityScheme = new OpenApiSecurityScheme
-    {
-        BearerFormat = "JWT",
-        Name = "JWT Authentication",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = JwtBearerDefaults.AuthenticationScheme,
-        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+// builder.Services.AddSwaggerGen(c=>{
+//         // Include 'SecurityScheme' to use JWT Authentication
+//     var jwtSecurityScheme = new OpenApiSecurityScheme
+//     {
+//         BearerFormat = "JWT",
+//         Name = "JWT Authentication",
+//         In = ParameterLocation.Header,
+//         Type = SecuritySchemeType.Http,
+//         Scheme = JwtBearerDefaults.AuthenticationScheme,
+//         Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
 
-        Reference = new OpenApiReference
-        {
-            Id = JwtBearerDefaults.AuthenticationScheme,
-            Type = ReferenceType.SecurityScheme
-        }
-    };
+//         Reference = new OpenApiReference
+//         {
+//             Id = JwtBearerDefaults.AuthenticationScheme,
+//             Type = ReferenceType.SecurityScheme
+//         }
+//     };
 
-    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+//     c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        { jwtSecurityScheme, Array.Empty<string>() }
-    });
-});
+//     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+//     {
+//         { jwtSecurityScheme, Array.Empty<string>() }
+//     });
+// });
 
-
+// builder.Services.AddIdentityCore<User>()
+// .AddEntityFrameworkStores<DataContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -119,5 +134,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseStaticFiles();
 
 app.Run();

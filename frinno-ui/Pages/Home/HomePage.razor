@@ -1,0 +1,55 @@
+@page "/"
+@inject NavigationManager Navigate;
+<div class="flex-col justify-items-center text-center" >
+    <h5 class="text-blue-600 font-bold">Home Page</h5>
+
+    <p>@PageState</p>
+
+    <div>
+        <button class="
+        m-4
+        p-2
+        bg-green-700 
+        text-white 
+        rounded-md" 
+        onclick="ChangeState" >
+            Check State
+        </button>
+
+        <button class="
+        m-4
+        p-2
+        bg-green-700 
+        text-white 
+        rounded-md" 
+        onclick="GotoAbout()" >
+            Go to About
+        </button>
+
+    </div>
+
+
+    @* <div class="w-12 h-14 rounded-lg bg-white backdrop-blur">
+        <p class="text-green-700">Home Text Content</p>
+    </div> *@
+</div>
+
+@* Recent Articles *@
+@* Featured Articles *@
+@* Footer Info *@
+
+
+@code
+{
+    public int PageState { get; set; } = 0;
+
+    void ChangeState()
+    {
+        PageState++;
+    }
+
+    void GotoAbout()
+    {
+        Navigate.NavigateTo("About");
+    }
+}

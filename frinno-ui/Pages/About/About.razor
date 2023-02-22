@@ -1,0 +1,23 @@
+@page "/About"
+@page "/About/{Id:int}"
+
+<div>
+    @if (Id>0)
+    {
+        <p>Page: @Id</p>
+    }
+    <p>Page Title: @PageTite</p>
+</div>
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public string? PageTite { get; set; }
+
+    protected override void OnInitialized()
+    {
+        PageTite = "About Page";
+    }
+}

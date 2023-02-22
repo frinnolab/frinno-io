@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using frinno_application.Projects;
 using frinno_core.Entities.Projects;
 using frinno_infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace frinno_infrastructure.Repostories.ProjectsRepositories
 {
@@ -25,17 +26,40 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
 
         public IEnumerable<Project> FetchAll()
         {
-            return DB.Projects.ToList();
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .ThenInclude(pr=>pr.Skills)
+            .ToList();
+        }
+
+        public List<Project> FetchAllByProfileId(string profileId)
+        {
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .ThenInclude(pr=>pr.Skills)
+            .Where(p=>p.Profile.Id == profileId)
+            .ToList();
         }
 
         public Project FetchSingle(Project data)
         {
-            return DB.Projects.FirstOrDefault((x)=>x==data);
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .ThenInclude(pr=>pr.Skills)
+            .Single((x)=>x==data);
         }
 
         public Project FetchSingleById(int dataId)
         {
-            return DB.Projects.Find(dataId);
+            return DB.Projects
+            .Include(pr=>pr.Profile)
+            .ThenInclude(pr=>pr.Skills)
+            .Single(x=>x.Id==dataId);
+        }
+
+        public bool Exists(int dataId)
+        {
+            return DB.Projects.Any(p=>p.Id ==dataId);
         }
 
         public void Remove(Project data)
