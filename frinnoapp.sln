@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-infrastructure", "fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-application", "frinno-application\frinno-application.csproj", "{83A2D278-3499-46C2-BC25-E50B9185DE3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frinno-ui", "frinno-ui\frinno-ui.csproj", "{119B9663-D629-4D0C-B860-97FDBB663DE3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +36,5 @@ Global
 		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83A2D278-3499-46C2-BC25-E50B9185DE3F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{119B9663-D629-4D0C-B860-97FDBB663DE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{119B9663-D629-4D0C-B860-97FDBB663DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{119B9663-D629-4D0C-B860-97FDBB663DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{119B9663-D629-4D0C-B860-97FDBB663DE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
