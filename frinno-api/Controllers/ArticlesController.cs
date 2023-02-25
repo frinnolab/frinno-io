@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using frinno_application.Articles;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
-using frinno_core.Entities.Article.Aggregates;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +21,7 @@ namespace frinno_api.Controllers
         }
         //Creates a New Article Resource
         [HttpPost("{profileId}")]
+        [Authorize]
         public ActionResult<CreateArticleResponse> CreateNew([FromBody] CreateArticleRequest request, string profileId)
         {
             var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
@@ -129,7 +125,7 @@ namespace frinno_api.Controllers
         }
 
         //Returns a Article Resource
-        [HttpGet("{Id}")]
+        [HttpGet("{Id}"), AllowAnonymous]
         public ActionResult<ArticleInfoResponse> GetSingle(int Id, [FromQuery] ArticleInfoRequest query)
         {
             var Article = articlesService.FetchSingleById(Id);

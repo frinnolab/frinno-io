@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
@@ -8,6 +11,7 @@ using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace frinno_api.Controllers.MockAuth
 {
@@ -37,12 +41,26 @@ namespace frinno_api.Controllers.MockAuth
                 return BadRequest("Password does not match.!");
             }
             var dummyToken = BCrypt.Net.BCrypt.HashPassword(profile.FirstName+profile.LastName);
+            //Create Token
+            var apiSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m5HMQ@FbiMTkWu6m"));
+            var credentials = new SigningCredentials(apiSecret, SecurityAlgorithms.HmacSha256);
+            var userClaims = new List<Claim>();
+
+            var tokenOptions = new JwtSecurityToken(
+                issuer:"Frinno-IO",
+                audience:"Frinno-IO",
+                expires:DateTime.Now.AddDays(1),
+                signingCredentials:credentials,
+                claims:userClaims
+            );
+
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             var response = new LoginResponse()
             {
                 Id = profile.Id,
                 Email = profile.User.Email,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
-                Token = dummyToken
+                Token = token
             };
 
             return Ok(response);

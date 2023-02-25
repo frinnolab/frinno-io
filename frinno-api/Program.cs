@@ -29,6 +29,24 @@ using frinno_core.Entities.user;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Setup Auth
+builder.Services.AddAuthentication(p=>{
+    p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(pt=>{
+    pt.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
+        ValidIssuer = "Frinno-IO",
+        ValidAudience = "Frinno-IO",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m5HMQ@FbiMTkWu6m"))
+    };
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -56,60 +74,6 @@ builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 builder.Services.AddScoped<ISkillsService, SkillsRepository>();
 builder.Services.AddScoped<ITagsService<Tag>, TagsRepository>();
-
-
-// builder.Services.AddIdentity<MockUser, IdentityRole>()
-//     .AddEntityFrameworkStores<MockUserContext>()
-//     .AddDefaultTokenProviders();
-
-//Setup Auth
-// builder.Services.AddAuthentication(authOptions => {
-//     authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//     authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-// })
-// .AddJwtBearer(jwtOptions=>{
-//     var key = builder.Configuration.GetSection("MockSettings:MockApiKey").ToString();
-//     jwtOptions.TokenValidationParameters = new TokenValidationParameters ()
-//     {
-//         ValidateIssuer = true,
-//         ValidateAudience = true,
-//         ValidateLifetime = true,
-//         ValidateIssuerSigningKey = true,
-//         ValidAudience = "FrinnoIO",
-//         ValidIssuer = "FrinnoIO",
-//         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m"))
-//     };
-// });
-
-
-// builder.Services.AddSwaggerGen(c=>{
-//         // Include 'SecurityScheme' to use JWT Authentication
-//     var jwtSecurityScheme = new OpenApiSecurityScheme
-//     {
-//         BearerFormat = "JWT",
-//         Name = "JWT Authentication",
-//         In = ParameterLocation.Header,
-//         Type = SecuritySchemeType.Http,
-//         Scheme = JwtBearerDefaults.AuthenticationScheme,
-//         Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
-
-//         Reference = new OpenApiReference
-//         {
-//             Id = JwtBearerDefaults.AuthenticationScheme,
-//             Type = ReferenceType.SecurityScheme
-//         }
-//     };
-
-//     c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
-//     c.AddSecurityRequirement(new OpenApiSecurityRequirement
-//     {
-//         { jwtSecurityScheme, Array.Empty<string>() }
-//     });
-// });
-
-// builder.Services.AddIdentityCore<User>()
-// .AddEntityFrameworkStores<DataContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
