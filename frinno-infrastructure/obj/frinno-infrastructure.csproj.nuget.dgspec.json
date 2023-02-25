@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {}
+    "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {}
   },
   "projects": {
     "D:\\FRINNOLAB\\Projects\\frn\\frinno-application\\frinno-application.csproj": {
@@ -52,12 +52,6 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.2, )"
             }
           },
           "imports": [
@@ -128,12 +122,6 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.2, )"
             }
           },
           "imports": [
@@ -156,14 +144,14 @@
         }
       }
     },
-    "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {
+    "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+        "projectUniqueName": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
         "projectName": "frinno-infrastructure",
-        "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+        "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
         "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-        "outputPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
+        "outputPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -225,6 +213,8 @@
               "version": "[6.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.2, )"
             },
