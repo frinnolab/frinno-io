@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
+using frinno_core.Entities;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
@@ -40,16 +41,37 @@ namespace frinno_api.Controllers.MockAuth
             if(!verifiedPassword){
                 return BadRequest("Password does not match.!");
             }
-            var dummyToken = BCrypt.Net.BCrypt.HashPassword(profile.FirstName+profile.LastName);
             //Create Token
             var apiSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m5HMQ@FbiMTkWu6m"));
             var credentials = new SigningCredentials(apiSecret, SecurityAlgorithms.HmacSha256);
-            var userClaims = new List<Claim>();
+            var userClaims = new List<Claim>()
+            {
+                new Claim("ProfileId", $"{profile.Id}"),
+                new Claim(ClaimTypes.Role, $"{Enum.GetName(profile.Role)}")
+            };
+
+            var tokenExpiry = DateTime.Now.AddDays(1);
+
+            switch (profile.Role)
+            {
+                case AuthRolesEnum.Administrator:
+                tokenExpiry = DateTime.Now.AddDays(14);
+                break;
+                case AuthRolesEnum.Author:
+                tokenExpiry = DateTime.Now.AddDays(7);
+                break;
+                case AuthRolesEnum.User:
+                tokenExpiry = DateTime.Now.AddDays(5);
+                break;
+                case AuthRolesEnum.Guest:
+                tokenExpiry = DateTime.Now.AddDays(1);
+                break;
+            }
 
             var tokenOptions = new JwtSecurityToken(
                 issuer:"Frinno-IO",
                 audience:"Frinno-IO",
-                expires:DateTime.Now.AddDays(1),
+                expires:tokenExpiry,
                 signingCredentials:credentials,
                 claims:userClaims
             );
@@ -66,7 +88,7 @@ namespace frinno_api.Controllers.MockAuth
             return Ok(response);
         }
         [HttpPost("register")]
-        public ActionResult<CreateAProfileResponse> Register(CreateAProfileRequest request)
+        public ActionResult<CreateAProfileResponse> Register(CreateAProfileRequest request, AuthRolesEnum role)
         {
             var exists = profileService.ProfileExists(new Profile{User = new User { Email = request.Email }});
 
@@ -75,10 +97,26 @@ namespace frinno_api.Controllers.MockAuth
                 return BadRequest("Profile already exists.");
             }
 
+
             var newProfile = new Profile {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
             };
+            switch (role)
+            {
+                case AuthRolesEnum.Administrator:
+                 newProfile.Role = AuthRolesEnum.Administrator;
+                 break;
+                case AuthRolesEnum.Author:
+                 newProfile.Role = AuthRolesEnum.Administrator;
+                 break;
+                case AuthRolesEnum.User:
+                 newProfile.Role = AuthRolesEnum.Administrator;
+                 break;
+                default:
+                newProfile.Role = AuthRolesEnum.Guest;
+                break;
+            }
 
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
@@ -117,8 +155,8 @@ namespace frinno_api.Controllers.MockAuth
                 LastName =data.LastName,
                 Id = data.Id,
                 AddressInfo = infoAddress,
-                Email = data.User.Email
-
+                Email = data.User.Email,
+                Role = Enum.GetName(data.Role)
             };
 
             return Created("",response);
