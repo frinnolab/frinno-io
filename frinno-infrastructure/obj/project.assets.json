@@ -18,7 +18,7 @@
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/_._": {
+          "lib/netstandard2.0/Humanizer.dll": {
             "related": ".xml"
           }
         },
@@ -166,7 +166,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "6.0.2"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
             "related": ".xml"
           }
         },
@@ -1446,11 +1446,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectUniqueName": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "projectName": "frinno-infrastructure",
-      "projectPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-      "outputPath": "D:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
+      "outputPath": "d:\\FRINNOLAB\\Projects\\frn\\frinno-infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
