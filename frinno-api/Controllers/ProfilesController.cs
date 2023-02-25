@@ -9,6 +9,7 @@ using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +26,7 @@ namespace frinno_api.Controllers
             profileService = profiles;
         }
         //Creates a New Profile Resource
-        [HttpPost()]
+        [HttpPost(), Authorize]
         public ActionResult<CreateAProfileResponse> CreateNew([FromBody] CreateAProfileRequest request)
         {
             //Todo, Add Profile Specific Validations
