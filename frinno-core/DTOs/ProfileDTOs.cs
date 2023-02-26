@@ -45,6 +45,7 @@ namespace frinno_core.DTOs
         public string Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
+        public string Role { get; set; }
         public ProfileAddressInfo AddressInfo { get; set; }
         public int TotalArticles { get; set; } = 0;
         public int TotalProjects { get; set; } = 0;

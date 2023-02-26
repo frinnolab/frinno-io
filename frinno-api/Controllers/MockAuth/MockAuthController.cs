@@ -108,10 +108,10 @@ namespace frinno_api.Controllers.MockAuth
                  newProfile.Role = AuthRolesEnum.Administrator;
                  break;
                 case AuthRolesEnum.Author:
-                 newProfile.Role = AuthRolesEnum.Administrator;
+                 newProfile.Role = AuthRolesEnum.Author;
                  break;
                 case AuthRolesEnum.User:
-                 newProfile.Role = AuthRolesEnum.Administrator;
+                 newProfile.Role = AuthRolesEnum.User;
                  break;
                 default:
                 newProfile.Role = AuthRolesEnum.Guest;
