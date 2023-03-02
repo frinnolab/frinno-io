@@ -21,6 +21,8 @@ namespace frinno_infrastructure.Mappings.ArticlesMapping
             builder.HasOne(p=>p.Author)
             .WithMany()
             .HasForeignKey("ProfileId");
+
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 using frinno_application.Articles;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
+using frinno_core.Entities;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace frinno_api.Controllers
 {
     [ApiController]
+    [Authorize(Roles = ("Administrator, Author") )]
     [Route("api/[controller]")]
     public class ArticlesController : ControllerBase
     {
@@ -21,7 +23,6 @@ namespace frinno_api.Controllers
         }
         //Creates a New Article Resource
         [HttpPost("{profileId}")]
-        [Authorize]
         public ActionResult<CreateArticleResponse> CreateNew([FromBody] CreateArticleRequest request, string profileId)
         {
             var profileExists = profileService.ProfileExists(new Profile{ Id = profileId});
@@ -147,7 +148,7 @@ namespace frinno_api.Controllers
         //Gets All Articles
         [HttpGet()]
         [AllowAnonymous]
-        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles([FromQuery] ArticleInfoRequest? query)
+        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles()
         {
             var Articles = articlesService.FetchAll();
             if (Articles == null)
@@ -159,10 +160,13 @@ namespace frinno_api.Controllers
             var ArticleInfos = Articles.ToList();
 
             var response = new DataListResponse<ArticleInfoResponse>();
+
+            response.Data = new List<ArticleInfoResponse>();
+
             response.Data = ArticleInfos.Select((p)=> new ArticleInfoResponse 
             {
                 Id = p.Id,
-                AuthorId = p.Author.Id,
+                AuthorId = p.Author?.Id,
                 Title = p.Title,
                 LongText = p.LongText,
                 TotalLikes = p.Likes.Likes

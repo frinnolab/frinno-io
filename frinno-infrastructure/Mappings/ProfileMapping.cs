@@ -13,6 +13,7 @@ namespace frinno_infrastructure.Mappings
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Profile> builder)
         {
             // //Configure Owns Properties
+            builder.Property<string>(p=>Enum.GetName(p.Role));
             // builder.Property<string>("Email");
             // builder.Property<string>("Password");
             // builder.Property<string>("Mobile");

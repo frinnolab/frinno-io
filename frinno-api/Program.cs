@@ -47,12 +47,73 @@ builder.Services.AddAuthentication(p=>{
     };
 });
 
+builder.Services.AddCors(pt=>{
+    pt.AddPolicy("Cors", builder =>{
+        builder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin();
+    });
+});
+
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Frinno-IO API", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Token invalid, Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+    // pt=>{
+    // pt.SwaggerDoc("V1", new OpenApiInfo { Title = "Finno-IO Backend API Resources", Version = "V1"});
+    // pt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
+    // {
+    //     In = ParameterLocation.Header,
+    //     Description = "Token Invalid",
+    //     Name = "Authorization",
+    //     Type = SecuritySchemeType.Http,
+    //     BearerFormat = "JWT",
+    //     Scheme = "Bearer"
+    //  });
+
+    // pt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    // {
+    //         {
+    //             new OpenApiSecurityScheme
+    //             {
+    //                 Reference = new OpenApiReference
+    //                 {
+    //                     Type=ReferenceType.SecurityScheme,
+    //                     Id="Bearer"
+    //                 }
+    //             },
+    //             new string[]{}
+    //         }
+    //     });
+    // }
 
 if (builder.Environment.IsDevelopment())
 {
@@ -74,9 +135,16 @@ builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 builder.Services.AddScoped<ISkillsService, SkillsRepository>();
 builder.Services.AddScoped<ITagsService<Tag>, TagsRepository>();
-var app = builder.Build();
+
+builder.Services.AddControllers();
 
 // Configure the HTTP request pipeline.
+var app = builder.Build();
+app.UseCors("Cors");
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -88,14 +156,6 @@ if (app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
 

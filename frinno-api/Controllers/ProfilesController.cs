@@ -184,6 +184,7 @@ namespace frinno_api.Controllers
                 Id = profile.Id,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
                 Email = profile.User.Email,
+                Role = Enum.GetName(profile.Role),
                 TotalArticles = profile.ProfileArticles.Count,
                 TotalProjects = profile.Projects.Count,
                 TotalResumes = profile.Resumes.Count,
@@ -216,6 +217,7 @@ namespace frinno_api.Controllers
                 TotalProjects = p.Projects.Count,
                 TotalResumes = p.Resumes.Count,
                 TotalSkills = p.Skills.Count,
+                Role = Enum.GetName(p.Role),
                 AddressInfo = new ProfileAddressInfo
                 {
                     Mobile = p.Address.Mobile,
