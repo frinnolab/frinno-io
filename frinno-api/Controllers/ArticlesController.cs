@@ -160,17 +160,20 @@ namespace frinno_api.Controllers
             var ArticleInfos = Articles.ToList();
 
             var response = new DataListResponse<ArticleInfoResponse>();
+
+            response.Data = new List<ArticleInfoResponse>();
+
             response.Data = ArticleInfos.Select((p)=> new ArticleInfoResponse 
             {
                 Id = p.Id,
-                AuthorId = p.Author.Id,
+                AuthorId = p.Author?.Id,
                 Title = p.Title,
                 LongText = p.LongText,
                 TotalLikes = p.Likes.Likes
                 
             } ).ToList();
             response.TotalItems = response.Data.Count;
-           return Ok(ArticleInfos);
+           return Ok(response);
 
         }
 
