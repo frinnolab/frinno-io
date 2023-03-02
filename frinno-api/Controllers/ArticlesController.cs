@@ -169,7 +169,6 @@ namespace frinno_api.Controllers
                 AuthorId = p.Author?.Id,
                 Title = p.Title,
                 LongText = p.LongText,
-                TotalLikes = p.Likes.Likes
                 
             } ).ToList();
             response.TotalItems = response.Data.Count;
