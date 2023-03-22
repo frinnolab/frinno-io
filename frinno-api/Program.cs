@@ -87,33 +87,6 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-    // pt=>{
-    // pt.SwaggerDoc("V1", new OpenApiInfo { Title = "Finno-IO Backend API Resources", Version = "V1"});
-    // pt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
-    // {
-    //     In = ParameterLocation.Header,
-    //     Description = "Token Invalid",
-    //     Name = "Authorization",
-    //     Type = SecuritySchemeType.Http,
-    //     BearerFormat = "JWT",
-    //     Scheme = "Bearer"
-    //  });
-
-    // pt.AddSecurityRequirement(new OpenApiSecurityRequirement
-    // {
-    //         {
-    //             new OpenApiSecurityScheme
-    //             {
-    //                 Reference = new OpenApiReference
-    //                 {
-    //                     Type=ReferenceType.SecurityScheme,
-    //                     Id="Bearer"
-    //                 }
-    //             },
-    //             new string[]{}
-    //         }
-    //     });
-    // }
 
 if (builder.Environment.IsDevelopment())
 {

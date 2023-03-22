@@ -8,7 +8,7 @@ namespace frinno_application.Authentication
 {
     public interface IRegisterService
     {
-        RegisterResponse Register(RegisterRequest request);
+        Task<bool> Register(CreateAProfileRequest request);
         void Forgotten();
         void Recovery();
 

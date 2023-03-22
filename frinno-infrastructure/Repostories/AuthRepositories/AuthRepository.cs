@@ -7,11 +7,14 @@ using frinno_core.DTOs;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
 using frinno_infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace frinno_infrastructure.Repostories
 {
     public class AuthRepository : IAuthService
     {
+        private readonly UserManager<Profile> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly DataContext DB;
         private ITokenService tokenService;
 
@@ -59,19 +62,6 @@ namespace frinno_infrastructure.Repostories
             throw new NotImplementedException();
         }
 
-        public RegisterResponse Register(RegisterRequest request)
-        {
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            var userOptions = new User { Email = request.Email, Password = hashedPassword };
-            var newUser = new Profile { FirstName =  request.FirstName, User = userOptions  };
-            //Future Add to Role
-            DB.Profiles.Add(newUser);
-            DB.SaveChanges();
-
-            var userResponse = new RegisterResponse { Fullname = newUser.FirstName, Email = newUser.User.Email, Id = newUser.Id };
-
-            return userResponse;
-        }
 
         public bool UserExists(string email)
         {
@@ -85,6 +75,13 @@ namespace frinno_infrastructure.Repostories
             var isMatched = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
 
             return isMatched;
+        }
+
+        public async Task<bool> Register(CreateAProfileRequest request)
+        {
+            //Assign Roles.
+            var user = await userManager.CreateAsync(new Profile { User = new (), Address = new () });
+            return user.Succeeded;
         }
     }
 }

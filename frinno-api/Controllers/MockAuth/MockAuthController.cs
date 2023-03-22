@@ -156,7 +156,7 @@ namespace frinno_api.Controllers.MockAuth
                 Id = data.Id,
                 AddressInfo = infoAddress,
                 Email = data.User.Email,
-                Role = Enum.GetName(data.Role)
+                //Role = Enum.GetName(data.Role)
             };
 
             return Created("",response);
