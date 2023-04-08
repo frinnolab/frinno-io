@@ -10,3 +10,15 @@ D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.dll
 D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\refint\frinno-core.dll
 D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\frinno-core.pdb
 D:\FRINNOLAB\Projects\frn\frinno-core\obj\Debug\net6.0\ref\frinno-core.dll
+D:\DEV\Frn App\Frn-API\frinno-core\bin\Debug\net6.0\frinno-core.deps.json
+D:\DEV\Frn App\Frn-API\frinno-core\bin\Debug\net6.0\frinno-core.dll
+D:\DEV\Frn App\Frn-API\frinno-core\bin\Debug\net6.0\frinno-core.pdb
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.csproj.AssemblyReference.cache
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.GeneratedMSBuildEditorConfig.editorconfig
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.AssemblyInfoInputs.cache
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.AssemblyInfo.cs
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.csproj.CoreCompileInputs.cache
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.dll
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\refint\frinno-core.dll
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\frinno-core.pdb
+D:\DEV\Frn App\Frn-API\frinno-core\obj\Debug\net6.0\ref\frinno-core.dll

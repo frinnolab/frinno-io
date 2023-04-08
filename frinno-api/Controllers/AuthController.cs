@@ -51,5 +51,12 @@ namespace frinno_api.Controllers
             }
             return Ok(new{ Message = $"Profile Ceated: {userInfo}" } );
         }
+
+        [HttpPost("login")]
+        public IActionResult Login()
+        {
+            var signedIn = true;
+            return Ok(signedIn);
+        }
     }
-}
+} 
