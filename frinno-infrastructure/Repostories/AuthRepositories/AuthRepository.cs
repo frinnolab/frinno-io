@@ -80,7 +80,7 @@ namespace frinno_infrastructure.Repostories
         public async Task<bool> Register(CreateAProfileRequest request)
         {
             //Assign Roles.
-            var user = await userManager.CreateAsync(new Profile { User = new (), Address = new () });
+            var user = await userManager.CreateAsync(new Profile { User = new (), Address = new (), Projects = null, Skills = null, Resumes = null });
             return user.Succeeded;
         }
     }

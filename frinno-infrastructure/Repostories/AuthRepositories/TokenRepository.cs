@@ -14,6 +14,9 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
 {
     public class TokenRepository : ITokenService
     {
+
+        #region Old Stuff
+        
         private readonly IConfiguration configuration;
 
         public TokenRepository(IConfiguration config)
@@ -78,5 +81,9 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
                 return null;
             }
         }
+        
+        #endregion
+        
     }
+
 }

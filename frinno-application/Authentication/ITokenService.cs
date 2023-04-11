@@ -8,8 +8,12 @@ namespace frinno_application.Authentication
 {
     public interface ITokenService
     {
+         #region Old Stuff
         string Generate(UserResponse user);
 
         int? Validate(string token);
+
+        #endregion
+        
     }
 }
