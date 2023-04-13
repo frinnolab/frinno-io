@@ -50,6 +50,5 @@ namespace frinno_infrastructure.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Resume> Resumes { get; set; }
-
     }
 }

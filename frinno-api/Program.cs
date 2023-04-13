@@ -34,21 +34,24 @@ builder.Services.AddAuthentication(p=>{
     p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(pt=>{
+.AddJwtBearer(
+    pt=>
+{
     pt.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
         ValidateLifetime = true,
-        ValidIssuer = "Frinno-IO",
-        ValidAudience = "Frinno-IO",
+        ValidIssuer = "Frinno-LAB",
+        ValidAudience = "Frinno-LAB",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m5HMQ@FbiMTkWu6m"))
     };
 });
 
 builder.Services.AddCors(pt=>{
-    pt.AddPolicy("Cors", builder =>{
+    pt.AddPolicy("Cors", 
+        builder =>{
         builder.AllowAnyHeader()
         .AllowAnyMethod()
         .AllowAnyOrigin();
@@ -62,7 +65,7 @@ builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Frinno-IO API", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Frinno-LAB API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -90,14 +93,16 @@ builder.Services.AddSwaggerGen(option =>
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
-    // builder.Services.AddDbContext<DataContext>(options=>
-    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
+    //builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+    builder.Services.AddDbContext<DataContext>(
+        options=>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
 }
 
 if (builder.Environment.IsProduction())
 {
-    builder.Services.AddDbContext<DataContext>(options=>
+    builder.Services.AddDbContext<DataContext>(
+        options=>
         options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
 }
 
