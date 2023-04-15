@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
+using frinno_core.Entities;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,108 +22,45 @@ namespace frinno_api.Controllers
     [Route("api/[controller]")]
     public class ProfilesController : ControllerBase
     {
+        private readonly UserManager<Profile> userManager;
         private readonly IProfileService<Profile> profileService;
-        public ProfilesController(IProfileService<Profile> profiles)
+        public ProfilesController(IProfileService<Profile> profiles, UserManager<Profile> userManager_)
         {
             profileService = profiles;
+            userManager = userManager_;
         }
         //Creates a New Profile Resource
-        [HttpPost(), Authorize]
-        public ActionResult<CreateAProfileResponse> CreateNew([FromBody] CreateAProfileRequest request)
+        [HttpPost(), Authorize(Roles = "Administrator" )]
+        public async Task<ActionResult<CreateAProfileResponse>> CreateNew([FromBody] CreateAProfileRequest request)
         {
             //Todo, Add Profile Specific Validations
-            var exists = profileService
-            .ProfileExists(new Profile { User = new User { Email = request.Email } });
+            var profile = await userManager.FindByEmailAsync(request.Email);
 
-            if (exists)
+            if (profile!=null)
             {
                 return BadRequest($"A Profile with the same email: {request.Email} already exists!");
             }
-            var newProfile = new Profile
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
 
-            };
-
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-            var newUser = new User()
-            {
-                Email = request.Email,
-                Password = hashedPassword
-            };
-
-            newProfile.User = newUser;
-
-            var newAddress = new Address()
-            {
-                Mobile = request.AddressInfo.Mobile,
-                City = request.AddressInfo.City
-            };
-
-            newProfile.Address = newAddress;
-
-
-            var profileResponse = new Profile();
-
-            try
-            {
-                profileResponse = profileService.AddNew(newProfile);
-
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(new { Message = ex.Message });
-            }
-
-            if (profileResponse == null)
-            {
-                return BadRequest("Failed to Create a profile!.");
-            }
-
-            var infoAddress = new ProfileAddressInfo ()
-            {
-                Mobile = profileResponse.Address.Mobile,
-                City = profileResponse.Address.City   
-            };
             var response = new CreateAProfileResponse
             {
-                Id = profileResponse.Id,
-                AddressInfo = infoAddress,
-                FirstName = profileResponse.FirstName,
-                LastName =profileResponse.LastName,
-                Email = profileResponse.User.Email,
+
             };
             return Created("", response);
         }
 
         //Updates a Profile Resource
         [HttpPut("{Id}")]
-        public ActionResult<CreateAProfileResponse> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
+        public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
         {
-            var profileExists = profileService.ProfileExists(new Profile { User =  new User{ Email = request.Email }});
+            var profile = await userManager.FindByIdAsync(request.Id);
 
-            if(profileExists)
+            if(profile == null)
             {
-                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
+                return NotFound($"Profile Not Found. Please Sign Up.");
             }
-
-            var profile = profileService.FindById(Id);
-
-            if (profile == null)
-            {
-                return NotFound($"Profile: {Id} NotFound!.");
-            }
-
 
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
-            profile.User = new User
-            {
-                Email =  request.Email,
-                Password = request.Password
-            };
             profile.Address = new Address
             {
                 City = request.AddressInfo.City,
@@ -129,7 +68,20 @@ namespace frinno_api.Controllers
             };
 
 
-            var profileResponse = profileService.Update(profile);
+            var profileResponse = new Profile();
+            try
+            {
+               profileResponse = profileService.Update(profile);
+            }
+            catch (System.Exception Ex)
+            {
+                
+                //throw Ex;
+
+                return BadRequest ($"Failed to update Profile with Error: {Ex.Message}");
+                
+            }
+
 
             var infoAddress = new ProfileAddressInfo ()
             {
@@ -142,7 +94,7 @@ namespace frinno_api.Controllers
                 AddressInfo = infoAddress,
                 FirstName = profileResponse.FirstName,
                 LastName =profileResponse.LastName,
-                Email = profileResponse.User.Email
+                Email = profileResponse.Email
             };
 
             return Created("",response);
@@ -150,9 +102,9 @@ namespace frinno_api.Controllers
 
         //Removes Single Profile Resource
         [HttpDelete("{Id}")]
-        public ActionResult<bool> DeleteProfile(string Id)
+        public async Task<ActionResult<bool>> DeleteProfile(string Id)
         {
-            var data = profileService.FindById(Id);
+            var data = await userManager.FindByIdAsync(Id);
 
             if (data == null)
             {
@@ -165,9 +117,9 @@ namespace frinno_api.Controllers
 
         //Returns a Profile Resource
         [HttpGet("{Id}")]
-        public ActionResult<ProfileInfoResponse> GetSingle(string Id, [FromQuery] ProfileInfoRequest query)
+        public async Task< ActionResult<ProfileInfoResponse>> GetSingle(string Id, [FromQuery] ProfileInfoRequest query)
         {
-            var profile = profileService.FindById(Id);
+            var profile = await userManager.FindByIdAsync(Id);
             if (profile == null)
             {
                 return NotFound("Profile NotFound");
@@ -183,7 +135,7 @@ namespace frinno_api.Controllers
             {
                 Id = profile.Id,
                 Fullname = $"{profile.FirstName} {profile.LastName}",
-                Email = profile.User.Email,
+                Email = profile.Email,
                 Role = Enum.GetName(profile.Role),
                 TotalArticles = profile.ProfileArticles.Count,
                 TotalProjects = profile.Projects.Count,
@@ -211,7 +163,7 @@ namespace frinno_api.Controllers
             response.Data = profileInfos.Select((p)=> new ProfileInfoResponse 
             {
                 Id = p.Id,
-                Email = p.User.Email,
+                Email = p.Email,
                 Fullname = $"{p.FirstName} {p.LastName}",
                 TotalArticles = p.ProfileArticles.Count,
                 TotalProjects = p.Projects.Count,
