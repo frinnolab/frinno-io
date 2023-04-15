@@ -59,6 +59,6 @@ namespace frinno_core.DTOs
     //Profile Update Request
     public record UpdateProfileRequest : CreateAProfileRequest
     {
-        public string Id { get; set; }
+        //public string Id { get; set; }
     }
 }

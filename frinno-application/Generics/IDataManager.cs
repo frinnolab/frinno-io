@@ -9,7 +9,7 @@ namespace frinno_application.Generics
     public interface IDataManager<T>
     {
         T AddNew(T newData);
-        T Update(T updateData);
+         Task<T> Update(T updateData);
         void Remove(T data);
         void SaveContextChanges();
     }

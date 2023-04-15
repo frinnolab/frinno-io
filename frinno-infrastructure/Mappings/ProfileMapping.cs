@@ -19,7 +19,6 @@ namespace frinno_infrastructure.Mappings
             // builder.Property<string>("Mobile");
             // builder.Property<string>("City");
             //Configure Owns
-            builder.OwnsOne(c=>c.User);
             builder.OwnsOne(c=>c.Address);
             // builder.Navigation(c=>c.Address).IsRequired();
 

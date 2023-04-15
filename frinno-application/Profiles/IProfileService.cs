@@ -9,9 +9,10 @@ namespace frinno_application.Profiles
     public interface IProfileService<Profile> : IDataManager<Profile>
     {
         IEnumerable<Profile> FetchAll();
-        Profile FindByEmail(string email);
-        Profile FindById(string profileId);
-        bool ProfileExists(Profile profile);
+        //Replaced with UserManager API
+        //Profile FindByEmail(string email);
+        //Replaced with UserManager API
+        //Profile FindById(string profileId);
         void UploadProfileImage();
         void RemoveProfileImage();
     }

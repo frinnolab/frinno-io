@@ -16,7 +16,6 @@ namespace frinno_core.Entities.Profiles
     {
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
-        public virtual User User { get; set; }
         public virtual Address Address { get; set; }
         public virtual AuthRolesEnum Role { get; set; }
         public virtual ICollection<ProfileArticles> ProfileArticles { get; set; }

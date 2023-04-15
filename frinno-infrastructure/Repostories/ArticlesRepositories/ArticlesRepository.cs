@@ -39,7 +39,6 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             .Include(p=>p.Author)
             .ThenInclude(a=>a.Address)
             .Include(p=>p.Author)
-            .ThenInclude(u=>u.User)
             .ToList();
         }
 
@@ -49,7 +48,6 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             .Include(p=>p.Author)
             .ThenInclude(a=>a.Address)
             .Include(p=>p.Author)
-            .ThenInclude(u=>u.User)
             .Include(t=>t.ArticleTags)
             .Include(p=>p.Likes)
             .Single((a)=>a==data);
@@ -61,7 +59,6 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             .Include(p=>p.Author)
             .ThenInclude(a=>a.Address)
             .Include(p=>p.Author)
-            .ThenInclude(u=>u.User)
             .Include(t=>t.ArticleTags)
             .Include(p=>p.Likes)
             .Single(a=>a.Id == dataId);
@@ -78,11 +75,10 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             DB.SaveChanges();
         }
 
-        public Article Update(Article updateData)
+        public async Task<Article> Update(Article updateData)
         {
             var data = DB.Articles.Update(updateData);
-            SaveContextChanges();
-
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
 

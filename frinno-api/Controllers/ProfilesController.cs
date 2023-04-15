@@ -23,36 +23,45 @@ namespace frinno_api.Controllers
     public class ProfilesController : ControllerBase
     {
         private readonly UserManager<Profile> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IProfileService<Profile> profileService;
-        public ProfilesController(IProfileService<Profile> profiles, UserManager<Profile> userManager_)
+        public ProfilesController(
+            IProfileService<Profile> profiles, 
+            UserManager<Profile> userManager_,
+            RoleManager<IdentityRole> roleManager_)
         {
             profileService = profiles;
             userManager = userManager_;
+            roleManager = roleManager_;
         }
+
+        #region New Profile Endpoint: Admin
         //Creates a New Profile Resource
-        [HttpPost(), Authorize(Roles = "Administrator" )]
-        public async Task<ActionResult<CreateAProfileResponse>> CreateNew([FromBody] CreateAProfileRequest request)
-        {
-            //Todo, Add Profile Specific Validations
-            var profile = await userManager.FindByEmailAsync(request.Email);
+        // [HttpPost(), Authorize(Roles = "Administrator" )]
+        // public async Task<ActionResult<CreateAProfileResponse>> CreateNew([FromBody] CreateAProfileRequest request)
+        // {
+        //     //Todo, Add Profile Specific Validations
+        //     var profile = await userManager.FindByEmailAsync(request.Email);
 
-            if (profile!=null)
-            {
-                return BadRequest($"A Profile with the same email: {request.Email} already exists!");
-            }
+        //     if (profile!=null)
+        //     {
+        //         return BadRequest($"A Profile with the same email: {request.Email} already exists!");
+        //     }
 
-            var response = new CreateAProfileResponse
-            {
+        //     var response = new CreateAProfileResponse
+        //     {
 
-            };
-            return Created("", response);
-        }
+        //     };
+        //     return Created("", response);
+        // }
+
+        #endregion
 
         //Updates a Profile Resource
-        [HttpPut("{Id}")]
-        public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
+        [HttpPut("{Id}"), Authorize()]
+        public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromForm] UpdateProfileRequest request)
         {
-            var profile = await userManager.FindByIdAsync(request.Id);
+            var profile = await userManager.FindByIdAsync(Id);
 
             if(profile == null)
             {
@@ -61,17 +70,46 @@ namespace frinno_api.Controllers
 
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
+            profile.Email = request.Email;
             profile.Address = new Address
             {
                 City = request.AddressInfo.City,
                 Mobile = request.AddressInfo.Mobile
             };
 
+            //Check Role Changes
+            if(request.Role != profile.Role)
+            {
+                //Role Changed.
+                var role = await roleManager.RoleExistsAsync(Enum.GetName(request.Role));
+                if(!role)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(){Name = Enum.GetName(request.Role)});
+                }
+
+                if(profile.Role != AuthRolesEnum.Administrator)
+                {
+                    switch(request.Role)
+                    {
+                        case AuthRolesEnum.Administrator:
+                            return BadRequest("Cannot Upgrade to Administrator priveledge");
+
+                        case AuthRolesEnum.Author:
+                            profile.Role = AuthRolesEnum.Author;
+                            break;
+                        case AuthRolesEnum.Guest:
+                            profile.Role = AuthRolesEnum.Guest;
+                            break;
+                    }
+                }
+                await userManager.AddToRoleAsync(profile,Enum.GetName(request.Role));
+            }
+
 
             var profileResponse = new Profile();
             try
             {
-               profileResponse = profileService.Update(profile);
+               profileResponse = await profileService.Update(profile);
             }
             catch (System.Exception Ex)
             {
@@ -92,9 +130,12 @@ namespace frinno_api.Controllers
             {
                 Id = profileResponse.Id,
                 AddressInfo = infoAddress,
+                UserName = profileResponse.UserName,
                 FirstName = profileResponse.FirstName,
                 LastName =profileResponse.LastName,
-                Email = profileResponse.Email
+                Email = profileResponse.Email,
+                Role = profileResponse.Role,
+                RoleName = Enum.GetName(profileResponse.Role),
             };
 
             return Created("",response);
@@ -147,7 +188,7 @@ namespace frinno_api.Controllers
         }
 
         //Gets All Profiles
-        [HttpGet()]
+        [HttpGet(), Authorize]
         public ActionResult<DataListResponse<ProfileInfoResponse>> GetAllProfiles([FromQuery] ProfileInfoRequest? query)
         {
             var profiles = profileService.FetchAll();

@@ -26,7 +26,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         public IEnumerable<Profile> FetchAll()
         {
             return DB.Profiles
-            .Include(x=>x.User)
+            
             .Include(x=>x.Address)
             .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
@@ -38,7 +38,6 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         public Profile FetchSingle(Profile data)
         {
             return DB.Profiles
-            .Include(x=>x.User)
             .Include(x=>x.Address)
             .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
@@ -50,7 +49,6 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         public Profile FindById(string dataId)
         {
             return DB.Profiles
-            .Include(u=>u.User)
             .Include(a=>a.Address)
             .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
@@ -61,20 +59,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
 
         public Profile FindByEmail(string email)
         {
-            return DB.Profiles.Include(x=>x.User).SingleOrDefault((p=>p.User.Email == email));
-        }
-
-        public bool ProfileExists(Profile profile)
-        {
-            if(profile.User != null )
-            {
-                return DB.Profiles.Include(u=>u.User)
-                .Any((p)=> p.User.Email == profile.User.Email);
-            }
-            else
-            {
-                return DB.Profiles.Any((p)=> p.Id == profile.Id);
-            }
+            return DB.Profiles.SingleOrDefault((p=>p.Email == email));
         }
 
         public void Remove(Profile data)
@@ -94,10 +79,10 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             DB.SaveChanges();
         }
 
-        public Profile Update(Profile updateData)
+        public async Task<Profile> Update(Profile updateData)
         {
-            var data = DB.Profiles.Update(updateData);
-            SaveContextChanges();
+            var data = DB.Update(updateData);
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
 

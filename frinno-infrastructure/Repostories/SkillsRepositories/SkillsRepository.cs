@@ -83,10 +83,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             DB.SaveChanges();
         }
 
-        public Skill Update(Skill updateData)
+        public async Task<Skill> Update(Skill updateData)
         {
             var data  = DB.Skills.Update(updateData);
-            SaveContextChanges();
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
     }

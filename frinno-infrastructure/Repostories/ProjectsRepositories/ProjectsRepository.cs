@@ -73,10 +73,10 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
             DB.SaveChanges();
         }
 
-        public Project Update(Project updateData)
+        public async Task<Project> Update(Project updateData)
         {
             var data = DB.Projects.Update(updateData);
-            SaveContextChanges();
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
     }

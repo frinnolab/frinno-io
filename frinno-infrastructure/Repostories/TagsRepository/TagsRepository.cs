@@ -60,11 +60,10 @@ namespace frinno_infrastructure.Repostories.TagsRepository
             dataContext.SaveChanges();
         }
 
-        public Tag Update(Tag updateData)
+        public async Task<Tag> Update(Tag updateData)
         {
             var data = dataContext.Tags.Update(updateData);
-            SaveContextChanges();
-
+            await dataContext.SaveChangesAsync();
             return data.Entity;
         }
     }
