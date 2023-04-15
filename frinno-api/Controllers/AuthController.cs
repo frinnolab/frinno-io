@@ -104,10 +104,40 @@ namespace frinno_api.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login()
+        public async Task<ActionResult<LoginResponse>> Login([FromForm] LoginRequest request)
         {
-            var signedIn = true;
-            return Ok(signedIn);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest("Fields can't be empty");
+            }
+
+            //find profile
+            var profile = await userManager.FindByEmailAsync(request.Email);
+
+            if(profile==null)
+            {
+                return NotFound("Profile Not Found, Please sign-up");
+            }
+
+            //validate Password
+
+            var isMatched = BCrypt.Net.BCrypt.Verify(request.Password, profile.PasswordHash);
+
+            if(!isMatched)
+            {
+                return BadRequest("Passwords Don't match!. Check password!.");
+            }
+
+            //Config Access tokens.
+    
+            var response = new LoginResponse 
+            {
+                Id = profile.Id,
+                Email = profile.Email,
+                UserName = profile.UserName,
+                Token = "Token"
+            };
+            return Ok(new {response});
         }
     }
 } 

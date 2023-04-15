@@ -81,7 +81,7 @@ namespace frinno_api.Controllers.MockAuth
             {
                 Id = profile.Id,
                 Email = profile.User.Email,
-                Fullname = $"{profile.FirstName} {profile.LastName}",
+                UserName = $"{profile.FirstName} {profile.LastName}",
                 Token = token
             };
 
