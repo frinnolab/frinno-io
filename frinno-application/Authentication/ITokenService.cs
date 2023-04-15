@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using frinno_core.DTOs;
+using frinno_core.Entities.Profiles;
+using Microsoft.AspNetCore.Identity;
 
 namespace frinno_application.Authentication
 {
     public interface ITokenService
     {
-         #region Old Stuff
-        string Generate(UserResponse user);
-
-        int? Validate(string token);
-
-        #endregion
-        
+        //Token Service Definitions
+       string GenerateToken(Profile profile, string RoleName);
     }
 }

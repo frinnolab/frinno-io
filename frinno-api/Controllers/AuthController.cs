@@ -6,6 +6,7 @@ using frinno_application.Authentication;
 using frinno_core.DTOs;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,7 @@ namespace frinno_api.Controllers
 
 
         //Register
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<CreateAProfileResponse>>  RegisterProfile([FromForm]CreateAProfileRequest request)
         {
@@ -103,6 +105,7 @@ namespace frinno_api.Controllers
             return Created("", new {response});
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponse>> Login([FromForm] LoginRequest request)
         {
@@ -129,13 +132,14 @@ namespace frinno_api.Controllers
             }
 
             //Config Access tokens.
+            var token  = authService.GetAuthToken(profile);
     
             var response = new LoginResponse 
             {
                 Id = profile.Id,
                 Email = profile.Email,
                 UserName = profile.UserName,
-                Token = "Token"
+                Token = token
             };
             return Ok(new {response});
         }

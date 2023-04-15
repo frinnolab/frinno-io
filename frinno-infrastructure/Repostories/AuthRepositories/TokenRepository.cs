@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using frinno_application.Authentication;
 using frinno_core.DTOs;
+using frinno_core.Entities;
+using frinno_core.Entities.Profiles;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,9 +26,9 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
         {
             configuration = config;
         }
-        public string Generate(UserResponse user)
+        public string GenerateToken(Profile user, string roleName)
         {
-            var tokenKey = configuration.GetSection("AppSettings:ApiKey").ToString();
+            var tokenKey = configuration["AppSettings:ApiKey"];
             var key = Encoding.ASCII.GetBytes(tokenKey);
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key),
             SecurityAlgorithms.HmacSha256Signature);
@@ -33,55 +36,38 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
             var userClaims = new ClaimsIdentity(new[]
             {
                 new Claim("Id",$"{user.Id}"), 
-                new Claim("Firstname",$"{user.FirstName}"), 
-                new Claim("Email",$"{user.Email}"),
+                new Claim("Username",$"{user.UserName}"), 
+                new Claim(ClaimTypes.Email,$"{user.Email}"),
+                new Claim(ClaimTypes.Role,$"{roleName}"),
             });
+
+            var expiresAt = DateTime.UtcNow.AddHours(2);
+
+            switch (user.Role)
+            {
+                case AuthRolesEnum.Administrator:
+                    expiresAt = DateTime.UtcNow.AddDays(7);
+                    break;
+                case AuthRolesEnum.Author:
+                    expiresAt = DateTime.UtcNow.AddDays(5);
+                    break;
+                case AuthRolesEnum.Guest:
+                    expiresAt = DateTime.UtcNow.AddDays(1);
+                    break;
+            }
+
 
             var descriptor = new SecurityTokenDescriptor()
             {
                 Subject = userClaims,
-                Expires = DateTime.UtcNow.AddDays(12),
+                Expires = expiresAt,
                 SigningCredentials = credentials
-
             };
 
-            var token = handler.CreateToken(descriptor);
-            return handler.WriteToken(token);
+            var tokenHandler = handler.CreateToken(descriptor);
+            var token = handler.WriteToken(tokenHandler);
+            return token;
         }
-
-        public int? Validate(string token)
-        {
-            if(string.IsNullOrEmpty(token))
-            {
-                return null;
-            }
-
-            var handler = new JwtSecurityTokenHandler();
-
-            var apiKey = Encoding.ASCII.GetBytes(configuration.GetSection("AppSettings:ApiKey").ToString());
-
-            try
-            {
-                handler.ValidateToken(token, new TokenValidationParameters {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(apiKey),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validToken);
-
-                var accessToken = (JwtSecurityToken)validToken;
-                var userId = int.Parse(accessToken.Claims.First(c=>c.Type == "Id").Value);
-
-                return userId;
-            }
-            catch (System.Exception)
-            {
-                
-                return null;
-            }
-        }
-        
         #endregion
         
     }

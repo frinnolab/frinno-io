@@ -4,7 +4,6 @@ namespace frinno_core.Entities
     {
         Administrator = 0,
         Author = 1,
-        User = 2,
-        Guest = 3
+        Guest = 2
     }
 }
