@@ -51,7 +51,7 @@ namespace frinno_infrastructure.Repostories
         public LoginResponse Login(UserResponse user)
         {
             var userToken = tokenService.Generate(user);
-            var tokenRespnse = new LoginResponse { Email = user.Email, Fullname = user.FirstName, Token = userToken};
+            var tokenRespnse = new LoginResponse { Email = user.Email, UserName = user.FirstName, Token = userToken};
             return tokenRespnse;
         }
 
