@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Authentication;
 using frinno_core.DTOs;
+using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,14 @@ namespace frinno_api.Controllers
         private readonly IAuthService authService;
         private readonly ITokenService tokenService;
          private readonly UserManager<Profile> userManager;
-        public AuthController(IAuthService authServices, ITokenService tokens,UserManager<Profile> userManager_)
+         private readonly RoleManager<IdentityRole> roleManager;
+         
+        public AuthController(IAuthService authServices, ITokenService tokens,UserManager<Profile> userManager_, RoleManager<IdentityRole> roleManager_)
         {
             authService = authServices;
             tokenService = tokens;
             userManager = userManager_;
+            roleManager = roleManager_;
         }
 
 
@@ -36,9 +40,9 @@ namespace frinno_api.Controllers
             }
             //Find User
             var Exists = await userManager.FindByEmailAsync(request.Email);
-            var userExists = authService.UserExists(request.Email);
+            
 
-            if(userExists)
+            if(Exists!=null)
             {
                 return BadRequest("Profile Exists!.");
             }
@@ -46,13 +50,32 @@ namespace frinno_api.Controllers
             //New Profile;
             var newProfile = new Profile()
             {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
+                UserName = $"{request.FirstName[0].ToString().ToUpper()}-{request.LastName}",
+                Address = new Address()
+                {
+                    City = request.AddressInfo.City,
+                    Mobile = request.AddressInfo.Mobile,
 
+                },
+                Role = request.Role,
             };
             try
             {
                 var obj = await authService.Register(newProfile);
                 //Add to Role
+                var isRole = await roleManager.RoleExistsAsync(Enum.GetName(request.Role));
+
+                if(!isRole)
+                {
+                    var newRole = await roleManager.CreateAsync(new IdentityRole(){Name = Enum.GetName(request.Role)});
+                }
+                var roleResult = await userManager.AddToRoleAsync(obj, Enum.GetName(request.Role));
                 newProfile = obj;
+
             }
             catch (System.Exception ex)
             {
@@ -63,9 +86,17 @@ namespace frinno_api.Controllers
             var response = new CreateAProfileResponse 
             {
                 Id = newProfile.Id,
+                UserName = newProfile.UserName,
                 FirstName = newProfile.FirstName,
+                LastName = newProfile.LastName,
+                Password = newProfile.PasswordHash,
                 Email = newProfile.Email,
-
+                Role = newProfile.Role,
+                RoleName = $"{Enum.GetName(newProfile.Role)}",
+                AddressInfo = new ProfileAddressInfo {
+                    City = newProfile.Address.City,
+                    Mobile = newProfile.Address.Mobile
+                }
             };
 
             
