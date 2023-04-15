@@ -31,42 +31,39 @@ namespace frinno_api.Controllers
         public ActionResult<CreateProjectResponse> CreateNew(string ProfileId, [FromBody] CreateProjectRequest request)
         {
             
-            if(ProfileId != string.Empty)
-            {
-                var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId});
+            // if(ProfileId != string.Empty)
+            // {
+            //     var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId});
 
-                if(!profileExists)
-                {
-                    return NotFound($"Profile Not found!.");
-                }
-            }
+            //     if(!profileExists)
+            //     {
+            //         return NotFound($"Profile Not found!.");
+            //     }
+            // }
             
-            var profile = profilesService.FindById(ProfileId);
-            //Todo, Add Project Specific Validations
-            var newProject = new Project
-            {
-                Title = request.Title,
-                Description = request.Description,
-                ProjectUrl = request.Url, 
-                Profile = profile,
-                Status = request.Status
-            };
+            // var profile = profilesService.FindById(ProfileId);
+            // //Todo, Add Project Specific Validations
+            // var newProject = new Project
+            // {
+            //     Title = request.Title,
+            //     Description = request.Description,
+            //     ProjectUrl = request.Url, 
+            //     Profile = profile,
+            //     Status = request.Status
+            // };
 
-            try
-            {
-                projectsService.AddNew(newProject);
+            // try
+            // {
+            //     projectsService.AddNew(newProject);
 
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(new { Message = ex.Message });
-            }
+            // }
+            // catch (System.Exception ex)
+            // {
+            //     return BadRequest(new { Message = ex.Message });
+            // }
 
             var response = new CreateProjectResponse
             {
-                Id = newProject.Id,
-                Title = newProject.Title,
-                ProfileId = newProject.Profile.Id
             };
             return Created("", new {response} );
         }
@@ -76,55 +73,49 @@ namespace frinno_api.Controllers
         public ActionResult<ProjectInfoResponse> UpdateProject(int Id, string ProfileId, [FromBody] UpdateProjectRequest request)
         {
 
-            if (ProfileId != string.Empty)
-            {
-                var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId });
+            // if (ProfileId != string.Empty)
+            // {
+            //     var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId });
 
-                if (!profileExists)
-                {
-                    return NotFound($"Profile Not found!.");
-                }
-            }
+            //     if (!profileExists)
+            //     {
+            //         return NotFound($"Profile Not found!.");
+            //     }
+            // }
             
-            var exists = projectsService.Exists(Id);
+            // var exists = projectsService.Exists(Id);
 
-            if (!exists)
-            {
-                return NotFound($"Project: {Id} NotFound!.");
-            }
+            // if (!exists)
+            // {
+            //     return NotFound($"Project: {Id} NotFound!.");
+            // }
 
-            var Project = projectsService.FetchSingleById(Id);
+            // var Project = projectsService.FetchSingleById(Id);
         
-            Project.Title = request.Title;
-            Project.Description = request.Description;
-            Project.ProjectUrl = request.Url;
-            Project.Status = request.Status;
+            // Project.Title = request.Title;
+            // Project.Description = request.Description;
+            // Project.ProjectUrl = request.Url;
+            // Project.Status = request.Status;
 
-            var ProjectResponse = new Project();
+            // var ProjectResponse = new Project();
 
-            try
-            {
-                ProjectResponse = projectsService.Update(Project);
+            // try
+            // {
+            //     ProjectResponse = projectsService.Update(Project);
 
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(new { Message = ex.Message });
-            }
+            // }
+            // catch (System.Exception ex)
+            // {
+            //     return BadRequest(new { Message = ex.Message });
+            // }
 
-            if (ProjectResponse == null)
-            {
-                return BadRequest("Failed to Update Project!.");
-            }
+            // if (ProjectResponse == null)
+            // {
+            //     return BadRequest("Failed to Update Project!.");
+            // }
 
             var response = new ProjectInfoResponse
             {
-                Id = ProjectResponse.Id,
-                ProfileId = ProjectResponse.Profile.Id,
-                Title = ProjectResponse.Title,
-                Description = ProjectResponse.Description,
-                Url = ProjectResponse.ProjectUrl,
-                Status = ProjectResponse.Status
             };
 
             return Created("", response);
@@ -134,25 +125,25 @@ namespace frinno_api.Controllers
         [HttpDelete("{Id}/{ProfileId}")]
         public ActionResult<bool> DeleteProject(int Id, string ProfileId)
         {
-            if (ProfileId != string.Empty)
-            {
-                var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId });
+            // if (ProfileId != string.Empty)
+            // {
+            //     var profileExists = profilesService.ProfileExists(new Profile { Id = ProfileId });
 
-                if (!profileExists)
-                {
-                    return NotFound($"Profile Not found!.");
-                }
-            }
+            //     if (!profileExists)
+            //     {
+            //         return NotFound($"Profile Not found!.");
+            //     }
+            // }
 
-            var exists = projectsService.Exists(Id);
+            // var exists = projectsService.Exists(Id);
 
-            if (!exists)
-            {
-                return NotFound($"Project: {Id} NotFound!.");
-            }
-            var data = projectsService.FetchSingleById(Id);
+            // if (!exists)
+            // {
+            //     return NotFound($"Project: {Id} NotFound!.");
+            // }
+            // var data = projectsService.FetchSingleById(Id);
 
-            projectsService.Remove(data);
+            // projectsService.Remove(data);
             return Ok("Project Delete Success.!");
         }
 

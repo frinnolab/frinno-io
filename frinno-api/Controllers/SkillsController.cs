@@ -36,73 +36,68 @@ namespace frinno_api.Controllers
         [HttpPost("{profileId}")]
         public ActionResult<CreateNewSkillResponse> CreateNewSkill(string profileId, CreateNewSkillRequest request)
         {
-            //NewSkill
-            var newSkill = new Skill
-            {
-                Name = request.Name   
-            };
-            //Find Profile
-            var skillProfile = new Profile();
-            if(profileId!= string.Empty)
-            {
-                var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
+            // //NewSkill
+            // var newSkill = new Skill
+            // {
+            //     Name = request.Name   
+            // };
+            // //Find Profile
+            // var skillProfile = new Profile();
+            // if(profileId!= string.Empty)
+            // {
+            //     var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
 
-                if(!skillProfileExists)
-                {
-                    return NotFound("Profile not found.");
-                }
+            //     if(!skillProfileExists)
+            //     {
+            //         return NotFound("Profile not found.");
+            //     }
 
-                skillProfile = profileService.FindById(profileId);
+            //     skillProfile = profileService.FindById(profileId);
 
-                newSkill.Profile = skillProfile;
-            }
+            //     newSkill.Profile = skillProfile;
+            // }
 
-            //Find Project
-            var skillProjects = new List<Project>();
-            if(request.ProjectIds.Length>0)
-            {
-                foreach (var projectId in request.ProjectIds)
-                {
-                    if(projectId>0){
-                        var projectExists = projectsService.Exists(projectId);
-                        if(projectExists)
-                        {
-                            var activeProject = projectsService.FetchSingleById(projectId);
-                            skillProjects.Add(activeProject);
-                        }
-                    }
-                };
+            // //Find Project
+            // var skillProjects = new List<Project>();
+            // if(request.ProjectIds.Length>0)
+            // {
+            //     foreach (var projectId in request.ProjectIds)
+            //     {
+            //         if(projectId>0){
+            //             var projectExists = projectsService.Exists(projectId);
+            //             if(projectExists)
+            //             {
+            //                 var activeProject = projectsService.FetchSingleById(projectId);
+            //                 skillProjects.Add(activeProject);
+            //             }
+            //         }
+            //     };
 
-                newSkill.Projects = skillProjects;
-            }
+            //     newSkill.Projects = skillProjects;
+            // }
 
-            var skillResponse = new Skill();
+            // var skillResponse = new Skill();
 
-            try
-            {
-                skillResponse = skillService.AddNew(newSkill);
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(new{ Message = $"{ex.Message}" });
-            }
+            // try
+            // {
+            //     skillResponse = skillService.AddNew(newSkill);
+            // }
+            // catch (System.Exception ex)
+            // {
+            //     return BadRequest(new{ Message = $"{ex.Message}" });
+            // }
 
-            //Format Response
+            // //Format Response
 
 
-            var projectIdsResponse = new List<int>();
+            // var projectIdsResponse = new List<int>();
 
-            foreach (var project in skillResponse.Projects.ToList())
-            {
-                projectIdsResponse.Add(project.Id);
-            }
+            // foreach (var project in skillResponse.Projects.ToList())
+            // {
+            //     projectIdsResponse.Add(project.Id);
+            // }
             var response = new CreateNewSkillResponse
             {
-                ID = skillResponse.Id,
-                Name = skillResponse.Name,
-                ProfileId = skillResponse.Profile.Id,
-                ProjectIds = projectIdsResponse.ToArray(),
-        
             };
             return Created("", new {response});
         }
@@ -111,78 +106,74 @@ namespace frinno_api.Controllers
         [HttpPut("{Id}/{profileId}")]
         public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, int Id, string profileId)
         {
-            var skill = new Skill();
+            // var skill = new Skill();
             
-            //Find Profile
-            var skillProfile = new Profile();
-            if(profileId != string.Empty)
-            {
-                var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
+            // //Find Profile
+            // var skillProfile = new Profile();
+            // if(profileId != string.Empty)
+            // {
+            //     var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
 
-                if(!skillProfileExists)
-                {
-                    return NotFound("Profile not found.");
-                }
+            //     if(!skillProfileExists)
+            //     {
+            //         return NotFound("Profile not found.");
+            //     }
 
-                skillProfile = profileService.FindById(profileId);
+            //     skillProfile = profileService.FindById(profileId);
 
-                skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
-            }else{
-                skill = skillService.FetchSingleById(Id);
-            }
-
-
-            if(skill == null)
-            {
-                return NotFound("Skill not found!.");
-            }
-
-            skill.Profile = skillProfile;
+            //     skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
+            // }else{
+            //     skill = skillService.FetchSingleById(Id);
+            // }
 
 
-            //Skill Projects
+            // if(skill == null)
+            // {
+            //     return NotFound("Skill not found!.");
+            // }
 
-            if (request.ProjectIds.Length > 0)
-            {
-                foreach (var projectId in request.ProjectIds)
-                {
-                    if(projectId>0)
-                    {
-                        var skP = skill.Projects.Find(p=>p.Id ==projectId);
-                        //New Updated Project
-                        if( skP == null && projectId > 0)
-                        {
-                            var projectExists = projectsService.Exists(projectId);
+            // skill.Profile = skillProfile;
 
-                            if(projectExists)
-                            {
-                                var activeProject = projectsService.FetchSingleById(projectId);
-                                skill.Projects.Add(activeProject);
-                            }
-                        }
-                    }
-                };
 
-            }
+            // //Skill Projects
 
-            //Update Skill
-            skill.Name = request.Name;            
-            var skillResponse = skillService.Update(skill);
+            // if (request.ProjectIds.Length > 0)
+            // {
+            //     foreach (var projectId in request.ProjectIds)
+            //     {
+            //         if(projectId>0)
+            //         {
+            //             var skP = skill.Projects.Find(p=>p.Id ==projectId);
+            //             //New Updated Project
+            //             if( skP == null && projectId > 0)
+            //             {
+            //                 var projectExists = projectsService.Exists(projectId);
 
-            //Format Response
+            //                 if(projectExists)
+            //                 {
+            //                     var activeProject = projectsService.FetchSingleById(projectId);
+            //                     skill.Projects.Add(activeProject);
+            //                 }
+            //             }
+            //         }
+            //     };
 
-            var projectIdsResponse = new List<int>();
+            // }
 
-            foreach (var project in skillResponse.Projects)
-            {
-                projectIdsResponse.Add(project.Id);
-            }
+            // //Update Skill
+            // skill.Name = request.Name;            
+            // var skillResponse = skillService.Update(skill);
+
+            // //Format Response
+
+            // var projectIdsResponse = new List<int>();
+
+            // foreach (var project in skillResponse.Projects)
+            // {
+            //     projectIdsResponse.Add(project.Id);
+            // }
             var response = new CreateNewSkillResponse
             {
-                ID = skillResponse.Id,
-                Name = skillResponse.Name,
-                ProfileId = skillResponse.Profile.Id,
-                ProjectIds = projectIdsResponse.ToArray()
             };
             return Created("", new { response });
         }
@@ -191,31 +182,31 @@ namespace frinno_api.Controllers
         [HttpDelete("{Id}/{profileId}")]
         public ActionResult<bool> RemoveSkill(int Id, string profileId)
         {
-            var skill = new Skill();
+            // var skill = new Skill();
             
-            //Find Profile
-            var skillProfile = new Profile();
-            if(profileId != string.Empty)
-            {
-                var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
+            // //Find Profile
+            // var skillProfile = new Profile();
+            // if(profileId != string.Empty)
+            // {
+            //     var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
 
-                if(!skillProfileExists)
-                {
-                    return NotFound("Profile not found.");
-                }
+            //     if(!skillProfileExists)
+            //     {
+            //         return NotFound("Profile not found.");
+            //     }
 
-                skillProfile = profileService.FindById(profileId);
+            //     skillProfile = profileService.FindById(profileId);
 
-                skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
-            }else{
-                skill = skillService.FetchSingleById(Id);
-            }
+            //     skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
+            // }else{
+            //     skill = skillService.FetchSingleById(Id);
+            // }
 
-            if(skill == null)
-            {
-                return NotFound();
-            }
-            skillService.Remove(skill);
+            // if(skill == null)
+            // {
+            //     return NotFound();
+            // }
+            // skillService.Remove(skill);
             return NoContent();
         }
         //Get Single Skill
