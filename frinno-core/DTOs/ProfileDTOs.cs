@@ -15,27 +15,18 @@ namespace frinno_core.DTOs
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
+        [Required, EmailAddress]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public AuthRolesEnum Role 
-        { 
-            get
-            {
-                var role = AuthRolesEnum.Guest;
-                return role;
-            } 
-            set 
-            {
-                Role = value;
-            } 
-        }
+        public AuthRolesEnum Role { get; set; }
         public ProfileAddressInfo AddressInfo { get; set; }
     }
     public record CreateAProfileResponse: CreateAProfileRequest
     {
         public string Id { get; set; }
+        public string UserName { get; set; }
+        public string RoleName { get; set; }
     }
 
     public record ProfileAddressInfo
