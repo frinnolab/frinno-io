@@ -13,8 +13,6 @@ namespace frinno_infrastructure.Repostories
 {
     public class AuthRepository : IAuthService
     {
-        private readonly UserManager<Profile> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
         private readonly DataContext DB;
         private ITokenService tokenService;
 
@@ -40,7 +38,7 @@ namespace frinno_infrastructure.Repostories
             return userResult;
         }
 
-        public void Forgotten()
+        public void Forgotten(string email)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +55,7 @@ namespace frinno_infrastructure.Repostories
             return tokenRespnse;
         }
 
-        public void Recovery()
+        public void Recovery(string newPassword)
         {
             throw new NotImplementedException();
         }
@@ -77,11 +75,11 @@ namespace frinno_infrastructure.Repostories
             return isMatched;
         }
 
-        public async Task<bool> Register(CreateAProfileRequest request)
+        public async Task<Profile> Register(Profile newProfile)
         {
-            //Assign Roles.
-            var user = await userManager.CreateAsync(new Profile { User = new (), Address = new (), Projects = null, Skills = null, Resumes = null });
-            return user.Succeeded;
+            var user = await DB.Profiles.AddAsync(newProfile);
+            await DB.SaveChangesAsync();
+            return user.Entity;
         }
     }
 }

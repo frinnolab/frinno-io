@@ -93,10 +93,10 @@ builder.Services.AddSwaggerGen(option =>
 
 if (builder.Environment.IsDevelopment())
 {
-    //builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
-    builder.Services.AddDbContext<DataContext>(
-        options=>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
+    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+    // builder.Services.AddDbContext<DataContext>(
+    //     options=>
+    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
 }
 
 if (builder.Environment.IsProduction())
@@ -105,6 +105,10 @@ if (builder.Environment.IsProduction())
         options=>
         options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
 }
+
+//Setup Identity Store DI
+builder.Services.AddIdentity<Profile, IdentityRole>()
+.AddEntityFrameworkStores<DataContext>();
 
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();

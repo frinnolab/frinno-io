@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using frinno_core.Entities;
 
 namespace frinno_core.DTOs
 {
@@ -10,11 +11,26 @@ namespace frinno_core.DTOs
     
     public record CreateAProfileRequest
     {
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
-        public string[] Roles { get; set; }
+        public AuthRolesEnum Role 
+        { 
+            get
+            {
+                var role = AuthRolesEnum.Guest;
+                return role;
+            } 
+            set 
+            {
+                Role = value;
+            } 
+        }
         public ProfileAddressInfo AddressInfo { get; set; }
     }
     public record CreateAProfileResponse: CreateAProfileRequest

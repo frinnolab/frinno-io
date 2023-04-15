@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using frinno_application.Authentication;
 using frinno_core.DTOs;
+using frinno_core.Entities.Profiles;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
@@ -14,16 +16,18 @@ namespace frinno_api.Controllers
     {
         private readonly IAuthService authService;
         private readonly ITokenService tokenService;
-        public AuthController(IAuthService authServices, ITokenService tokens)
+         private readonly UserManager<Profile> userManager;
+        public AuthController(IAuthService authServices, ITokenService tokens,UserManager<Profile> userManager_)
         {
             authService = authServices;
             tokenService = tokens;
+            userManager = userManager_;
         }
 
 
         //Register
         [HttpPost("register")]
-        public async Task<ActionResult<CreateAProfileResponse>>  Register(CreateAProfileRequest request)
+        public async Task<ActionResult<CreateAProfileResponse>>  RegisterProfile([FromForm]CreateAProfileRequest request)
         {
             //Validate Model
             if(!ModelState.IsValid)
@@ -31,6 +35,7 @@ namespace frinno_api.Controllers
                 return BadRequest("Values cannot be empty.!");
             }
             //Find User
+            var Exists = await userManager.FindByEmailAsync(request.Email);
             var userExists = authService.UserExists(request.Email);
 
             if(userExists)
@@ -39,17 +44,32 @@ namespace frinno_api.Controllers
             }
 
             //New Profile;
-            var userInfo = false;
+            var newProfile = new Profile()
+            {
+
+            };
             try
             {
-                userInfo = await authService.Register(request);
+                var obj = await authService.Register(newProfile);
+                //Add to Role
+                newProfile = obj;
             }
             catch (System.Exception ex)
             {
                 //throw ex;
                 return BadRequest(new{ Message = $"Failed to Register user with Error: {ex.Message}" });
             }
-            return Ok(new{ Message = $"Profile Ceated: {userInfo}" } );
+
+            var response = new CreateAProfileResponse 
+            {
+                Id = newProfile.Id,
+                FirstName = newProfile.FirstName,
+                Email = newProfile.Email,
+
+            };
+
+            
+            return Created("", new {response});
         }
 
         [HttpPost("login")]
