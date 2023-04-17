@@ -58,7 +58,7 @@ namespace frinno_api.Controllers
         #endregion
 
         //Updates a Profile Resource
-        [HttpPut("{Id}"), Authorize()]
+        [HttpPut("{Id}")]
         public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromForm] UpdateProfileRequest request)
         {
             var profile = await userManager.FindByIdAsync(Id);
@@ -71,6 +71,7 @@ namespace frinno_api.Controllers
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
             profile.Email = request.Email;
+            profile.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
             profile.Address = new Address
             {
                 City = request.AddressInfo.City,
@@ -92,7 +93,7 @@ namespace frinno_api.Controllers
                     switch(request.Role)
                     {
                         case AuthRolesEnum.Administrator:
-                            return BadRequest("Cannot Upgrade to Administrator priveledge");
+                            return BadRequest("Cannot Upgrade to this Role.");
 
                         case AuthRolesEnum.Author:
                             profile.Role = AuthRolesEnum.Author;
@@ -153,7 +154,7 @@ namespace frinno_api.Controllers
             }
 
             profileService.Remove(data);
-            return Ok("Profile Delete Success.!");
+            return NoContent();
         }
 
         //Returns a Profile Resource
