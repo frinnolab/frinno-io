@@ -158,7 +158,7 @@ namespace frinno_api.Controllers
 
         //Returns a Profile Resource
         [HttpGet("{Id}")]
-        public async Task< ActionResult<ProfileInfoResponse>> GetSingle(string Id, [FromQuery] ProfileInfoRequest query)
+        public async Task< ActionResult<ProfileInfoResponse>> GetSingle(string Id)
         {
             var profile = await userManager.FindByIdAsync(Id);
             if (profile == null)
@@ -166,29 +166,28 @@ namespace frinno_api.Controllers
                 return NotFound("Profile NotFound");
             }
 
-            var infoAddress = new ProfileAddressInfo
-            {
-                City = profile.Address.City,
-                Mobile = profile.Address.Mobile
-            };
-
-            var response = new ProfileInfoResponse
+            var response = new ProfileInfoResponse()
             {
                 Id = profile.Id,
-                Fullname = $"{profile.FirstName} {profile.LastName}",
+                Username = profile.UserName,
                 Email = profile.Email,
                 Role = Enum.GetName(profile.Role),
-                TotalArticles = profile.ProfileArticles.Count,
-                TotalProjects = profile.Projects.Count,
-                TotalResumes = profile.Resumes.Count,
-                TotalSkills = profile.Skills.Count,
-                AddressInfo = infoAddress
+                AddressInfo = new ProfileAddressInfo()
+                {
+                    Mobile = profile.Address.Mobile,
+                    City = profile.Address.City
+                },
+                TotalArticles = profile.ProfileArticles != null ? profile.ProfileArticles.Count : 0, 
+                TotalProjects = profile.Projects != null ? profile.Projects.Count : 0, 
+                TotalSkills = profile.Skills != null ? profile.Skills.Count : 0, 
+                TotalResumes = profile.Resumes != null ? profile.Resumes.Count : 0, 
             };
+
             return Ok(response);
         }
 
         //Gets All Profiles
-        [HttpGet(), Authorize]
+        [HttpGet()]
         public ActionResult<DataListResponse<ProfileInfoResponse>> GetAllProfiles([FromQuery] ProfileInfoRequest? query)
         {
             var profiles = profileService.FetchAll();
@@ -205,11 +204,11 @@ namespace frinno_api.Controllers
             {
                 Id = p.Id,
                 Email = p.Email,
-                Fullname = $"{p.FirstName} {p.LastName}",
-                TotalArticles = p.ProfileArticles.Count,
-                TotalProjects = p.Projects.Count,
-                TotalResumes = p.Resumes.Count,
-                TotalSkills = p.Skills.Count,
+                Username = $"{p.FirstName} {p.LastName}",
+                TotalArticles = p.ProfileArticles != null ? p.ProfileArticles.Count : 0, 
+                TotalProjects = p.Projects != null ? p.Projects.Count : 0, 
+                TotalSkills = p.Skills != null ? p.Skills.Count : 0, 
+                TotalResumes = p.Resumes != null ? p.Resumes.Count : 0, 
                 Role = Enum.GetName(p.Role),
                 AddressInfo = new ProfileAddressInfo
                 {
