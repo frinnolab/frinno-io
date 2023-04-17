@@ -2,6 +2,7 @@ using frinno_application.Articles;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
 using frinno_core.Entities;
+using frinno_core.Entities.Article.Aggregates;
 using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace frinno_api.Controllers
 {
     [ApiController]
-    [Authorize(Roles = ("Administrator, Author") )]
+    //[Authorize(Roles = ("Administrator, Author") )]
     [Route("api/[controller]")]
     public class ArticlesController : ControllerBase
     {
@@ -26,7 +27,7 @@ namespace frinno_api.Controllers
             userManager = users;
         }
         //Creates a New Article Resource
-        [HttpPost("{profileId}"), Authorize(Roles ="Author")]
+        [HttpPost("{profileId}")]
         public async Task< ActionResult<CreateArticleResponse>> CreateNew([FromBody] CreateArticleRequest request, string profileId)
         {
             var profile = await userManager.FindByIdAsync(profileId);
@@ -146,22 +147,23 @@ namespace frinno_api.Controllers
             }
 
             //Format response
-            var ArticleInfos = Articles.ToList();
+            var articleInfos = Articles.ToList();
 
-            var response = new DataListResponse<ArticleInfoResponse>();
+            var response = new DataListResponse<ArticleInfoResponse>(){
+                TotalItems = articleInfos.Count,
+                Data = articleInfos.Select((a=>new ArticleInfoResponse() 
+                {
+                    
+                    Id = a.Id,
+                    AuthorId = a.Author.Id,
+                    Title = a.Title,
+                    LongText = a.LongText,
+                    //TotalLikes = a.Likes.Likes
 
-            response.Data = new List<ArticleInfoResponse>();
-
-            response.Data = ArticleInfos.Select((p)=> new ArticleInfoResponse 
-            {
-                Id = p.Id,
-                AuthorId = p.Author?.Id,
-                Title = p.Title,
-                LongText = p.LongText,
-                TotalLikes = p.Likes.Likes
-                
-            } ).ToList();
-            response.TotalItems = response.Data.Count;
+                    
+                })).ToList(),
+            };
+            
            return Ok(response);
 
         }

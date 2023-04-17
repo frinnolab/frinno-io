@@ -34,11 +34,9 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         public IEnumerable<Article> FetchAll()
         {
             return DB.Articles
-            .Include(p=>p.Likes)
             .Include(t=>t.ArticleTags)
             .Include(p=>p.Author)
             .ThenInclude(a=>a.Address)
-            .Include(p=>p.Author)
             .ToList();
         }
 
@@ -49,7 +47,6 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             .ThenInclude(a=>a.Address)
             .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
-            .Include(p=>p.Likes)
             .Single((a)=>a==data);
         }
 
@@ -60,7 +57,6 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             .ThenInclude(a=>a.Address)
             .Include(p=>p.Author)
             .Include(t=>t.ArticleTags)
-            .Include(p=>p.Likes)
             .Single(a=>a.Id == dataId);
         }
 

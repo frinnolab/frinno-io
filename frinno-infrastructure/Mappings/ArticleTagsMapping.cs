@@ -23,9 +23,9 @@ namespace frinno_infrastructure.Mappings
 
             //Configure Each Entity
             //Articles
-            builder.HasOne<Article>()
-            .WithMany(at => at.ArticleTags)
-            .HasForeignKey(at => at.ArticelId);
+            // builder.HasOne<Article>()
+            // .WithMany(at => at.ArticleTags)
+            // .HasForeignKey(at => at.ArticelId);
 
             //Tags
             builder.HasOne(t => t.Tag)

@@ -15,15 +15,15 @@ namespace frinno_infrastructure.Mappings.ArticlesMapping
             //Columns
             builder.Property<string>("LikedById")
             .HasColumnName("LikedById");
-            builder.Property<int>("ArticleId")
-            .HasColumnName("ArticleId");
+            // builder.Property<int>("ArticleId")
+            // .HasColumnName("ArticleId");
 
             //Profile
             builder.HasOne(p=>p.Profile)
             .WithOne();
 
-            builder.HasOne(p=>p.Article)
-            .WithOne();
+            // builder.HasOne(p=>p.Article)
+            // .WithOne();
         }
     }
 }

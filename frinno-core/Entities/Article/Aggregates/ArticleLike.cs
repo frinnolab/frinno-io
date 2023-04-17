@@ -12,7 +12,7 @@ namespace frinno_core.Entities.Article.Aggregates
         public string likedById { get; set; }
         public Profiles.Profile Profile { get; set; }
 
-        public int ArticleId { get; set; }
-        public Articles.Article Article { get; set; }
+        //public int ArticleId { get; set; }
+        //public Articles.Article Article { get; set; }
     }
 }

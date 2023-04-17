@@ -17,8 +17,6 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
 {
     public class TokenRepository : ITokenService
     {
-
-        #region Old Stuff
         
         private readonly IConfiguration configuration;
 
@@ -68,8 +66,7 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
             var token = handler.WriteToken(tokenHandler);
             return token;
         }
-        #endregion
-        
+    
     }
 
 }
