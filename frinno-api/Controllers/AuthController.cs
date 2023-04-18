@@ -75,6 +75,7 @@ namespace frinno_api.Controllers
                 {
                     var newRole = await roleManager.CreateAsync(new IdentityRole(){Name = Enum.GetName(request.Role)});
                 }
+                
                 var roleResult = await userManager.AddToRoleAsync(obj, Enum.GetName(request.Role));
                 newProfile = obj;
 

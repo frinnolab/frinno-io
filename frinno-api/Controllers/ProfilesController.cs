@@ -158,36 +158,44 @@ namespace frinno_api.Controllers
         }
 
         //Returns a Profile Resource
+        //[Authorize()]
         [HttpGet("{Id}")]
         public async Task< ActionResult<ProfileInfoResponse>> GetSingle(string Id)
         {
             var profile = await userManager.FindByIdAsync(Id);
-            if (profile == null)
-            {
-                return NotFound("Profile NotFound");
+            if(profile == null){
+                return NotFound("Profile does not exist!.");
             }
 
-            var response = new ProfileInfoResponse()
+            if (profile != null)
             {
-                Id = profile.Id,
-                Username = profile.UserName,
-                Email = profile.Email,
-                Role = Enum.GetName(profile.Role),
-                AddressInfo = new ProfileAddressInfo()
+                //Format Response
+                
+                var response = new ProfileInfoResponse()
                 {
-                    Mobile = profile.Address.Mobile,
-                    City = profile.Address.City
-                },
-                TotalArticles = profile.ProfileArticles != null ? profile.ProfileArticles.Count : 0, 
-                TotalProjects = profile.Projects != null ? profile.Projects.Count : 0, 
-                TotalSkills = profile.Skills != null ? profile.Skills.Count : 0, 
-                TotalResumes = profile.Resumes != null ? profile.Resumes.Count : 0, 
-            };
+                    Id = profile.Id,
+                    Username = profile.UserName,
+                    Email = profile.Email,
+                    Role = Enum.GetName(profile.Role),
+                    AddressInfo = new ProfileAddressInfo()
+                    {
+                        Mobile = profile.Address.Mobile,
+                        City = profile.Address.City
+                    },
+                    TotalArticles = profile.ProfileArticles != null ? profile.ProfileArticles.Count : 0, 
+                    TotalProjects = profile.Projects != null ? profile.Projects.Count : 0, 
+                    TotalSkills = profile.Skills != null ? profile.Skills.Count : 0, 
+                    TotalResumes = profile.Resumes != null ? profile.Resumes.Count : 0, 
+                };
 
-            return Ok(response);
+                return Ok(response);
+            }
+
+            return Unauthorized();
         }
 
         //Gets All Profiles
+        [AllowAnonymous]
         [HttpGet()]
         public ActionResult<DataListResponse<ProfileInfoResponse>> GetAllProfiles([FromQuery] ProfileInfoRequest? query)
         {
@@ -196,6 +204,7 @@ namespace frinno_api.Controllers
             {
                 return NoContent();
             }
+            
 
             //Format response
             var profileInfos = profiles.ToList();
@@ -218,7 +227,6 @@ namespace frinno_api.Controllers
                 }
             } ).ToList();
             response.TotalItems = response.Data.Count;
-
             return Ok(response);
         }
 

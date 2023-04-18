@@ -43,9 +43,9 @@ builder.Services.AddAuthentication(p=>{
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
         ValidateLifetime = true,
-        ValidIssuer = "Frinno-LAB",
-        ValidAudience = "Frinno-LAB",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5HMQ@FbiMTkWu6m5HMQ@FbiMTkWu6m"))
+        ValidIssuer = builder.Configuration["AppSettings:Issuer"],
+        ValidAudience = builder.Configuration["AppSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:ApiKey"]))
     };
 });
 
@@ -125,8 +125,6 @@ var app = builder.Build();
 app.UseCors("Cors");
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -139,8 +137,10 @@ if (app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 
-app.MapControllers();
 
 app.UseStaticFiles();
 
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 app.Run();
