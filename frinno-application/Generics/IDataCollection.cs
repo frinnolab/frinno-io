@@ -10,6 +10,6 @@ namespace frinno_application.Generics
     {
         T FetchSingle(T data);
         T FetchSingleById(int dataId);
-        IEnumerable<T> FetchAll();
+        Task<IEnumerable<T>> FetchAll();
     }
 }

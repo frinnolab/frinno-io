@@ -24,12 +24,12 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
             return data.Entity;
         }
 
-        public IEnumerable<Project> FetchAll()
+        public async Task<IEnumerable<Project>> FetchAll()
         {
-            return DB.Projects
+            return await DB.Projects
             .Include(pr=>pr.Profile)
             .ThenInclude(pr=>pr.Skills)
-            .ToList();
+            .ToListAsync();
         }
 
         public List<Project> FetchAllByProfileId(string profileId)

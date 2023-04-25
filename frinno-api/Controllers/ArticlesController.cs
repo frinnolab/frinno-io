@@ -138,9 +138,9 @@ namespace frinno_api.Controllers
         //Gets All Articles
         [HttpGet()]
         [AllowAnonymous]
-        public ActionResult<DataListResponse<ArticleInfoResponse>> GetAllArticles()
+        public async Task<ActionResult<DataListResponse<ArticleInfoResponse>>> GetAllArticles()
         {
-            var Articles = articlesService.FetchAll();
+            var Articles = await articlesService.FetchAll();
             if (Articles == null)
             {
                 return NoContent();

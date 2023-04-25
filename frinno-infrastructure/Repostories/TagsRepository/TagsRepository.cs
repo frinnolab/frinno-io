@@ -22,13 +22,13 @@ namespace frinno_infrastructure.Repostories.TagsRepository
             return data.Entity;
         }
 
-        public IEnumerable<Tag> FetchAll()
+        public async Task<IEnumerable<Tag>> FetchAll()
         {
-            return dataContext.Tags
+            return await dataContext.Tags
             .Include(p=>p.Profile)
             .Include(a=>a.ArticleTags)
             .ThenInclude(at=>at.Article)
-            .ToList();
+            .ToListAsync();
         }
 
         public Tag FetchSingle(Tag data)

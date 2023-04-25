@@ -233,7 +233,7 @@ namespace frinno_api.Controllers
 
         //Get All Skills
         [HttpGet()]
-        public ActionResult<DataListResponse<SkillInfoResponse>> GetAllSkills(string profileId)
+        public async Task<ActionResult<DataListResponse<SkillInfoResponse>>> GetAllSkills(string profileId)
         {
             var skills = new List<Skill>();
             if(profileId != string.Empty)
@@ -242,7 +242,8 @@ namespace frinno_api.Controllers
             }
             else
             {                
-                skills = skillService.FetchAll().ToList();
+                var data = await skillService.FetchAll();
+                skills = data.ToList();
             }
 
             if(skills == null)

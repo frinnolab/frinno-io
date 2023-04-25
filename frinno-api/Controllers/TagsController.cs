@@ -113,9 +113,9 @@ namespace frinno_api.Controllers
 
         //Gets All tags
         [HttpGet()]
-        public ActionResult<DataListResponse<TagInfoResponse>> GetAlltags([FromQuery] TagInfoRequest? query)
+        public async Task<ActionResult<DataListResponse<TagInfoResponse>>> GetAlltags([FromQuery] TagInfoRequest? query)
         {
-            var tags = tagsService.FetchAll();
+            var tags = await tagsService.FetchAll();
             if (tags == null)
             {
                 return NoContent();

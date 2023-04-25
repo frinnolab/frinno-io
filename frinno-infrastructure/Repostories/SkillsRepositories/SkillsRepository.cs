@@ -23,13 +23,13 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             return data.Entity;
         }
 
-        public IEnumerable<Skill> FetchAll()
+        public async Task<IEnumerable<Skill>> FetchAll()
         {
-            return DB.Skills
+            return await DB.Skills
             .Include(p=>p.Profile)
             .ThenInclude(x=>x.Skills)
             .Include(s=>s.Projects)
-            .ToList();
+            .ToListAsync();
         }
 
         public IEnumerable<Skill> FetchAllByProfileId(string profileId)

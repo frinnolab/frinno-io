@@ -174,7 +174,7 @@ namespace frinno_api.Controllers
 
         //Gets All Projects
         [HttpGet()]
-        public ActionResult<DataListResponse<ProjectInfoResponse>> GetAllProjects([FromQuery] ProjectInfoRequest query)
+        public async Task<ActionResult<DataListResponse<ProjectInfoResponse>>> GetAllProjects([FromQuery] ProjectInfoRequest query)
         {
             var projects = new List<Project>();;
             if(query.ProfileId != string.Empty)
@@ -182,7 +182,8 @@ namespace frinno_api.Controllers
                 projects = projectsService.FetchAllByProfileId(query.ProfileId);
             }
             else{
-                projects = projectsService.FetchAll().ToList();
+                var data = await projectsService.FetchAll();
+                projects = data.ToList();
             }
 
             if (projects == null)

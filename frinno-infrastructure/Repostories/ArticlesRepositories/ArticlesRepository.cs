@@ -30,13 +30,13 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
             return DB.Articles.Any((a)=>a==data);
         }
 
-        public IEnumerable<Article> FetchAll()
+        public async Task<IEnumerable<Article>> FetchAll()
         {
-            return DB.Articles
+            return await DB.Articles
             .Include(t=>t.ArticleTags)
             .Include(p=>p.Author)
             .ThenInclude(a=>a.Address)
-            .ToList();
+            .ToListAsync();
         }
 
         public Article FetchSingle(Article data)
