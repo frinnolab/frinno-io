@@ -16,10 +16,10 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             DB = data;
         }
-        public Profile AddNew(Profile newData)
+        public async Task<Profile> AddNew(Profile newData)
         {
-            var data = DB.Profiles.Add(newData);
-            SaveContextChanges();
+            var data = await DB.Profiles.AddAsync(newData);
+            await DB.SaveChangesAsync();
             return data.Entity;;
         }
 

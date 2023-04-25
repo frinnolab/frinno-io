@@ -20,7 +20,7 @@ namespace frinno_api.Controllers
         }
         //Creates a New Tag Resource
         [HttpPost()]
-        public ActionResult<TagInfoResponse> CreateNew([FromBody] CreateTagRequest request, string profileId, int articleId)
+        public async Task<ActionResult<TagInfoResponse>> CreateNew([FromBody] CreateTagRequest request, string profileId, int articleId)
         {
             //Todo, Add Tag Specific ValIdations
             var newTag = new Tag
@@ -34,7 +34,7 @@ namespace frinno_api.Controllers
 
             try
             {
-                TagResponse = tagsService.AddNew(newTag);
+                TagResponse = await tagsService.AddNew(newTag);
 
             }
             catch (System.Exception ex)

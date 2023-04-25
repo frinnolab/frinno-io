@@ -18,11 +18,10 @@ namespace frinno_infrastructure.Repostories.ArticlesRepositories
         {
             DB = data;
         }
-        public Article AddNew(Article newData)
+        public async Task<Article> AddNew(Article newData)
         {
-            var data = DB.Articles.Add(newData);
-            SaveContextChanges();
-
+            var data = await DB.Articles.AddAsync(newData);
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
 

@@ -16,11 +16,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
         {
             DB = data;
         }
-        public Skill AddNew(Skill newData)
+        public async Task<Skill> AddNew(Skill newData)
         {
-            var data = DB.Skills.Add(newData);
-            SaveContextChanges();
-
+            var data = await DB.Skills.AddAsync(newData);
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
 

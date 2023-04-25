@@ -17,10 +17,10 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             DB = data;
         }
-        public Project AddNew(Project newData)
+        public async Task<Project> AddNew(Project newData)
         {
-            var data = DB.Projects.Add(newData);
-            SaveContextChanges();
+            var data = await DB.Projects.AddAsync(newData);
+            await DB.SaveChangesAsync();
             return data.Entity;
         }
 

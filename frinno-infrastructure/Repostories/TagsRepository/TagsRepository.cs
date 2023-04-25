@@ -15,10 +15,10 @@ namespace frinno_infrastructure.Repostories.TagsRepository
         {
             dataContext = DB;
         }
-        public Tag AddNew(Tag newData)
+        public async Task<Tag> AddNew(Tag newData)
         {
-            var data = dataContext.Tags.Add(newData);
-            dataContext.SaveChanges();
+            var data = await dataContext.Tags.AddAsync(newData);
+            await dataContext.SaveChangesAsync();
             return data.Entity;
         }
 

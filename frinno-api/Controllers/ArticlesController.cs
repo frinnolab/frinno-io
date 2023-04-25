@@ -28,7 +28,7 @@ namespace frinno_api.Controllers
         }
         //Creates a New Article Resource
         [HttpPost("{profileId}")]
-        public async Task< ActionResult<CreateArticleResponse>> CreateNew([FromBody] CreateArticleRequest request, string profileId)
+        public async Task<ActionResult<CreateArticleResponse>> CreateNew([FromBody] CreateArticleRequest request, string profileId)
         {
             var profile = await userManager.FindByIdAsync(profileId);
 
@@ -50,7 +50,7 @@ namespace frinno_api.Controllers
 
             try
             {
-                ArticleResponse = articlesService.AddNew(newArticle);
+                ArticleResponse = await articlesService.AddNew(newArticle);
 
             }
             catch (System.Exception ex)
