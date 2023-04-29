@@ -9,12 +9,14 @@ using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Project.ValueObjects;
 using frinno_core.Entities.Projects;
 using frinno_core.Entities.user;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class ProjectsController : ControllerBase
     {
@@ -182,7 +184,7 @@ namespace frinno_api.Controllers
         }
 
         //Returns a Project Resource
-        [HttpGet("{Id}")]
+        [HttpGet("{Id}"), AllowAnonymous]
         public ActionResult<ProjectInfoResponse> GetSingle(int Id, [FromQuery] ProjectInfoRequest query)
         {
             var project = new Project();
@@ -215,7 +217,7 @@ namespace frinno_api.Controllers
         }
 
         //Gets All Projects
-        [HttpGet()]
+        [HttpGet(), AllowAnonymous]
         public async Task<ActionResult<DataListResponse<ProjectInfoResponse>>> GetAllProjects([FromQuery] ProjectInfoRequest query)
         {
             var projects = new List<Project>();;

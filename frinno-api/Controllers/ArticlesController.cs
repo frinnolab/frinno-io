@@ -70,6 +70,7 @@ namespace frinno_api.Controllers
         }
 
         //Updates a Article Resource
+        [Authorize(Roles = "Administrator, Author")]
         [HttpPut("{Id}/{profileId}")]
         public async Task<ActionResult<ArticleInfoResponse>> UpdateArticle(int Id,string profileId, [FromBody] UpdateArticleRequest request)
         {
@@ -95,6 +96,7 @@ namespace frinno_api.Controllers
         }
 
         //Removes Single Article Resource
+        [Authorize(Roles = "Administrator, Author")]
         [HttpDelete("{Id}/{profileId}")]
         public async Task<ActionResult<bool>> DeleteArticle(int Id, string profileId)
         {

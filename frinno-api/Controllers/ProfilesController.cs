@@ -58,6 +58,7 @@ namespace frinno_api.Controllers
         #endregion
 
         //Updates a Profile Resource
+        [Authorize]
         [HttpPut("{Id}")]
         public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromForm] UpdateProfileRequest request)
         {
@@ -143,6 +144,7 @@ namespace frinno_api.Controllers
         }
 
         //Removes Single Profile Resource
+        [Authorize]
         [HttpDelete("{Id}")]
         public async Task<ActionResult<bool>> DeleteProfile(string Id)
         {
@@ -159,7 +161,7 @@ namespace frinno_api.Controllers
 
         //Returns a Profile Resource
         //[Authorize()]
-        [HttpGet("{Id}")]
+        [HttpGet("{Id}"), AllowAnonymous]
         public async Task< ActionResult<ProfileInfoResponse>> GetSingle(string Id)
         {
             var profile = await userManager.FindByIdAsync(Id);
@@ -233,6 +235,7 @@ namespace frinno_api.Controllers
 
         //Profile Image
         //Upload
+        [Authorize]
         [HttpPost("{Id}/upload-avatar")]
         public ActionResult<bool> UploadProfileImage(string Id, IFormFile file)
         {
@@ -242,6 +245,7 @@ namespace frinno_api.Controllers
 
 
         //Remove
+        [Authorize]
         [HttpDelete("{Id}/remove-avatar")]
         public ActionResult<bool> RemoveProfileImage(string Id)
         {
