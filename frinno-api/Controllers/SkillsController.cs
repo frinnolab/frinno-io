@@ -36,66 +36,6 @@ namespace frinno_api.Controllers
         [HttpPost("{profileId}")]
         public ActionResult<CreateNewSkillResponse> CreateNewSkill(string profileId, CreateNewSkillRequest request)
         {
-            // //NewSkill
-            // var newSkill = new Skill
-            // {
-            //     Name = request.Name   
-            // };
-            // //Find Profile
-            // var skillProfile = new Profile();
-            // if(profileId!= string.Empty)
-            // {
-            //     var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
-
-            //     if(!skillProfileExists)
-            //     {
-            //         return NotFound("Profile not found.");
-            //     }
-
-            //     skillProfile = profileService.FindById(profileId);
-
-            //     newSkill.Profile = skillProfile;
-            // }
-
-            // //Find Project
-            // var skillProjects = new List<Project>();
-            // if(request.ProjectIds.Length>0)
-            // {
-            //     foreach (var projectId in request.ProjectIds)
-            //     {
-            //         if(projectId>0){
-            //             var projectExists = projectsService.Exists(projectId);
-            //             if(projectExists)
-            //             {
-            //                 var activeProject = projectsService.FetchSingleById(projectId);
-            //                 skillProjects.Add(activeProject);
-            //             }
-            //         }
-            //     };
-
-            //     newSkill.Projects = skillProjects;
-            // }
-
-            // var skillResponse = new Skill();
-
-            // try
-            // {
-            //     skillResponse = skillService.AddNew(newSkill);
-            // }
-            // catch (System.Exception ex)
-            // {
-            //     return BadRequest(new{ Message = $"{ex.Message}" });
-            // }
-
-            // //Format Response
-
-
-            // var projectIdsResponse = new List<int>();
-
-            // foreach (var project in skillResponse.Projects.ToList())
-            // {
-            //     projectIdsResponse.Add(project.Id);
-            // }
             var response = new CreateNewSkillResponse
             {
             };

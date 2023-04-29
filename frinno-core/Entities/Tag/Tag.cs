@@ -10,6 +10,6 @@ namespace frinno_core.Entities.Tags
     {
         public string Name { get; set; }
         public Profiles.Profile Profile { get; set; }
-        public List<ArticleTags> ArticleTags { get; set; }
+        public IEnumerable<ArticleTags> ArticleTags { get; set; }
     }
 }

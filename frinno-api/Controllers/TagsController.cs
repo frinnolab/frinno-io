@@ -2,98 +2,209 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using frinno_application.Articles;
 using frinno_application.Tags;
 using frinno_core.DTOs;
+using frinno_core.Entities.Article.Aggregates;
+using frinno_core.Entities.Articles;
+using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Tags;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class TagsController : ControllerBase
     {
         private readonly ITagsService<Tag> tagsService;
-        public TagsController(ITagsService<Tag> tags)
+        private readonly IArticlesService<Article> articleService;
+        private readonly UserManager<Profile> userManager;
+
+        public TagsController(
+            ITagsService<Tag> tags, 
+            UserManager<Profile> manager,
+            IArticlesService<Article> articleService_)
         {
             tagsService = tags;
+            userManager = manager;
+            articleService = articleService_;
         }
         //Creates a New Tag Resource
-        [HttpPost()]
-        public async Task<ActionResult<TagInfoResponse>> CreateNew([FromBody] CreateTagRequest request, string profileId, int articleId)
+        [HttpPost("{profileId}")]
+        [Authorize(Roles ="Administrator, Author")]
+        public async Task<ActionResult<TagInfoResponse>> CreateNew(string profileId, [FromBody] CreateTagRequest request)
         {
-            //Todo, Add Tag Specific ValIdations
+            //Find Profile
+            var profile = await userManager.FindByIdAsync(profileId);
+
+            if(profile == null)
+            {
+                return NotFound($"Profile Not found!.");
+            }
+
+            //Add new Tag
             var newTag = new Tag
             {
                 Name = request.Name,
+                Profile = profile,
             };
 
-            //Add Profile if not null
+            //Tag to Articles
 
-            var TagResponse = new Tag();
+            var articlesToTag = new List<ArticleTags>();
+
+            if(request.articleIds.Length > 0)
+            {
+                foreach (var aId in request.articleIds)
+                {
+                    if(aId>0)
+                    {
+                        var article = articleService.FetchSingleById(aId);
+                        if(article !=  null)
+                        {
+                            articlesToTag.Add(new ArticleTags() { Article = article });
+                        }
+                    }
+                }
+            }
+
+            newTag.ArticleTags = articlesToTag ?? null;
 
             try
             {
-                TagResponse = await tagsService.AddNew(newTag);
+                var data = await tagsService.AddNew(newTag);
+                newTag = data;
 
             }
             catch (System.Exception ex)
             {
-                return BadRequest(new { Message = ex.Message });
-            }
-
-            if (newTag == null)
-            {
-                return BadRequest("Failed to Create a Tag!.");
+                return BadRequest($"Failed to create Tag with Error: {ex.Message}");
             }
 
             var response = new TagInfoResponse
             {
-                Id = TagResponse.Id,
+                Id = newTag.Id,
+                Name = newTag.Name,
+                ProfileId = newTag.Profile.Id,
+                TotalArtilcesUsed = newTag.ArticleTags.Select((a) => a.Article).Count()
             };
-            return Created(nameof(GetSingle), new { Message = $"Tag Created with Id: {response.Id}" });
+            return Created("", response);
         }
 
         //Updates a Tag Resource
-        [HttpPut("{Id}")]
-        public ActionResult<TagInfoResponse> UpdateTag(int Id, string profileId, int articleId,  [FromBody] UpdateTagRequest request)
+        [HttpPut("{Id}/{profileId}")]
+        [Authorize(Roles = "Administrator, Author")]
+        public async Task<ActionResult<TagInfoResponse>> UpdateTag(int Id, string profileId, [FromBody] UpdateTagRequest request)
         {
+            //Find Profile
+            var profile = await userManager.FindByIdAsync(profileId);
+
+            if (profile == null)
+            {
+                return NotFound($"Profile Not found!.");
+            }
+
             var Tag = tagsService.FetchSingleById(Id);
 
             if (Tag == null)
             {
-                return NotFound($"Tag: {Id} NotFound!.");
+                return NotFound($"Tag: NotFound!.");
             }
 
-            if (request == null)
-            {
-                return BadRequest();
-            }
 
             Tag.Name = request.Name;
+            Tag.Profile = profile;
+            Tag.Modified = DateTime.UtcNow;
 
-            var TagResponse = tagsService.Update(Tag);
+            var articlesToTag = new List<ArticleTags>();
 
-            return Created(nameof(GetSingle), new { Message = $"Updated {TagResponse.Id}" });
+            if (request.articleIds.Length > 0)
+            {
+                articlesToTag = Tag.ArticleTags.ToList();
+                foreach (var aId in request.articleIds)
+                {
+                    if (aId > 0)
+                    {
+                        var article = articleService.FetchSingleById(aId);
+
+                        if(article !=null)
+                        {
+                            var currentArticle = Tag.ArticleTags.Select((a => a.Article)).SingleOrDefault((ay=>ay.Id == article.Id));
+                            if(currentArticle == null)
+                            {
+                                //Add tag to existing articles tags
+                                articlesToTag.Add(new ArticleTags() { Article = article });
+                            }
+                        }
+
+                    }
+                }
+
+                Tag.ArticleTags = articlesToTag;
+            }
+
+            try
+            {
+                var data = await tagsService.Update(Tag);
+                Tag = data;
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest($"Failed to update Tag with Error: {ex.Message}");
+            }
+
+            //Format Response
+            var response = new TagInfoResponse
+            {
+                Id = Tag.Id,
+                Name = Tag.Name,
+                ProfileId = Tag.Profile.Id,
+                TotalArtilcesUsed = Tag.ArticleTags.Select((a) => a.Article).Count()
+            };
+
+
+            return Created("", response);
         }
 
         //Removes Single Tag Resource
         [HttpDelete("{Id}/{profileId}")]
-        public ActionResult<string> DeleteTag(int Id, int profileId)
+        [Authorize(Roles = "Administrator, Author")]
+        public async Task<ActionResult<bool>> DeleteTag(int Id, string profileId)
         {
-            var data = tagsService.FetchSingleById(Id);
+            var profile = await userManager.FindByIdAsync(profileId);
 
-            if (data == null)
+            if (profile == null)
             {
-                return NotFound("Tag Not found");
+                return NotFound($"Profile Not found!.");
             }
 
-            tagsService.Remove(data);
-            return Ok("Tag Delete Success.!");
+            var Tag = tagsService.FetchSingleById(Id);
+
+            if (Tag == null)
+            {
+                return NotFound($"Tag: NotFound!.");
+            }
+
+            try
+            {
+                tagsService.Remove(Tag);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to remove Tag with Error: {ex.Message}");
+            }
+            return NoContent();
         }
 
         //Returns a Tag Resource
         [HttpGet("{Id}")]
+        [AllowAnonymous]
         public ActionResult<TagInfoResponse> GetSingle(int Id, [FromQuery] TagInfoRequest query)
         {
             var Tag = tagsService.FetchSingleById(Id);
@@ -106,13 +217,15 @@ namespace frinno_api.Controllers
             {
                 Id = Tag.Id,
                 Name = Tag.Name,
-                TotalArtilcesUsed = Tag.ArticleTags.Select(a=>a.Article).ToList().Count
+                ProfileId = Tag.Profile.Id,
+                TotalArtilcesUsed = Tag.ArticleTags.Select(a=>a.Article).Count()
             };
             return Ok(response);
         }
 
         //Gets All tags
         [HttpGet()]
+        [AllowAnonymous]
         public async Task<ActionResult<DataListResponse<TagInfoResponse>>> GetAlltags([FromQuery] TagInfoRequest? query)
         {
             var tags = await tagsService.FetchAll();
@@ -129,7 +242,8 @@ namespace frinno_api.Controllers
             {
                 Id = p.Id,
                 Name = p.Name,
-                TotalArtilcesUsed = p.ArticleTags.Select(a=>a.Article).ToList().Count
+                ProfileId = p.Profile.Id,
+                TotalArtilcesUsed = p.ArticleTags.Select(a=>a.Article).Count()
             } ).ToList();
             response.TotalItems = response.Data.Count;
            return Ok(response);

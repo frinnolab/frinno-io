@@ -10,6 +10,7 @@ namespace frinno_core.DTOs
     public record CreateTagRequest
     {
         public string Name { get; set; } = string.Empty;
+        public int[] articleIds { get; set; }
     }
     //Create a Tag Response
     
@@ -29,7 +30,7 @@ namespace frinno_core.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int? ProfileId { get; set; }
+        public string ProfileId { get; set; } = string.Empty;
         public int? TotalArtilcesUsed { get; set; }
     }
 
