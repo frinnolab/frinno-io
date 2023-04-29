@@ -27,6 +27,7 @@ namespace frinno_api.Controllers
             userManager = users;
         }
         //Creates a New Article Resource
+        [Authorize(Roles = "Administrator, Author")]
         [HttpPost("{profileId}")]
         public async Task<ActionResult<CreateArticleResponse>> CreateNew([FromBody] CreateArticleRequest request, string profileId)
         {
@@ -159,8 +160,6 @@ namespace frinno_api.Controllers
                     Title = a.Title,
                     LongText = a.LongText,
                     //TotalLikes = a.Likes.Likes
-
-                    
                 })).ToList(),
             };
             

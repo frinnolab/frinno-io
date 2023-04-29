@@ -8,7 +8,7 @@ namespace frinno_application.Projects
 {
     public interface IProjectsManager <Project> : IMasterService<frinno_core.Entities.Projects.Project>
     {
-        List<Project> FetchAllByProfileId(string profileId);
+        Task<IEnumerable<Project>> FetchAllByProfileId(string profileId);
 
         bool Exists(int projectId);
     }

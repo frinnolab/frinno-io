@@ -26,8 +26,29 @@ using frinno_application.Tags;
 using frinno_core.Entities.Tags;
 using frinno_infrastructure.Repostories.TagsRepository;
 using frinno_core.Entities.user;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Config Environment
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+    // builder.Services.AddDbContext<DataContext>(
+    //     options=>
+    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
+}
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDbContext<DataContext>(
+        options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
+}
+
+//Setup Identity Store DI
+builder.Services.AddIdentity<Profile, IdentityRole>()
+.AddEntityFrameworkStores<DataContext>();
 
 //Setup Auth
 builder.Services.AddAuthentication(p=>{
@@ -63,6 +84,9 @@ builder.Services.AddCors(pt=>{
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
+
+
+
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Frinno-LAB API", Version = "v1" });
@@ -90,25 +114,6 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
-    // builder.Services.AddDbContext<DataContext>(
-    //     options=>
-    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
-}
-
-if (builder.Environment.IsProduction())
-{
-    builder.Services.AddDbContext<DataContext>(
-        options=>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
-}
-
-//Setup Identity Store DI
-builder.Services.AddIdentity<Profile, IdentityRole>()
-.AddEntityFrameworkStores<DataContext>();
 
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();

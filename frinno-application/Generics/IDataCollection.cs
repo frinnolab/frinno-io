@@ -8,7 +8,6 @@ namespace frinno_application.Generics
 {
     public interface IDataCollection <T>
     {
-        T FetchSingle(T data);
         T FetchSingleById(int dataId);
         Task<IEnumerable<T>> FetchAll();
     }

@@ -33,7 +33,7 @@ namespace frinno_api.Controllers
         //Register
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<CreateAProfileResponse>>  RegisterProfile([FromForm]CreateAProfileRequest request)
+        public async Task<ActionResult<CreateAProfileResponse>>  RegisterProfile([FromBody]CreateAProfileRequest request)
         {
             //Validate Model
             if(!ModelState.IsValid)
@@ -108,7 +108,7 @@ namespace frinno_api.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<LoginResponse>> Login([FromForm] LoginRequest request)
+        public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
         {
             if(!ModelState.IsValid)
             {

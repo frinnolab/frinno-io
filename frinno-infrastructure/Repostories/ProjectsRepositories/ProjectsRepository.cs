@@ -32,13 +32,13 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
             .ToListAsync();
         }
 
-        public List<Project> FetchAllByProfileId(string profileId)
+        public async Task<IEnumerable<Project>> FetchAllByProfileId(string profileId)
         {
-            return DB.Projects
+            return await DB.Projects
             .Include(pr=>pr.Profile)
             .ThenInclude(pr=>pr.Skills)
             .Where(p=>p.Profile.Id == profileId)
-            .ToList();
+            .ToListAsync();
         }
 
         public Project FetchSingle(Project data)
@@ -46,15 +46,14 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
             return DB.Projects
             .Include(pr=>pr.Profile)
             .ThenInclude(pr=>pr.Skills)
-            .Single((x)=>x==data);
+            .SingleOrDefault((x)=>x==data);
         }
 
         public Project FetchSingleById(int dataId)
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
-            .Single(x=>x.Id==dataId);
+            .SingleOrDefault(x=>x.Id==dataId);
         }
 
         public bool Exists(int dataId)

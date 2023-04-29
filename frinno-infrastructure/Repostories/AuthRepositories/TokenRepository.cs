@@ -91,7 +91,7 @@ namespace frinno_infrastructure.Repostories.AuthRepositories
                     break;
             }
             var tokenSecurity = new JwtSecurityToken(
-                issuer:configuration["AppSettings:ApiKey"],
+                issuer:configuration["AppSettings:Issuer"],
                 audience:configuration["AppSettings:Audience"],
                 expires:expiresAt,
                 claims:userClaims,

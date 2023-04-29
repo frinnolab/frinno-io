@@ -11,7 +11,7 @@ namespace frinno_core.Entities
         [Key]
         public int Id { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime Created => DateTime.UtcNow;
 
         public DateTime Modified { get; set; }
     }
