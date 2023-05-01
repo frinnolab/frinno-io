@@ -22,7 +22,7 @@ namespace frinno_core.DTOs
 
     public record CreateNewSkillResponse : CreateNewSkillRequest
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string ProfileId { get; set; }
     }
     public record SkillInfoResponse : CreateNewSkillResponse

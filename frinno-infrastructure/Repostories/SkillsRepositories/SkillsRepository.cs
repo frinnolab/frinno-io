@@ -29,6 +29,9 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             .Include(p=>p.Profile)
             .ThenInclude(x=>x.Skills)
             .Include(s=>s.Projects)
+            .ThenInclude(p=>p.Project)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Skill)
             .ToListAsync();
         }
 
@@ -38,8 +41,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             .Include(p=>p.Profile)
             .ThenInclude(p=>p.Skills)
             .Where(p=>p.Profile.Id == profileId)
-            .Include(pj=>pj.Projects)
-            .Include(s=>s.Projects)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Project)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Skill)
             .ToList();
         }
 
@@ -48,7 +53,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             return DB.Skills
             .Include(p=>p.Profile)
             .ThenInclude(x=>x.Skills)
-            .Include(s=>s.Projects)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Project)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Skill)
             .FirstOrDefault((s)=>s==data);
         }
 
@@ -57,7 +65,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             return DB.Skills
             .Include(p=>p.Profile)
             .ThenInclude(x=>x.Skills)
-            .Include(s=>s.Projects)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Project)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Skill)
             .FirstOrDefault(x=>x.Id == dataId);
         }
 
@@ -67,7 +78,10 @@ namespace frinno_infrastructure.Repostories.SkillsRepositories
             .Include(p=>p.Profile)
             .ThenInclude(x=>x.Skills)
             .Where(p=>p.Profile.Id == profileId)
-            .Include(s=>s.Projects)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Project)
+            .Include(s => s.Projects)
+            .ThenInclude(p => p.Skill)
             .FirstOrDefault(x=>x.Id == Id);
         }
 

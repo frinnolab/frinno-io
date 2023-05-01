@@ -7,9 +7,11 @@ using frinno_application.Projects;
 using frinno_application.Skills;
 using frinno_core.DTOs;
 using frinno_core.Entities.Profiles;
+using frinno_core.Entities.Project.ValueObjects;
 using frinno_core.Entities.Projects;
 using frinno_core.Entities.Skill;
 using frinno_core.Entities.Skill.Aggregates;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frinno_api.Controllers
@@ -21,194 +23,244 @@ namespace frinno_api.Controllers
         private readonly ISkillsService skillService;
         private readonly IProfileService<Profile> profileService;
         private readonly IProjectsManager<Project> projectsService;
+        private readonly UserManager<Profile> userManager;
         public SkillsController(
             ISkillsService skills,
             IProfileService<Profile> profiles,
-            IProjectsManager<Project> projects
+            IProjectsManager<Project> projects,
+            UserManager<Profile> manager
             )
         {
             skillService = skills;
             profileService = profiles;
             projectsService = projects;
+            userManager = manager;
         }
 
-        //Create a New Skill
-        [HttpPost("{profileId}")]
-        public ActionResult<CreateNewSkillResponse> CreateNewSkill(string profileId, CreateNewSkillRequest request)
-        {
-            var response = new CreateNewSkillResponse
-            {
-            };
-            return Created("", new {response});
-        }
+        #region To Fix Navigation 
 
-        //Updte Single Skill
-        [HttpPut("{Id}/{profileId}")]
-        public ActionResult<UpdateSkillResponse> UpdateSkill(UpdateSkillRequest request, int Id, string profileId)
-        {
-            // var skill = new Skill();
-            
-            // //Find Profile
-            // var skillProfile = new Profile();
-            // if(profileId != string.Empty)
-            // {
-            //     var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
+        ////Create a New Skill
+        //[HttpPost("{profileId}")]
+        //public async Task<ActionResult<CreateNewSkillResponse>> CreateNewSkill(string profileId, CreateNewSkillRequest request)
+        //{
+        //    var profile = await userManager.FindByIdAsync(profileId);
 
-            //     if(!skillProfileExists)
-            //     {
-            //         return NotFound("Profile not found.");
-            //     }
+        //    if(profile == null)
+        //    {
+        //        return NotFound($"Profile Not found!.");
+        //    }
 
-            //     skillProfile = profileService.FindById(profileId);
+        //    var projectsWithSkill = new List<ProjectSkills>();
 
-            //     skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
-            // }else{
-            //     skill = skillService.FetchSingleById(Id);
-            // }
+        //    if (request.ProjectIds.Length > 0)
+        //    {
+        //        foreach (var pId in request.ProjectIds)
+        //        {
+        //            if(pId>0)
+        //            {
+        //                var project = projectsService.FetchSingleById(pId);
 
+        //                if(project != null)
+        //                {
+        //                    projectsWithSkill.Add(new ProjectSkills { Project = project});
+        //                }
+        //            }
+        //        }
+        //    }
 
-            // if(skill == null)
-            // {
-            //     return NotFound("Skill not found!.");
-            // }
+        //    var newSkill = new Skill()
+        //    {
+        //        Name = request.Name,
+        //        Profile = profile
+        //    };
 
-            // skill.Profile = skillProfile;
+        //    newSkill.Projects = projectsWithSkill ?? null;
 
+        //    //Save Skill
+        //    try
+        //    {
+        //        var data = await skillService.AddNew(newSkill);
+        //        newSkill = data;
+        //    }
+        //    catch (Exception Ex)
+        //    {
 
-            // //Skill Projects
+        //        //throw;
 
-            // if (request.ProjectIds.Length > 0)
-            // {
-            //     foreach (var projectId in request.ProjectIds)
-            //     {
-            //         if(projectId>0)
-            //         {
-            //             var skP = skill.Projects.Find(p=>p.Id ==projectId);
-            //             //New Updated Project
-            //             if( skP == null && projectId > 0)
-            //             {
-            //                 var projectExists = projectsService.Exists(projectId);
+        //        return BadRequest($"Failed to Create skill with Error: {Ex.Message}");
+        //    }
+        //    var response = new CreateNewSkillResponse
+        //    {
+        //        Name = newSkill.Name,
+        //        Id = newSkill.Id,
+        //        ProfileId = newSkill.Profile.Id,
+        //        ProjectIds = newSkill.Projects.Select((pj=>pj.Project.Id)).ToArray() ?? null
+        //    };
+        //    return Created("", new {response});
+        //}
 
-            //                 if(projectExists)
-            //                 {
-            //                     var activeProject = projectsService.FetchSingleById(projectId);
-            //                     skill.Projects.Add(activeProject);
-            //                 }
-            //             }
-            //         }
-            //     };
+        ////Updte Single Skill
+        //[HttpPut("{Id}/{profileId}")]
+        //public async Task<ActionResult<UpdateSkillResponse>> UpdateSkill(int Id, string profileId, UpdateSkillRequest request)
+        //{
+        //    var profile = await userManager.FindByIdAsync(profileId);
 
-            // }
+        //    if (profile == null)
+        //    {
+        //        return NotFound($"Profile Not found!.");
+        //    }
 
-            // //Update Skill
-            // skill.Name = request.Name;            
-            // var skillResponse = skillService.Update(skill);
+        //    //Find Skill
+        //    var skill = skillService.FetchSingleById(Id);
 
-            // //Format Response
+        //    if (skill == null)
+        //        return NotFound($"Skill Not found!.");
 
-            // var projectIdsResponse = new List<int>();
+        //    skill.Name = request.Name;
+        //    skill.Profile = profile;
 
-            // foreach (var project in skillResponse.Projects)
-            // {
-            //     projectIdsResponse.Add(project.Id);
-            // }
-            var response = new CreateNewSkillResponse
-            {
-            };
-            return Created("", new { response });
-        }
+        //    //Current Skills
+
+        //    var skillProjects = new List<ProjectSkills>();
+
+        //    if(request.ProjectIds.Length > 0)
+        //    {
+        //        skillProjects = skill.Projects.ToList();
+
+        //        foreach (var pId in request.ProjectIds) 
+        //        {
+        //            if(pId>0)
+        //            {
+        //                var pj = projectsService.FetchSingleById(pId);
+
+        //                if(pj!=null)
+        //                {
+        //                    //Find in Current List
+        //                    var currentPj = skill.Projects.SingleOrDefault((p => p.Id == pj.Id));
+
+        //                    if(currentPj == null)
+        //                    {
+        //                        skillProjects.Add(new ProjectSkills { Project = pj });
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        skill.Projects = skillProjects;
+        //    }
+        //    //Update Skill
+
+        //    try
+        //    {
+        //        var data = await skillService.Update(skill);
+        //        skill = data;
+        //    }
+        //    catch (Exception Ex)
+        //    {
+
+        //        return BadRequest($"Failed to update Skill with Error: {Ex.Message}");
+        //    }
+        //    var response = new CreateNewSkillResponse
+        //    {
+        //        Name = skill.Name,
+        //        ProfileId = skill.Profile.Id,
+        //        ProjectIds = skill.Projects.Select((pj => pj.Project.Id)).ToArray() ?? null
+        //    };
+
+        //    return Created("", new { response });
+        //}
         
-        //Remove Skill
-        [HttpDelete("{Id}/{profileId}")]
-        public ActionResult<bool> RemoveSkill(int Id, string profileId)
-        {
-            // var skill = new Skill();
-            
-            // //Find Profile
-            // var skillProfile = new Profile();
-            // if(profileId != string.Empty)
-            // {
-            //     var skillProfileExists = profileService.ProfileExists(new Profile { Id = profileId });
+        ////Remove Skill
+        //[HttpDelete("{Id}/{profileId}")]
+        //public async Task<ActionResult<bool>> RemoveSkill(int Id, string profileId)
+        //{
+        //    var profile = await userManager.FindByIdAsync(profileId);
 
-            //     if(!skillProfileExists)
-            //     {
-            //         return NotFound("Profile not found.");
-            //     }
+        //    if (profile == null)
+        //    {
+        //        return NotFound($"Profile Not found!.");
+        //    }
 
-            //     skillProfile = profileService.FindById(profileId);
+        //    //Find Skill
+        //    var skill = skillService.FetchSingleById(Id);
 
-            //     skill = skillService.FetchSingleByProfileId(Id, skillProfile.Id);
-            // }else{
-            //     skill = skillService.FetchSingleById(Id);
-            // }
+        //    if (skill == null)
+        //        return NotFound($"Skill Not found!.");
 
-            // if(skill == null)
-            // {
-            //     return NotFound();
-            // }
-            // skillService.Remove(skill);
-            return NoContent();
-        }
-        //Get Single Skill
-        [HttpGet("{Id}")]
-        public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
-        {
-            var skill = skillService.FetchSingleById(Id);
+        //    //Remove Skill
+        //    try
+        //    {
+        //        skillService.Remove(skill);
+        //    }
+        //    catch (Exception Ex)
+        //    {
 
-            if(skill == null)
-            {
-                return NotFound("Resource Not Found.!");
-            }
+        //        BadRequest($"Failed to remove Skill with Error: {Ex.Message}");
+        //    }
+        //    return NoContent();
+        //}
+        ////Get Single Skill
+        //[HttpGet("{Id}")]
+        //public ActionResult<SkillInfoResponse> GetSingleSkill(int Id)
+        //{
+        //    var skill = skillService.FetchSingleById(Id);
 
-            //Format response
-            var response = new SkillInfoResponse
-            {
-                ID = skill.Id,
-                Name = skill.Name,
-                ProfileId = skill.Profile.Id,
-                ProjectIds = skill.Projects.Select((p)=>p.Id).ToArray()
-            };
-            return Ok(response);
-        }
+        //    if(skill == null)
+        //    {
+        //        return NotFound("Resource Not Found.!");
+        //    }
 
-        //Get All Skills
-        [HttpGet()]
-        public async Task<ActionResult<DataListResponse<SkillInfoResponse>>> GetAllSkills(string profileId)
-        {
-            var skills = new List<Skill>();
-            if(profileId != string.Empty)
-            {
-                skills = skillService.FetchAllByProfileId(profileId).ToList();
-            }
-            else
-            {                
-                var data = await skillService.FetchAll();
-                skills = data.ToList();
-            }
+        //    //Format response
+        //    var response = new SkillInfoResponse
+        //    {
+        //        Id = skill.Id,
+        //        Name = skill.Name,
+        //        ProfileId = skill.Profile.Id,
+        //        ProjectIds = skill.Projects.Select((p)=>p.Project.Id).ToArray()
+        //    };
+        //    return Ok(response);
+        //}
 
-            if(skills == null)
-            {
-                return NoContent();
-            }
+        ////Get All Skills
+        //[HttpGet()]
+        //public async Task<ActionResult<DataListResponse<SkillInfoResponse>>> GetAllSkills(string profileId)
+        //{
+        //    var skills = new List<Skill>();
+        //    if(profileId != string.Empty)
+        //    {
+        //        skills = skillService.FetchAllByProfileId(profileId).ToList();
+        //    }
+        //    else
+        //    {                
+        //        var data = await skillService.FetchAll();
+        //        skills = data.ToList();
+        //    }
 
-            //Format Response
+        //    if(skills == null)
+        //    {
+        //        return NoContent();
+        //    }
 
-          var response = new DataListResponse<SkillInfoResponse>();
-            response.Data = skills.Select((p)=> new SkillInfoResponse 
-            {
-                ID = p.Id,
-                ProfileId = p.Profile.Id,
-                Name = p.Name,
-                ProjectIds = p.Projects.Select((pj)=>pj.Id).ToArray(),
-            } ).ToList();
-            response.TotalItems = response.Data.Count;
-            return Ok(new{response});
-        }
+        //    //Format Response
+
+        //  var response = new DataListResponse<SkillInfoResponse>();
+        //    response.Data = skills.Select((p)=> new SkillInfoResponse 
+        //    {
+        //        Id = p.Id,
+        //        ProfileId = p.Profile.Id,
+        //        Name = p.Name,
+        //        ProjectIds = p.Projects.Select((pj)=>pj.Id).ToArray(),
+        //    } ).ToList();
+        //    response.TotalItems = response.Data.Count;
+        //    return Ok(new{response});
+        //}
+
+        #endregion
 
     }
 
 
 
 
-    
+
 }
