@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NameOfLastUsedPublishProfile>D:\DEV\Frn App\Frn-API\frinno-api\Properties\PublishProfiles\frnlab-001-site1 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\DEV\Frn App\Frn-API\frinno-api\Properties\PublishProfiles\frnlab-001-site1 - FTP.pubxml</NameOfLastUsedPublishProfile>
     <ActiveDebugProfile>frinno_api</ActiveDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
