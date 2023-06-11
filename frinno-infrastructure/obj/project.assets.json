@@ -1440,19 +1440,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Frinno-iO\\.nuget\\packages\\": {}
+    "C:\\Users\\Frinno-LAB\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DEV\\Frn App\\Frn-API\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "projectUniqueName": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj",
       "projectName": "frinno-infrastructure",
-      "projectPath": "D:\\DEV\\Frn App\\Frn-API\\frinno-infrastructure\\frinno-infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Frinno-iO\\.nuget\\packages\\",
-      "outputPath": "D:\\DEV\\Frn App\\Frn-API\\frinno-infrastructure\\obj\\",
+      "projectPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
+      "outputPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Frinno-iO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Frinno-LAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1460,17 +1465,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\DEV\\Frn App\\Frn-API\\frinno-application\\frinno-application.csproj": {
-              "projectPath": "D:\\DEV\\Frn App\\Frn-API\\frinno-application\\frinno-application.csproj"
+            "D:\\DEV\\Frn Apps\\Frn-io\\frinno-application\\frinno-application.csproj": {
+              "projectPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-application\\frinno-application.csproj"
             },
-            "D:\\DEV\\Frn App\\Frn-API\\frinno-core\\frinno-core.csproj": {
-              "projectPath": "D:\\DEV\\Frn App\\Frn-API\\frinno-core\\frinno-core.csproj"
+            "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj": {
+              "projectPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj"
             }
           }
         }
@@ -1534,7 +1540,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
