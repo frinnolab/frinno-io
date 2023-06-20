@@ -66,7 +66,8 @@ builder.Services.AddAuthentication(p=>{
         ValidateLifetime = true,
         ValidIssuer = builder.Configuration["AppSettings:Issuer"],
         ValidAudience = builder.Configuration["AppSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:ApiKey"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:ApiKey"])),
+        ClockSkew = new TimeSpan(3000)
     };
 });
 
@@ -110,7 +111,7 @@ builder.Services.AddSwaggerGen(option =>
                     Id="Bearer"
                 }
             },
-            new string[]{}
+            Array.Empty<string>()
         }
     });
 });

@@ -17,14 +17,13 @@ namespace frinno_api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService authService;
-        private readonly ITokenService tokenService;
+        //private readonly ITokenService tokenService;
          private readonly UserManager<Profile> userManager;
          private readonly RoleManager<IdentityRole> roleManager;
          
-        public AuthController(IAuthService authServices, ITokenService tokens,UserManager<Profile> userManager_, RoleManager<IdentityRole> roleManager_)
+        public AuthController(IAuthService authServices,UserManager<Profile> userManager_, RoleManager<IdentityRole> roleManager_)
         {
             authService = authServices;
-            tokenService = tokens;
             userManager = userManager_;
             roleManager = roleManager_;
         }
@@ -140,9 +139,10 @@ namespace frinno_api.Controllers
                 Id = profile.Id,
                 Email = profile.Email,
                 UserName = profile.UserName,
-                Token = token
+                Token = token,
+                Role = (int)profile.Role,
             };
-            return Ok(new {response});
+            return Ok(response);
         }
     }
 } 

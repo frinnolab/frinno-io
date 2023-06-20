@@ -108,7 +108,7 @@ namespace frinno_api.Controllers
             }
 
 
-            var profileResponse = new Profile();
+            Profile? profileResponse;
             try
             {
                profileResponse = await profileService.Update(profile);
@@ -206,28 +206,35 @@ namespace frinno_api.Controllers
             {
                 return NoContent();
             }
+
+            if(query!=null)
+            {
+                
+            }
             
 
             //Format response
             var profileInfos = profiles.ToList();
 
-            var response = new DataListResponse<ProfileInfoResponse>();
-            response.Data = profileInfos.Select((p)=> new ProfileInfoResponse 
+            var response = new DataListResponse<ProfileInfoResponse>
             {
-                Id = p.Id,
-                Email = p.Email,
-                Username = $"{p.FirstName} {p.LastName}",
-                TotalArticles = p.ProfileArticles != null ? p.ProfileArticles.Count : 0, 
-                TotalProjects = p.Projects != null ? p.Projects.Count : 0, 
-                TotalSkills = p.Skills != null ? p.Skills.Count : 0, 
-                TotalResumes = p.Resumes != null ? p.Resumes.Count : 0, 
-                Role = Enum.GetName(p.Role),
-                AddressInfo = new ProfileAddressInfo
+                Data = profileInfos.Select((p) => new ProfileInfoResponse
                 {
-                    Mobile = p.Address.Mobile,
-                    City = p.Address.City
-                }
-            } ).ToList();
+                    Id = p.Id,
+                    Email = p.Email,
+                    Username = $"{p.FirstName} {p.LastName}",
+                    TotalArticles = p.ProfileArticles != null ? p.ProfileArticles.Count : 0,
+                    TotalProjects = p.Projects != null ? p.Projects.Count : 0,
+                    TotalSkills = p.Skills != null ? p.Skills.Count : 0,
+                    TotalResumes = p.Resumes != null ? p.Resumes.Count : 0,
+                    Role = Enum.GetName(p.Role),
+                    AddressInfo = new ProfileAddressInfo
+                    {
+                        Mobile = p.Address.Mobile,
+                        City = p.Address.City
+                    }
+                }).ToList()
+            };
             response.TotalItems = response.Data.Count;
             return Ok(response);
         }
@@ -235,21 +242,21 @@ namespace frinno_api.Controllers
 
         //Profile Image
         //Upload
-        [Authorize]
-        [HttpPost("{Id}/upload-avatar")]
-        public ActionResult<bool> UploadProfileImage(string Id, IFormFile file)
-        {
+        // [Authorize]
+        // [HttpPost("{Id}/upload-avatar")]
+        // public ActionResult<bool> UploadProfileImage(string Id, IFormFile file)
+        // {
 
-            return Ok();
-        }
+        //     return Ok();
+        // }
 
 
         //Remove
-        [Authorize]
-        [HttpDelete("{Id}/remove-avatar")]
-        public ActionResult<bool> RemoveProfileImage(string Id)
-        {
-            return Ok();
-        }
+        // [Authorize]
+        // [HttpDelete("{Id}/remove-avatar")]
+        // public ActionResult<bool> RemoveProfileImage(string Id)
+        // {
+        //     return Ok();
+        // }
     }
 }

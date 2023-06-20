@@ -23,8 +23,7 @@ namespace frinno_api.Controllers
         private readonly UserManager<Profile> userManager;
         private readonly IProjectsManager<Project> projectsService;
         private readonly IProfileService<Profile> profilesService;
-        //private readonly I
-
+        //private readonly 
         public ProjectsController(
             IProjectsManager<Project> projects, 
             IProfileService<Profile> profiles,
@@ -50,29 +49,21 @@ namespace frinno_api.Controllers
                 return BadRequest();
             }
 
-            var newProject = new Project()
+            var newProject = new Project
             {
                 Title = request.Title,
                 Description = request.Description,
                 ProjectUrl = request.Url,
-                Profile = profile
+                Profile = profile,
+                //Check Status
+
+                Status = request.Status switch
+                {
+                    ProjectStatus.Completed => (int)ProjectStatus.Completed,
+                    ProjectStatus.Ongoing => (int)ProjectStatus.Ongoing,
+                    _ => (int)ProjectStatus.NotStarted,
+                }
             };
-
-            //Check Status
-
-            switch(request.Status)
-            {
-                case ProjectStatus.Completed:
-                    newProject.Status = (int)ProjectStatus.Completed;
-                break;
-                case ProjectStatus.Ongoing:
-                    newProject.Status = (int)ProjectStatus.Ongoing;
-                break;
-                default:
-                    newProject.Status = (int)ProjectStatus.NotStarted;
-                    break;
-            }
-
             try
             {
                 var data = await projectsService.AddNew(newProject);
@@ -104,21 +95,19 @@ namespace frinno_api.Controllers
                 return NotFound($"Profile Not found!.");
             }
 
-            var project = new Project();
-
+            Project? project;
             try
             {
-                var data = projectsService.FetchSingleById(Id);
-                project = data;
+                project = projectsService.FetchSingleById(Id);
             }
             catch (System.Exception Ex)
             {
-                
+
                 //throw;
                 return BadRequest($"Failed to fetch project with Error: {Ex.Message}");
             }
 
-            if(project == null)
+            if (project == null)
             {
                 return NotFound($"Project Not found!.");
             }
@@ -187,11 +176,15 @@ namespace frinno_api.Controllers
         [HttpGet("{Id}"), AllowAnonymous]
         public ActionResult<ProjectInfoResponse> GetSingle(int Id, [FromQuery] ProjectInfoRequest query)
         {
-            var project = new Project();
+            Project? project;
 
             try
             {
                 project = projectsService.FetchSingleById(Id);
+
+                if(query!=null){
+
+                }
             }
             catch (System.Exception Ex)
             {
@@ -242,15 +235,17 @@ namespace frinno_api.Controllers
             }
 
             //Format response
-            var response = new DataListResponse<ProjectInfoResponse>();
-            response.Data = projects.Select((p)=> new ProjectInfoResponse 
+            DataListResponse<ProjectInfoResponse>? response = new()
             {
-                Id = p.Id,
-                Title = p.Title,
-                Url = p.ProjectUrl,
-                Status = p.Status,
-                Description = p.Description,
-            } ).ToList();
+                Data = projects.Select((p) => new ProjectInfoResponse
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Url = p.ProjectUrl,
+                    Status = p.Status,
+                    Description = p.Description,
+                }).ToList()
+            };
             response.TotalItems = response.Data.Count;
            return Ok( new {response});
         }
