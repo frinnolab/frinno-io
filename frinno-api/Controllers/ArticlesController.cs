@@ -46,9 +46,8 @@ namespace frinno_api.Controllers
                 LongText = request.LongText,
                 Author = profile
             };
-
-            var ArticleResponse = new Article();
-
+            
+            Article? ArticleResponse;
             try
             {
                 ArticleResponse = await articlesService.AddNew(newArticle);
@@ -56,7 +55,7 @@ namespace frinno_api.Controllers
             }
             catch (System.Exception ex)
             {
-                return BadRequest(new { Message = ex.Message });
+                return BadRequest(new { ex.Message });
             }
 
             var response = new CreateArticleResponse
@@ -123,6 +122,12 @@ namespace frinno_api.Controllers
         public ActionResult<ArticleInfoResponse> GetSingle(int Id, [FromQuery] ArticleInfoRequest query)
         {
             var Article = articlesService.FetchSingleById(Id);
+
+            //Query Search
+            if(query != null)
+            {
+                //Article = articlesService
+            }
             if (Article == null)
             {
                 return NotFound("Article NotFound");
