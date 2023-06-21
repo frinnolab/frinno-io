@@ -6,6 +6,7 @@
     <RootNamespace>frinno_api</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentFTP" Version="46.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />

@@ -63,6 +63,19 @@
           "buildTransitive/netcoreapp3.0/EntityFramework.targets": {}
         }
       },
+      "FluentFTP/46.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/FluentFTP.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FluentFTP.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Google.Protobuf/3.11.4": {
         "type": "package",
         "dependencies": {
@@ -3254,6 +3267,31 @@
         "tools/netcoreapp3.0/any/ef6.dll",
         "tools/netcoreapp3.0/any/ef6.pdb",
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
+      ]
+    },
+    "FluentFTP/46.0.2": {
+      "sha512": "DWdIT+tAzypO8cDeh+o5kqRx1DWBRHmwnzjc4TStpjwxZf+FyQ0draXmmghBiT+c5mOnqcbV631+w0xbMvoVZg==",
+      "type": "package",
+      "path": "fluentftp/46.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "fluentftp.46.0.2.nupkg.sha512",
+        "fluentftp.nuspec",
+        "lib/net462/FluentFTP.dll",
+        "lib/net462/FluentFTP.xml",
+        "lib/net472/FluentFTP.dll",
+        "lib/net472/FluentFTP.xml",
+        "lib/net5.0/FluentFTP.dll",
+        "lib/net5.0/FluentFTP.xml",
+        "lib/net6.0/FluentFTP.dll",
+        "lib/net6.0/FluentFTP.xml",
+        "lib/netstandard2.0/FluentFTP.dll",
+        "lib/netstandard2.0/FluentFTP.xml",
+        "lib/netstandard2.1/FluentFTP.dll",
+        "lib/netstandard2.1/FluentFTP.xml",
+        "logo-nuget.png"
       ]
     },
     "Google.Protobuf/3.11.4": {
@@ -9051,6 +9089,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "FluentFTP >= 46.0.2",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.0",
       "Microsoft.AspNetCore.Mvc.Core >= 2.2.5",
       "Microsoft.EntityFrameworkCore >= 6.0.2",
@@ -9121,6 +9160,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "FluentFTP": {
+            "target": "Package",
+            "version": "[46.0.2, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[6.0.0, )"
