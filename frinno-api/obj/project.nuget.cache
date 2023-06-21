@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "BtwZ8HWxV2ixc+BB1TwMr/+mQCW/GJJgnht0aQmbNV9xyX09A/npTUjo9mhalShASyd/xGgPWtXD5IamFFujdA==",
+  "dgSpecHash": "KLWS7SpRzA+fBZJYnH8tVkXdcklVAXYTJhxDb6uwc1Q8mhgBKpm5IrJpm735R/KdPN6WnBsDI1r/SfwgKu3rUA==",
   "success": true,
   "projectFilePath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-api\\frinno-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\Frinno-LAB\\.nuget\\packages\\fluentftp\\46.0.2\\fluentftp.46.0.2.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",

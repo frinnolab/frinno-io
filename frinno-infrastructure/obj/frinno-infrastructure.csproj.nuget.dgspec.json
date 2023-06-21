@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "d:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj": {}
+    "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj": {}
   },
   "projects": {
     "d:\\DEV\\Frn Apps\\Frn-io\\frinno-application\\frinno-application.csproj": {
@@ -144,14 +144,14 @@
         }
       }
     },
-    "d:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj": {
+    "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj",
+        "projectUniqueName": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj",
         "projectName": "frinno-infrastructure",
-        "projectPath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj",
+        "projectPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\frinno-infrastructure.csproj",
         "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-        "outputPath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\obj\\",
+        "outputPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
