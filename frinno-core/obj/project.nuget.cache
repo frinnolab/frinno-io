@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oKMvuBhtB5tZC52J3x4sAhx80DZPWD5i8MsXGxWEajoe6kqCrsR3t0tePeh3N/w3/nFrg8Zb1XjUJCOxrIulKw==",
+  "dgSpecHash": "6RK4tlgC9Aep2F9T48zJrweYLNlyJVt6APEtieLXlXTVuIHxoykq4aGfs/aiCIL7ccza8+OovbQAEN8bewvHpQ==",
   "success": true,
-  "projectFilePath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj",
+  "projectFilePath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0.nupkg.sha512",

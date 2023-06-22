@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj": {}
+    "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj": {}
   },
   "projects": {
-    "d:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj": {
+    "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj",
+        "projectUniqueName": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj",
         "projectName": "frinno-core",
-        "projectPath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj",
+        "projectPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\frinno-core.csproj",
         "packagesPath": "C:\\Users\\Frinno-LAB\\.nuget\\packages\\",
-        "outputPath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\obj\\",
+        "outputPath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

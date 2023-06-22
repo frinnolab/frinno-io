@@ -26,7 +26,7 @@ namespace frinno_infrastructure.Data
         {
             
         }
-        protected void Configure(ModelBuilder builder)
+        protected static void Configure(ModelBuilder builder)
         {
             //Artilces Mapping
             new ArticlesMapping().Configure(builder.Entity<Article>());

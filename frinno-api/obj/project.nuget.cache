@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9LIo7YXA5xjLSW18p4h2gDk5WsDtBqThIQYszXp3hDi3zb56VFCr2B66QdnGMk2rtd2NBt7e2D+s37IHklnv7g==",
+  "dgSpecHash": "crbDZCGe85mQaavZGJYKwKTIBtrsD/YKDzBq/g2n7xeFM/9WiSPiGi0mKRrCSJyvB00NsNHIfoNcwNWaFcQxKg==",
   "success": true,
-  "projectFilePath": "d:\\DEV\\Frn Apps\\Frn-io\\frinno-api\\frinno-api.csproj",
+  "projectFilePath": "D:\\DEV\\Frn Apps\\Frn-io\\frinno-api\\frinno-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\Frinno-LAB\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
