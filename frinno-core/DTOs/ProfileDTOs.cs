@@ -45,9 +45,9 @@ namespace frinno_core.DTOs
     //Profile Response.
     public record ProfileInfoResponse
     {
-        public string Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public string Id { get; set; }
         public string Role { get; set; }
         public ProfileAddressInfo AddressInfo { get; set; }
         public int TotalArticles { get; set; } = 0;
@@ -60,5 +60,11 @@ namespace frinno_core.DTOs
     public record UpdateProfileRequest : CreateAProfileRequest
     {
         //public string Id { get; set; }
+
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -27,16 +27,19 @@ using frinno_core.Entities.Tags;
 using frinno_infrastructure.Repostories.TagsRepository;
 using frinno_core.Entities.user;
 using Microsoft.Extensions.DependencyInjection;
+using frinno_core.Entities.FileAsset;
+using frinno_application.FileAssets;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Config Environment
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
-    // builder.Services.AddDbContext<DataContext>(
-    //     options=>
-    //     options.UseSqlServer(builder.Configuration.GetConnectionString("frinnoldb")));
+    //builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
+    builder.Services.AddDbContext<DataContext>(
+        options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnotdb")));
 }
 
 if (builder.Environment.IsProduction())
@@ -44,6 +47,14 @@ if (builder.Environment.IsProduction())
     builder.Services.AddDbContext<DataContext>(
         options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
+
+
+
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders =
+            ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    });
 }
 
 //Setup Identity Store DI
@@ -90,7 +101,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Frinno-LAB API", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Frank Leons API  Explorer", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -116,6 +127,8 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+//Setup services DI
+
 builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();
 builder.Services.AddScoped<IProfileService<Profile>, ProfileRepository>();
@@ -123,6 +136,7 @@ builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
 builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
 builder.Services.AddScoped<ISkillsService, SkillsRepository>();
 builder.Services.AddScoped<ITagsService<Tag>, TagsRepository>();
+builder.Services.AddScoped<IFileAssetService, FileAssetsRepository>();
 
 builder.Services.AddControllers();
 
@@ -131,7 +145,7 @@ var app = builder.Build();
 app.UseCors("Cors");
 app.UseHttpsRedirection();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())  
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -142,8 +156,8 @@ if (app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
+app.UseForwardedHeaders();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseAuthentication();

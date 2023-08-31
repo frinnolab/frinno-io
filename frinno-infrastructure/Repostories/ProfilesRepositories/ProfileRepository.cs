@@ -46,22 +46,6 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             .FirstOrDefault((p)=>p==data);
         }
 
-        public Profile FindById(string dataId)
-        {
-            return DB.Profiles
-            .Include(a=>a.Address)
-            .Include(x=>x.ProfileArticles)
-            .Include(x=>x.Projects)
-            .Include(x=>x.Resumes)
-            .Include(x=>x.Skills)
-            .Single(x=>x.Id ==dataId);
-        }
-
-        public Profile FindByEmail(string email)
-        {
-            return DB.Profiles.SingleOrDefault((p=>p.Email == email));
-        }
-
         public void Remove(Profile data)
         {
             DB.Profiles.Find(data.Id);
@@ -89,6 +73,17 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         public void UploadProfileImage()
         {
             throw new NotImplementedException();
+        }
+
+        public Profile FindProfileById(string profileId)
+        {
+            return DB.Profiles
+                .Include(a => a.Address)
+                .Include(x => x.ProfileArticles)
+                .Include(x => x.Projects)
+                .Include(x => x.Resumes)
+                .Include(x => x.Skills)
+                .Single(x => x.Id == profileId);
         }
     }
 }

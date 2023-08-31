@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BCrypt.Net;
 using frinno_core.Entities.Profile;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
@@ -25,6 +26,22 @@ namespace frinno_infrastructure.Mappings
             //Configure Indexes
             builder.HasIndex(p => p.FirstName);
             builder.HasIndex(p => p.LastName);
+
+            //Default Data
+           // builder.HasData(new Profile()
+            //{
+            //    FirstName = "Frank Leons",
+            //    LastName = "Malisawa",
+            //    Address = new frinno_core.Entities.Profile.ValueObjects.Address()
+            //    {
+            //        City = "DSM",
+            //        Mobile = "0756589799"
+            //    },
+            //    Role = frinno_core.Entities.AuthRolesEnum.Administrator,
+            //    Email = "dev.frinno@gmail.com",
+            //    PasswordHash = BCrypt.Net.BCrypt.HashPassword("@SuspectZer0"),
+            //    UserName = "frinno"
+            //});
         }
     }
 }

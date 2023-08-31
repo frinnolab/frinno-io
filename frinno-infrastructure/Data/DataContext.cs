@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using frinno_core.Entities.Article.Aggregates;
 using frinno_core.Entities.Articles;
+using frinno_core.Entities.FileAsset;
 using frinno_core.Entities.Profile;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Projects;
@@ -42,6 +43,9 @@ namespace frinno_infrastructure.Data
             //Configure Skills Mapping
             new SkillsMapping().Configure(builder.Entity<Skill>());
 
+            //Configure File Assets
+            new FileAssetsMappings().Configure(builder.Entity<FileAsset>());
+
         }
         //public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
@@ -50,5 +54,7 @@ namespace frinno_infrastructure.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Resume> Resumes { get; set; }
+
+        public DbSet<FileAsset> FileAssets { get; set; }
     }
 }

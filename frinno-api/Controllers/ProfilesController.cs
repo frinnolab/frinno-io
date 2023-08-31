@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using frinno_application.FileAssets;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
 using frinno_core.Entities;
 using frinno_core.Entities.Articles;
+using frinno_core.Entities.FileAsset;
 using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.user;
+using frinno_infrastructure.Repostories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,14 +28,17 @@ namespace frinno_api.Controllers
         private readonly UserManager<Profile> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IProfileService<Profile> profileService;
+        private readonly IFileAssetService fileService;
         public ProfilesController(
             IProfileService<Profile> profiles, 
             UserManager<Profile> userManager_,
-            RoleManager<IdentityRole> roleManager_)
+            RoleManager<IdentityRole> roleManager_,
+            IFileAssetService fileAssets)
         {
             profileService = profiles;
             userManager = userManager_;
             roleManager = roleManager_;
+            fileService = fileAssets;
         }
 
         #region New Profile Endpoint: Admin
@@ -60,7 +66,7 @@ namespace frinno_api.Controllers
         //Updates a Profile Resource
         [Authorize]
         [HttpPut("{Id}")]
-        public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromForm] UpdateProfileRequest request)
+        public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
         {
             var profile = await userManager.FindByIdAsync(Id);
 
@@ -72,7 +78,20 @@ namespace frinno_api.Controllers
             profile.FirstName = request.FirstName;
             profile.LastName = request.LastName;
             profile.Email = request.Email;
-            profile.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+            if (!string.IsNullOrEmpty(request.Username))
+            {
+                profile.UserName = request.Username;
+            }else
+            {
+                profile.UserName = $"{request.FirstName[0].ToString().ToUpper()}-{request.LastName}";
+            }
+
+
+            if (!string.IsNullOrEmpty(request.Password))
+            {
+                profile.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            }
             profile.Address = new Address
             {
                 City = request.AddressInfo.City,
@@ -86,7 +105,8 @@ namespace frinno_api.Controllers
                 var role = await roleManager.RoleExistsAsync(Enum.GetName(request.Role));
                 if(!role)
                 {
-                    await roleManager.CreateAsync(new IdentityRole(){Name = Enum.GetName(request.Role)});
+                    //await roleManager.CreateAsync(new IdentityRole(){Name = Enum.GetName(request.Role)});
+                    return NotFound("Role Not Found!!.");
                 }
 
                 if(profile.Role != AuthRolesEnum.Administrator)
@@ -169,25 +189,29 @@ namespace frinno_api.Controllers
                 return NotFound("Profile does not exist!.");
             }
 
-            if (profile != null)
+
+
+            var profileResponse = profileService.FindProfileById(profile.Id);
+
+            if (profileResponse != null)
             {
                 //Format Response
                 
                 var response = new ProfileInfoResponse()
                 {
-                    Id = profile.Id,
-                    Username = profile.UserName,
-                    Email = profile.Email,
-                    Role = Enum.GetName(profile.Role),
+                    Id = profileResponse.Id,
+                    Username = profileResponse.UserName,
+                    Email = profileResponse.Email,
+                    Role = Enum.GetName(profileResponse.Role),
                     AddressInfo = new ProfileAddressInfo()
                     {
-                        Mobile = profile.Address.Mobile,
-                        City = profile.Address.City
+                        Mobile = profileResponse.Address.Mobile,
+                        City = profileResponse.Address.City
                     },
-                    TotalArticles = profile.ProfileArticles != null ? profile.ProfileArticles.Count : 0, 
-                    TotalProjects = profile.Projects != null ? profile.Projects.Count : 0, 
-                    TotalSkills = profile.Skills != null ? profile.Skills.Count : 0, 
-                    TotalResumes = profile.Resumes != null ? profile.Resumes.Count : 0, 
+                    TotalArticles = profileResponse.ProfileArticles != null ? profileResponse.ProfileArticles.Count : 0, 
+                    TotalProjects = profileResponse.Projects != null ? profileResponse.Projects.Count : 0, 
+                    TotalSkills = profileResponse.Skills != null ? profileResponse.Skills.Count : 0, 
+                    TotalResumes = profileResponse.Resumes != null ? profileResponse.Resumes.Count : 0, 
                 };
 
                 return Ok(response);
@@ -242,13 +266,43 @@ namespace frinno_api.Controllers
 
         //Profile Image
         //Upload
-        // [Authorize]
-        // [HttpPost("{Id}/upload-avatar")]
-        // public ActionResult<bool> UploadProfileImage(string Id, IFormFile file)
-        // {
+        [Authorize]
+        [HttpPost("{Id}/upload-files")]
+        public async Task<ActionResult<FileUploadReponse>> UploadProfileImage([FromForm] FileUploadRequest fileUploadInfo , IFormFile file)
+        {
 
-        //     return Ok();
-        // }
+            if(file == null)
+            {
+                return BadRequest();
+            }
+
+            var uploaderProfile = await userManager.FindByIdAsync(fileUploadInfo.ProfileId);
+
+            if(uploaderProfile == null)
+            {
+                return NotFound("No Profile found!..");
+            }
+
+            var newFile = new FileAsset()
+            {
+                Name = fileUploadInfo.FileName,
+                Description = fileUploadInfo.FileDescription,
+                FileType = fileUploadInfo.FileType,
+                UploadProfile = uploaderProfile
+            };
+
+            //Process File to Stream
+            using (var fileStream = new MemoryStream())
+            {
+                file.CopyTo(fileStream);
+
+                newFile.FileData = fileStream.ToArray();
+            }
+
+            var data = await fileService.SaveFileAsynyc(newFile);
+            var response = data;
+            return Ok(new {response});
+        }
 
 
         //Remove

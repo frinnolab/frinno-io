@@ -25,4 +25,7 @@
     <ProjectReference Include="..\frinno-application\frinno-application.csproj" />
     <ProjectReference Include="..\frinno-infrastructure\frinno-infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="public\upload_assets\" />
+  </ItemGroup>
 </Project>

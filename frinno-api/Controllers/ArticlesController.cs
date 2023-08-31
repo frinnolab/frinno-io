@@ -71,7 +71,8 @@ namespace frinno_api.Controllers
         //Updates a Article Resource
         [Authorize(Roles = "Administrator, Author")]
         [HttpPut("{Id}/{profileId}")]
-        public async Task<ActionResult<ArticleInfoResponse>> UpdateArticle(int Id,string profileId, [FromBody] UpdateArticleRequest request)
+        public async Task<ActionResult<ArticleInfoResponse>> UpdateArticle(int Id,string profileId, 
+            [FromBody] UpdateArticleRequest request)
         {
             var profile = await userManager.FindByIdAsync(profileId);
 
