@@ -22,65 +22,6 @@ namespace frinno_infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("frinno_core.Entities.Article.Aggregates.ArticleTags", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ArticelId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TagId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TagId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("TagId1");
-
-                    b.ToTable("ArticleTags");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Articles.Article", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LongText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Articles");
-                });
-
             modelBuilder.Entity("frinno_core.Entities.FileAsset.FileAsset", b =>
                 {
                     b.Property<int>("Id")
@@ -112,35 +53,6 @@ namespace frinno_infrastructure.Migrations
                     b.HasIndex("UploadProfileId");
 
                     b.ToTable("FileAssets");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Profile.Aggregates.ProfileArticles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ArticleId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ArticleId1")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProfileId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId1");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("ProfileArticles");
                 });
 
             modelBuilder.Entity("frinno_core.Entities.Profiles.Profile", b =>
@@ -217,32 +129,6 @@ namespace frinno_infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("frinno_core.Entities.Project.ValueObjects.ProjectSkills", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("SkillId");
-
-                    b.ToTable("ProjectSkills");
-                });
-
             modelBuilder.Entity("frinno_core.Entities.Projects.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -251,8 +137,23 @@ namespace frinno_infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClientPublicLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyAgencyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyAgencyPublicLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRepoPublic")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
@@ -261,6 +162,9 @@ namespace frinno_infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProjectUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RepositoryUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -284,6 +188,9 @@ namespace frinno_infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("FileId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
@@ -295,57 +202,11 @@ namespace frinno_infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FileId");
+
                     b.HasIndex("ProfileId");
 
                     b.ToTable("Resumes");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Skill.Skill", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfileId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("Skills");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Tags.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfileId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -481,30 +342,6 @@ namespace frinno_infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("frinno_core.Entities.Article.Aggregates.ArticleTags", b =>
-                {
-                    b.HasOne("frinno_core.Entities.Articles.Article", "Article")
-                        .WithMany("ArticleTags")
-                        .HasForeignKey("ArticleId");
-
-                    b.HasOne("frinno_core.Entities.Tags.Tag", "Tag")
-                        .WithMany("ArticleTags")
-                        .HasForeignKey("TagId1");
-
-                    b.Navigation("Article");
-
-                    b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Articles.Article", b =>
-                {
-                    b.HasOne("frinno_core.Entities.Profiles.Profile", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("frinno_core.Entities.FileAsset.FileAsset", b =>
                 {
                     b.HasOne("frinno_core.Entities.Profiles.Profile", "UploadProfile")
@@ -512,21 +349,6 @@ namespace frinno_infrastructure.Migrations
                         .HasForeignKey("UploadProfileId");
 
                     b.Navigation("UploadProfile");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Profile.Aggregates.ProfileArticles", b =>
-                {
-                    b.HasOne("frinno_core.Entities.Articles.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId1");
-
-                    b.HasOne("frinno_core.Entities.Profiles.Profile", "Profile")
-                        .WithMany("ProfileArticles")
-                        .HasForeignKey("ProfileId");
-
-                    b.Navigation("Article");
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("frinno_core.Entities.Profiles.Profile", b =>
@@ -537,6 +359,9 @@ namespace frinno_infrastructure.Migrations
                                 .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Country")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Mobile")
@@ -553,57 +378,74 @@ namespace frinno_infrastructure.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("frinno_core.Entities.Project.ValueObjects.ProjectSkills", b =>
-                {
-                    b.HasOne("frinno_core.Entities.Projects.Project", "Project")
-                        .WithMany("Skills")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("frinno_core.Entities.Skill.Skill", "Skill")
-                        .WithMany("Projects")
-                        .HasForeignKey("SkillId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-
-                    b.Navigation("Skill");
-                });
-
             modelBuilder.Entity("frinno_core.Entities.Projects.Project", b =>
                 {
                     b.HasOne("frinno_core.Entities.Profiles.Profile", "Profile")
                         .WithMany("Projects")
                         .HasForeignKey("ProfileId");
 
+                    b.OwnsOne("frinno_core.Entities.Profile.ValueObjects.Address", "ClientAddress", b1 =>
+                        {
+                            b1.Property<int>("ProjectId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Mobile")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ProjectId");
+
+                            b1.ToTable("Projects");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId");
+                        });
+
+                    b.OwnsOne("frinno_core.Entities.Profile.ValueObjects.Address", "CompanyAgencyAddress", b1 =>
+                        {
+                            b1.Property<int>("ProjectId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Mobile")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ProjectId");
+
+                            b1.ToTable("Projects");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId");
+                        });
+
+                    b.Navigation("ClientAddress");
+
+                    b.Navigation("CompanyAgencyAddress");
+
                     b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("frinno_core.Entities.Resumes.Resume", b =>
                 {
+                    b.HasOne("frinno_core.Entities.FileAsset.FileAsset", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId");
+
                     b.HasOne("frinno_core.Entities.Profiles.Profile", "Profile")
                         .WithMany("Resumes")
                         .HasForeignKey("ProfileId");
 
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Skill.Skill", b =>
-                {
-                    b.HasOne("frinno_core.Entities.Profiles.Profile", "Profile")
-                        .WithMany("Skills")
-                        .HasForeignKey("ProfileId");
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Tags.Tag", b =>
-                {
-                    b.HasOne("frinno_core.Entities.Profiles.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileId");
+                    b.Navigation("File");
 
                     b.Navigation("Profile");
                 });
@@ -659,35 +501,11 @@ namespace frinno_infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("frinno_core.Entities.Articles.Article", b =>
-                {
-                    b.Navigation("ArticleTags");
-                });
-
             modelBuilder.Entity("frinno_core.Entities.Profiles.Profile", b =>
                 {
-                    b.Navigation("ProfileArticles");
-
                     b.Navigation("Projects");
 
                     b.Navigation("Resumes");
-
-                    b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Projects.Project", b =>
-                {
-                    b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Skill.Skill", b =>
-                {
-                    b.Navigation("Projects");
-                });
-
-            modelBuilder.Entity("frinno_core.Entities.Tags.Tag", b =>
-                {
-                    b.Navigation("ArticleTags");
                 });
 #pragma warning restore 612, 618
         }

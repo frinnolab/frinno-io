@@ -8,7 +8,6 @@ using frinno_core.DTOs;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Project.ValueObjects;
 using frinno_core.Entities.Projects;
-using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -59,9 +58,9 @@ namespace frinno_api.Controllers
 
                 Status = request.Status switch
                 {
-                    ProjectStatus.Completed => (int)ProjectStatus.Completed,
+                    ProjectStatus.Deployed => (int)ProjectStatus.Deployed,
                     ProjectStatus.Ongoing => (int)ProjectStatus.Ongoing,
-                    _ => (int)ProjectStatus.NotStarted,
+                    _ => (int)ProjectStatus.Planning,
                 }
             };
             try
@@ -88,7 +87,9 @@ namespace frinno_api.Controllers
         [HttpPut("{Id}/{profileId}")]
         public async Task<ActionResult<ProjectInfoResponse>> UpdateProject(int Id, string profileId, [FromBody] UpdateProjectRequest request)
         {
-            var profile = await userManager.FindByIdAsync(profileId);
+            //var profile = await userManager.FindByIdAsync(profileId);
+
+            var profile = profilesService.FindProfileById(profileId);
 
             if(profile == null)
             {
@@ -119,9 +120,10 @@ namespace frinno_api.Controllers
             project.Profile = profile;
             project.Status = (int)request.Status;
 
+
             try
             {
-                var data = projectsService.FetchSingleById(Id);
+                var data = await projectsService.Update(project);
                 project = data;
             }
             catch (Exception Ex)

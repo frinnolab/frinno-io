@@ -28,7 +28,6 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return await DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
             .ToListAsync();
         }
 
@@ -36,7 +35,6 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return await DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
             .Where(p=>p.Profile.Id == profileId)
             .ToListAsync();
         }
@@ -45,7 +43,6 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
             .SingleOrDefault((x)=>x==data);
         }
 

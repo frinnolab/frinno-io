@@ -14,6 +14,10 @@ D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\IdentityModel.dl
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\K4os.Compression.LZ4.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\K4os.Compression.LZ4.Streams.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\K4os.Hash.xxHash.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\System.Web.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\System.Net.Http.Formatting.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\System.Web.Http.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\System.Web.Http.Cors.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
@@ -38,6 +42,7 @@ D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Ubiety.Dns.Core.
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Zstandard.Net.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\MySql.Data.EntityFramework.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Npgsql.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\PubTmp\Out\Renci.SshNet.dll

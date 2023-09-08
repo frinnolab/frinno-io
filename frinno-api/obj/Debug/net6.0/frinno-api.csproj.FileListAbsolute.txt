@@ -257,3 +257,8 @@ D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\sni.d
 D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\FluentFTP.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Web.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Web.Http.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Web.Http.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

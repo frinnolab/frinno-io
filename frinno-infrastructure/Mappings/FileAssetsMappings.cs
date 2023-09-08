@@ -1,5 +1,4 @@
-﻿using frinno_core.Entities.Article.Aggregates;
-using frinno_core.Entities.FileAsset;
+﻿using frinno_core.Entities.FileAsset;
 using frinno_core.Entities.Profiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

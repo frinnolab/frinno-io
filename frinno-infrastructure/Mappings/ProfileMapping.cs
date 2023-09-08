@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using BCrypt.Net;
 using frinno_core.Entities.Profile;
 using frinno_core.Entities.Profiles;
-using frinno_core.Entities.user;
 
 namespace frinno_infrastructure.Mappings
 {

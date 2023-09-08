@@ -257,3 +257,8 @@ D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\refint\frinno-api.dll
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\frinno-api.pdb
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\frinno-api.genruntimeconfig.cache
 D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Release\net6.0\ref\frinno-api.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Release\net6.0\System.Web.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Release\net6.0\System.Net.Http.Formatting.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Release\net6.0\System.Web.Http.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Release\net6.0\System.Web.Http.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Release\net6.0\Newtonsoft.Json.Bson.dll

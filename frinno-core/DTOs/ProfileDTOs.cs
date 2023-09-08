@@ -33,6 +33,7 @@ namespace frinno_core.DTOs
     {
         public string Mobile { get; set; }
         public string City { get; set; }
+        public string Country { get; set; }
     }
     //Profile Single Resource Request
     public record ProfileInfoRequest
@@ -46,6 +47,8 @@ namespace frinno_core.DTOs
     public record ProfileInfoResponse
     {
         public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Id { get; set; }
         public string Role { get; set; }

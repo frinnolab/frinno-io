@@ -28,9 +28,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
             return DB.Profiles
             
             .Include(x=>x.Address)
-            .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
-            .Include(x=>x.Skills)
             .Include(x=>x.Resumes)
             .ToList();
         }
@@ -39,10 +37,8 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             return DB.Profiles
             .Include(x=>x.Address)
-            .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
             .Include(x=>x.Resumes)
-            .Include(x=>x.Skills)
             .FirstOrDefault((p)=>p==data);
         }
 
@@ -79,10 +75,8 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             return DB.Profiles
                 .Include(a => a.Address)
-                .Include(x => x.ProfileArticles)
                 .Include(x => x.Projects)
                 .Include(x => x.Resumes)
-                .Include(x => x.Skills)
                 .Single(x => x.Id == profileId);
         }
     }

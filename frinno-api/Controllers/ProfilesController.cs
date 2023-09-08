@@ -6,12 +6,9 @@ using frinno_application.FileAssets;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
 using frinno_core.Entities;
-using frinno_core.Entities.Articles;
 using frinno_core.Entities.FileAsset;
-using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
-using frinno_core.Entities.user;
 using frinno_infrastructure.Repostories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -68,7 +65,7 @@ namespace frinno_api.Controllers
         [HttpPut("{Id}")]
         public async Task<ActionResult<CreateAProfileResponse>> UpdateProfile(string Id, [FromBody] UpdateProfileRequest request)
         {
-            var profile = await userManager.FindByIdAsync(Id);
+            var profile =  profileService.FindProfileById(Id);
 
             if(profile == null)
             {
@@ -95,7 +92,8 @@ namespace frinno_api.Controllers
             profile.Address = new Address
             {
                 City = request.AddressInfo.City,
-                Mobile = request.AddressInfo.Mobile
+                Mobile = request.AddressInfo.Mobile,
+                Country = request.AddressInfo.Country
             };
 
             //Check Role Changes
@@ -106,7 +104,7 @@ namespace frinno_api.Controllers
                 if(!role)
                 {
                     //await roleManager.CreateAsync(new IdentityRole(){Name = Enum.GetName(request.Role)});
-                    return NotFound("Role Not Found!!.");
+                    return NotFound("Role Not Found. Please Contact Admin!!.");
                 }
 
                 if(profile.Role != AuthRolesEnum.Administrator)
@@ -124,7 +122,11 @@ namespace frinno_api.Controllers
                             break;
                     }
                 }
-                await userManager.AddToRoleAsync(profile,Enum.GetName(request.Role));
+                else
+                {
+                    return Unauthorized("You dont hav permission to mak this change. Please Contact Admin! ");
+                }
+                //await userManager.AddToRoleAsync(profile,Enum.GetName(request.Role));
             }
 
 
@@ -201,16 +203,17 @@ namespace frinno_api.Controllers
                 {
                     Id = profileResponse.Id,
                     Username = profileResponse.UserName,
+                    FirstName = profileResponse.FirstName,
+                    LastName = profileResponse.LastName,
                     Email = profileResponse.Email,
                     Role = Enum.GetName(profileResponse.Role),
                     AddressInfo = new ProfileAddressInfo()
                     {
                         Mobile = profileResponse.Address.Mobile,
-                        City = profileResponse.Address.City
+                        City = profileResponse.Address.City,
+                        Country = profileResponse.Address.Country
                     },
-                    TotalArticles = profileResponse.ProfileArticles != null ? profileResponse.ProfileArticles.Count : 0, 
                     TotalProjects = profileResponse.Projects != null ? profileResponse.Projects.Count : 0, 
-                    TotalSkills = profileResponse.Skills != null ? profileResponse.Skills.Count : 0, 
                     TotalResumes = profileResponse.Resumes != null ? profileResponse.Resumes.Count : 0, 
                 };
 
@@ -247,9 +250,7 @@ namespace frinno_api.Controllers
                     Id = p.Id,
                     Email = p.Email,
                     Username = $"{p.FirstName} {p.LastName}",
-                    TotalArticles = p.ProfileArticles != null ? p.ProfileArticles.Count : 0,
                     TotalProjects = p.Projects != null ? p.Projects.Count : 0,
-                    TotalSkills = p.Skills != null ? p.Skills.Count : 0,
                     TotalResumes = p.Resumes != null ? p.Resumes.Count : 0,
                     Role = Enum.GetName(p.Role),
                     AddressInfo = new ProfileAddressInfo
