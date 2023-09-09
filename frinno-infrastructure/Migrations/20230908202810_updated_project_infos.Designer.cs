@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using frinno_infrastructure.Data;
 
@@ -11,9 +12,10 @@ using frinno_infrastructure.Data;
 namespace frinno_infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230908202810_updated_project_infos")]
+    partial class updated_project_infos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,6 +142,18 @@ namespace frinno_infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClientPublicLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyAgencyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyAgencyPublicLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -160,9 +174,6 @@ namespace frinno_infrastructure.Migrations
 
                     b.Property<DateTime>("ProjectStart")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("ProjectType")
-                        .HasColumnType("int");
 
                     b.Property<string>("ProjectUrl")
                         .HasColumnType("nvarchar(max)");
@@ -390,24 +401,18 @@ namespace frinno_infrastructure.Migrations
                         .WithMany("Projects")
                         .HasForeignKey("ProfileId");
 
-                    b.OwnsOne("frinno_core.Entities.Project.ValueObjects.ProjectAgencyInfo", "CompanyAgencyInfo", b1 =>
+                    b.OwnsOne("frinno_core.Entities.Profile.ValueObjects.Address", "ClientAddress", b1 =>
                         {
                             b1.Property<int>("ProjectId")
                                 .HasColumnType("int");
 
-                            b1.Property<string>("CompanyAgencyCity")
+                            b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("CompanyAgencyCountry")
+                            b1.Property<string>("Country")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("CompanyAgencyMobile")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("CompanyAgencyName")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("CompanyAgencyPublicLink")
+                            b1.Property<string>("Mobile")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("ProjectId");
@@ -418,24 +423,18 @@ namespace frinno_infrastructure.Migrations
                                 .HasForeignKey("ProjectId");
                         });
 
-                    b.OwnsOne("frinno_core.Entities.Project.ValueObjects.ProjectClientInfo", "ClientInfo", b1 =>
+                    b.OwnsOne("frinno_core.Entities.Profile.ValueObjects.Address", "CompanyAgencyAddress", b1 =>
                         {
                             b1.Property<int>("ProjectId")
                                 .HasColumnType("int");
 
-                            b1.Property<string>("ClientCity")
+                            b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("ClientCountry")
+                            b1.Property<string>("Country")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("ClientMobile")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ClientName")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ClientPublicLink")
+                            b1.Property<string>("Mobile")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("ProjectId");
@@ -446,9 +445,9 @@ namespace frinno_infrastructure.Migrations
                                 .HasForeignKey("ProjectId");
                         });
 
-                    b.Navigation("ClientInfo");
+                    b.Navigation("ClientAddress");
 
-                    b.Navigation("CompanyAgencyInfo");
+                    b.Navigation("CompanyAgencyAddress");
 
                     b.Navigation("Profile");
                 });

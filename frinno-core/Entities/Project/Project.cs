@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using frinno_core.Entities.Profile.ValueObjects;
+using frinno_core.Entities.Project;
 using frinno_core.Entities.Project.ValueObjects;
 
 namespace frinno_core.Entities.Projects
@@ -11,6 +12,9 @@ namespace frinno_core.Entities.Projects
     {
         public string Title { get; set; }
         public string Description { get; set; }
+
+        public DateTime ProjectStart { get; set; }
+        public DateTime ProjectEnd { get; set; }
         public Profiles.Profile Profile { get; set; }
         //Project Url
         public string ProjectUrl { get; set; }
@@ -18,14 +22,12 @@ namespace frinno_core.Entities.Projects
         public bool IsRepoPublic { get; set; } = false;
         public int Status { get; set; } = (int)ProjectStatus.Planning;
 
+        public int ProjectType { get; set; } = (int)ProjectTypeEnum.Fullstack;
         //Project Client
-        public string ClientName { get; set; }
-        public string ClientPublicLink { get; set; }
-        public Address ClientAddress { get; set; }
+        public ProjectClientInfo? ClientInfo { get; set; } = new();
+
         //Project Company/Agency
-        public string CompanyAgencyName { get; set; }
-        public string CompanyAgencyPublicLink { get; set; }
-        public Address CompanyAgencyAddress { get; set; }
+        public ProjectAgencyInfo? CompanyAgencyInfo { get; set; } = new();
 
     }
 }
