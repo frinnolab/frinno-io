@@ -24,10 +24,10 @@ namespace frinno_core.Entities.Projects
 
         public int ProjectType { get; set; } = (int)ProjectTypeEnum.Fullstack;
         //Project Client
-        public ProjectClientInfo? ClientInfo { get; set; } = new();
+        public ProjectClientInfo ClientInfo { get; set; } = new();
 
         //Project Company/Agency
-        public ProjectAgencyInfo? CompanyAgencyInfo { get; set; } = new();
+        public ProjectAgencyInfo CompanyAgencyInfo { get; set; } = new();
 
     }
 }

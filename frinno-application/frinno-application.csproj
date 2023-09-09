@@ -10,6 +10,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>frinno_application</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 </Project>

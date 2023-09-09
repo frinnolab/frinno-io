@@ -29,7 +29,7 @@ if (builder.Environment.IsDevelopment())
     //builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("FRINNODB"));
     builder.Services.AddDbContext<DataContext>(
         options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnotdb")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("frinnordb")));
 }
 
 if (builder.Environment.IsProduction())

@@ -33,6 +33,7 @@ namespace frinno_core.DTOs
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
 
         public string ProjectUrl { get; set; }
         public string ProfileId { get; set; }
@@ -68,7 +69,6 @@ namespace frinno_core.DTOs
 
     public record ProjectInfoResponse : ProjectCreateResponse
     {
-        public string Desctiption { get; set; }
         public string RepositoryUrl { get; set; } = string.Empty;
         public bool IsRepoPublic { get; set; } = false;
         //Project Client

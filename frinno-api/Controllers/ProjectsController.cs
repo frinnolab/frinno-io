@@ -221,7 +221,16 @@ namespace frinno_api.Controllers
                 Title = project.Title,
                 ProjectUrl = project.ProjectUrl,
                 Created = project.Created,
+                ProfileId = project.Profile.Id,
                 Modified = project.Modified,
+                ProjectType = project.ProjectType switch
+                {
+                    (int)ProjectTypeEnum.Graphics => ProjectTypeEnum.Graphics,
+                    (int)ProjectTypeEnum.BackEnd => ProjectTypeEnum.BackEnd,
+                    (int)ProjectTypeEnum.FrontEnd => ProjectTypeEnum.FrontEnd,
+                    (int)ProjectTypeEnum.Mobile => ProjectTypeEnum.Mobile,
+                    _ => (int)ProjectTypeEnum.Fullstack,
+                },
                 Status = project.Status switch
                 {
                     (int)ProjectStatus.Deployed => ProjectStatus.Deployed,
@@ -292,13 +301,17 @@ namespace frinno_api.Controllers
             {
                 Id = project.Id,
                 Title = project.Title,
-                Desctiption = project.Description,
+                Description = project.Description,
                 ProfileId = project.Profile.Id,
                 ProjectUrl = project.ProjectUrl,
                 RepositoryUrl = project.RepositoryUrl,
                 IsRepoPublic = project.IsRepoPublic,
                 ClientInfo = project.ClientInfo,
                 CompanyAgencyInfo = project.CompanyAgencyInfo,
+                Created = project.Created,
+                Modified = project.Modified,
+                ProjectStart = project.ProjectStart,
+                ProjectEnd =  project.ProjectEnd,
                 Status = project.Status switch
                 {
                     (int)ProjectStatus.Deployed => ProjectStatus.Deployed,
@@ -338,7 +351,7 @@ namespace frinno_api.Controllers
                 projects = data.ToList();
             }
 
-            DataListResponse<ProjectCreateResponse>? response = new();
+            DataListResponse<ProjectCreateResponse> response = new();
 
             if (projects == null)
             {
@@ -351,6 +364,11 @@ namespace frinno_api.Controllers
                     {
                         Id = p.Id,
                         Title = p.Title,
+                        Description = p.Description,
+                        Created = p.Created,
+                        ProjectUrl = p.ProjectUrl,
+                        Modified = p.Modified,
+                        ProfileId = p.Profile.Id,
                         Status = p.Status switch
                         {
                             (int)ProjectStatus.Deployed => ProjectStatus.Deployed,
