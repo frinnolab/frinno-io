@@ -13,6 +13,7 @@ D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application
 D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\refint\frinno-application.dll
 D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\frinno-application.pdb
 D:\FRINNOLAB\Projects\frn\frinno-application\obj\Debug\net6.0\ref\frinno-application.dll
+<<<<<<< HEAD
 D:\DEV\Frn App\Frn-API\frinno-application\bin\Debug\net6.0\frinno-application.deps.json
 D:\DEV\Frn App\Frn-API\frinno-application\bin\Debug\net6.0\frinno-application.dll
 D:\DEV\Frn App\Frn-API\frinno-application\bin\Debug\net6.0\frinno-application.pdb
@@ -43,3 +44,20 @@ D:\DEV\Frn Apps\Frn-io\frinno-application\obj\Debug\net6.0\frinno-application.dl
 D:\DEV\Frn Apps\Frn-io\frinno-application\obj\Debug\net6.0\refint\frinno-application.dll
 D:\DEV\Frn Apps\Frn-io\frinno-application\obj\Debug\net6.0\frinno-application.pdb
 D:\DEV\Frn Apps\Frn-io\frinno-application\obj\Debug\net6.0\ref\frinno-application.dll
+=======
+F:\DEV\FRN-APPs\frinno-io\frinno-application\bin\Debug\net6.0\frinno-application.deps.json
+F:\DEV\FRN-APPs\frinno-io\frinno-application\bin\Debug\net6.0\frinno-application.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-application\bin\Debug\net6.0\frinno-application.pdb
+F:\DEV\FRN-APPs\frinno-io\frinno-application\bin\Debug\net6.0\frinno-core.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-application\bin\Debug\net6.0\frinno-core.pdb
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.csproj.AssemblyReference.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.GeneratedMSBuildEditorConfig.editorconfig
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.AssemblyInfoInputs.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.AssemblyInfo.cs
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.csproj.CoreCompileInputs.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.csproj.CopyComplete
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\refint\frinno-application.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.pdb
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\ref\frinno-application.dll
+>>>>>>> master
