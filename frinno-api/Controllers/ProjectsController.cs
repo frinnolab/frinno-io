@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_application.Projects;
 using frinno_core.DTOs;
 using frinno_core.Entities.Profiles;
 using frinno_core.Entities.Project.ValueObjects;
 using frinno_core.Entities.Projects;
-using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

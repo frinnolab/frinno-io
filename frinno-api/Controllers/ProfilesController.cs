@@ -1,19 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
 using frinno_core.Entities;
-using frinno_core.Entities.Articles;
-using frinno_core.Entities.Profile.Aggregates;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
-using frinno_core.Entities.user;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace frinno_api.Controllers
@@ -184,10 +176,7 @@ namespace frinno_api.Controllers
                         Mobile = profile.Address.Mobile,
                         City = profile.Address.City
                     },
-                    TotalArticles = profile.ProfileArticles != null ? profile.ProfileArticles.Count : 0, 
                     TotalProjects = profile.Projects != null ? profile.Projects.Count : 0, 
-                    TotalSkills = profile.Skills != null ? profile.Skills.Count : 0, 
-                    TotalResumes = profile.Resumes != null ? profile.Resumes.Count : 0, 
                 };
 
                 return Ok(response);
@@ -223,10 +212,6 @@ namespace frinno_api.Controllers
                     Id = p.Id,
                     Email = p.Email,
                     Username = $"{p.FirstName} {p.LastName}",
-                    TotalArticles = p.ProfileArticles != null ? p.ProfileArticles.Count : 0,
-                    TotalProjects = p.Projects != null ? p.Projects.Count : 0,
-                    TotalSkills = p.Skills != null ? p.Skills.Count : 0,
-                    TotalResumes = p.Resumes != null ? p.Resumes.Count : 0,
                     Role = Enum.GetName(p.Role),
                     AddressInfo = new ProfileAddressInfo
                     {

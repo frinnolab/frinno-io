@@ -1,13 +1,7 @@
 using System.Text;
-using frinno_application.Articles;
 using frinno_application.Authentication;
-using frinno_application.Skills;
-using frinno_application.Generics;
 using frinno_application.Profiles;
-using frinno_core.Entities.Articles;
 using frinno_core.Entities.Profiles;
-using frinno_core.Entities.Skill;
-using frinno_infrastructure;
 using frinno_infrastructure.Data;
 using frinno_infrastructure.Repostories;
 using frinno_infrastructure.Repostories.AuthRepositories;
@@ -20,13 +14,6 @@ using frinno_application.Projects;
 using frinno_core.Entities.Projects;
 using frinno_infrastructure.Repostories.ProjectsRepositories;
 using frinno_infrastructure.Repostories.ProfilesRepositories;
-using frinno_infrastructure.Repostories.ArticlesRepositories;
-using frinno_infrastructure.Repostories.SkillsRepositories;
-using frinno_application.Tags;
-using frinno_core.Entities.Tags;
-using frinno_infrastructure.Repostories.TagsRepository;
-using frinno_core.Entities.user;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -120,9 +107,6 @@ builder.Services.AddScoped<IAuthService, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenRepository>();
 builder.Services.AddScoped<IProfileService<Profile>, ProfileRepository>();
 builder.Services.AddScoped<IProjectsManager<Project>, ProjectsRepository>();
-builder.Services.AddScoped<IArticlesService<Article>, ArticlesRepository>();
-builder.Services.AddScoped<ISkillsService, SkillsRepository>();
-builder.Services.AddScoped<ITagsService<Tag>, TagsRepository>();
 
 builder.Services.AddControllers();
 
