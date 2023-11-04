@@ -2,8 +2,8 @@ namespace frinno_core.Entities.Project.ValueObjects
 {
     public enum ProjectStatus
     {
-        NotStarted = 0,
+        Planning = 0,
         Ongoing = 1,
-        Completed = 2
+        Deployed = 2
     }
 }

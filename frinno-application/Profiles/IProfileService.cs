@@ -11,8 +11,8 @@ namespace frinno_application.Profiles
         IEnumerable<Profile> FetchAll();
         //Replaced with UserManager API
         //Profile FindByEmail(string email);
-        //Replaced with UserManager API
-        //Profile FindById(string profileId);
+        //Explicit Profile Fetch
+        Profile FindProfileById(string profileId);
         void UploadProfileImage();
         void RemoveProfileImage();
     }

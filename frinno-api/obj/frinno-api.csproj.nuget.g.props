@@ -38,7 +38,7 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Extensions_ApiDescription_Server Condition=" '$(PkgMicrosoft_Extensions_ApiDescription_Server)' == '' ">C:\Users\Frinno-iO\.nuget\packages\microsoft.extensions.apidescription.server\3.0.0</PkgMicrosoft_Extensions_ApiDescription_Server>
-    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\Frinno-iO\.nuget\packages\newtonsoft.json\9.0.1</PkgNewtonsoft_Json>
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\Frinno-iO\.nuget\packages\newtonsoft.json\10.0.1</PkgNewtonsoft_Json>
     <PkgEntityFramework Condition=" '$(PkgEntityFramework)' == '' ">C:\Users\Frinno-iO\.nuget\packages\entityframework\6.4.4</PkgEntityFramework>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\Frinno-iO\.nuget\packages\microsoft.entityframeworkcore.tools\6.0.2</PkgMicrosoft_EntityFrameworkCore_Tools>
   </PropertyGroup>

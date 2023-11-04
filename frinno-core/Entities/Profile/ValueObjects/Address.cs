@@ -13,6 +13,8 @@ namespace frinno_core.Entities.Profile.ValueObjects
         [Column]
         public string Mobile { get; set; }
         [Column]
-        public string City { get; set; }   
+        public string City { get; set; }
+        [Column]
+        public string Country { get; set; }
     }
 }

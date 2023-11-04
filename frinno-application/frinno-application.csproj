@@ -3,6 +3,7 @@
     <ProjectReference Include="..\frinno-core\frinno-core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
   </ItemGroup>
   <PropertyGroup>

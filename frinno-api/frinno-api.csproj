@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>frinno_api</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentFTP" Version="46.0.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
@@ -24,5 +25,8 @@
     <ProjectReference Include="..\frinno-core\frinno-core.csproj" />
     <ProjectReference Include="..\frinno-application\frinno-application.csproj" />
     <ProjectReference Include="..\frinno-infrastructure\frinno-infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="public\upload_assets\" />
   </ItemGroup>
 </Project>

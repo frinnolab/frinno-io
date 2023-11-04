@@ -35,7 +35,6 @@ D:\DEV\Frn Apps\Frn-io\frinno-core\obj\Debug\net6.0\frinno-core.dll
 D:\DEV\Frn Apps\Frn-io\frinno-core\obj\Debug\net6.0\refint\frinno-core.dll
 D:\DEV\Frn Apps\Frn-io\frinno-core\obj\Debug\net6.0\frinno-core.pdb
 D:\DEV\Frn Apps\Frn-io\frinno-core\obj\Debug\net6.0\ref\frinno-core.dll
-=======
 F:\DEV\FRN-APPs\frinno-io\frinno-core\bin\Debug\net6.0\frinno-core.deps.json
 F:\DEV\FRN-APPs\frinno-io\frinno-core\bin\Debug\net6.0\frinno-core.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-core\bin\Debug\net6.0\frinno-core.pdb
@@ -44,9 +43,8 @@ F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.GeneratedMSBu
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.AssemblyInfoInputs.cache
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.AssemblyInfo.cs
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.csproj.CoreCompileInputs.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.sourcelink.json
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\refint\frinno-core.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\ref\frinno-core.dll
->>>>>>> master
-F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.sourcelink.json

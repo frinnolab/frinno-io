@@ -137,8 +137,10 @@ namespace frinno_api.Controllers
                 UserName = profile.UserName,
                 Token = token,
                 Role = (int)profile.Role,
+                RoleName = Enum.GetName(profile.Role)
             };
             return Ok(response);
         }
     }
+    
 } 

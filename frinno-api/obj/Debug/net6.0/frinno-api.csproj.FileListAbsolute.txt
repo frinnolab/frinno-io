@@ -73,6 +73,198 @@ D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\BCrypt.Net-Core.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 D:\FRINNOLAB\Projects\frn\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\appsettings.Development.json
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\appsettings.json
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-api.exe
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-api.deps.json
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-api.runtimeconfig.json
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-api.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-api.pdb
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\BCrypt.Net-Core.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Humanizer.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\IdentityModel.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-application.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-core.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-infrastructure.dll
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-core.pdb
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-application.pdb
+D:\DEV\Frn App\Frn-API\frinno-api\bin\Debug\net6.0\frinno-infrastructure.pdb
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.csproj.AssemblyReference.cache
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.GeneratedMSBuildEditorConfig.editorconfig
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.AssemblyInfoInputs.cache
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.AssemblyInfo.cs
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.csproj.CoreCompileInputs.cache
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.MvcApplicationPartsAssemblyInfo.cs
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.MvcApplicationPartsAssemblyInfo.cache
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets.build.json
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets.development.json
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\scopedcss\bundle\frinno-api.styles.css
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.csproj.CopyComplete
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.dll
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\refint\frinno-api.dll
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.pdb
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\frinno-api.genruntimeconfig.cache
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\ref\frinno-api.dll
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.frinno-api.Microsoft.AspNetCore.StaticWebAssets.props
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.build.frinno-api.props
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.frinno-api.props
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.frinno-api.props
+D:\DEV\Frn App\Frn-API\frinno-api\obj\Debug\net6.0\staticwebassets.pack.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\appsettings.Development.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\appsettings.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-api.exe
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-api.deps.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-api.runtimeconfig.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-api.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-api.pdb
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\BCrypt.Net-Core.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Humanizer.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\IdentityModel.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-application.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-core.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-infrastructure.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-core.pdb
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-application.pdb
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\frinno-infrastructure.pdb
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.csproj.AssemblyReference.cache
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.GeneratedMSBuildEditorConfig.editorconfig
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.AssemblyInfoInputs.cache
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.AssemblyInfo.cs
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.csproj.CoreCompileInputs.cache
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.MvcApplicationPartsAssemblyInfo.cs
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.MvcApplicationPartsAssemblyInfo.cache
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.frinno-api.Microsoft.AspNetCore.StaticWebAssets.props
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.build.frinno-api.props
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.frinno-api.props
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.frinno-api.props
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets.pack.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets.build.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\staticwebassets.development.json
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\scopedcss\bundle\frinno-api.styles.css
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.csproj.CopyComplete
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\refint\frinno-api.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.pdb
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\frinno-api.genruntimeconfig.cache
+D:\DEV\Frn Apps\Frn-io\frinno-api\obj\Debug\net6.0\ref\frinno-api.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Npgsql.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\EntityFramework.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Google.Protobuf.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\MySql.Data.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Ubiety.Dns.Core.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Zstandard.Net.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\MySql.Data.EntityFramework.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Renci.SshNet.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\SshNet.Security.Cryptography.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.CodeDom.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\FluentFTP.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Web.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Web.Http.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\System.Web.Http.Cors.dll
+D:\DEV\Frn Apps\Frn-io\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\refint\frinno-api.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\appsettings.Development.json
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\appsettings.json
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\frinno-api.exe
@@ -81,8 +273,20 @@ F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\frinno-api.runtimeconfig.j
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\frinno-api.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\frinno-api.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\BCrypt.Net-Core.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\EntityFramework.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\FluentFTP.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Google.Protobuf.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Humanizer.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\IdentityModel.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Web.Cors.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Web.Http.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Web.Http.Cors.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
@@ -103,17 +307,29 @@ F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Pr
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.OpenApi.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\MySql.Data.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Ubiety.Dns.Core.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Zstandard.Net.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\MySql.Data.EntityFramework.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Npgsql.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Renci.SshNet.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\SshNet.Security.Cryptography.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.CodeDom.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Data.SqlClient.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Drawing.Common.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Runtime.Caching.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Security.Permissions.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Windows.Extensions.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
@@ -121,6 +337,11 @@ F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm64\native\
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
@@ -139,42 +360,15 @@ F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.AssemblyInfo.cs
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.csproj.CoreCompileInputs.cache
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.MvcApplicationPartsAssemblyInfo.cs
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.MvcApplicationPartsAssemblyInfo.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.sourcelink.json
+F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets.build.json
+F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets.development.json
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.frinno-api.Microsoft.AspNetCore.StaticWebAssets.props
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.build.frinno-api.props
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.frinno-api.props
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.frinno-api.props
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets.pack.json
-F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets.build.json
-F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\staticwebassets.development.json
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\scopedcss\bundle\frinno-api.styles.css
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.csproj.CopyComplete
-F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\refint\frinno-api.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.genruntimeconfig.cache
 F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\ref\frinno-api.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\BouncyCastle.Crypto.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\EntityFramework.SqlServer.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\EntityFramework.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\FluentFTP.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Google.Protobuf.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\K4os.Compression.LZ4.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\K4os.Hash.xxHash.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\MySql.Data.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Ubiety.Dns.Core.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Zstandard.Net.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\MySql.Data.EntityFramework.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Npgsql.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\Renci.SshNet.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\SshNet.Security.Cryptography.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.CodeDom.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Data.SqlClient.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-F:\DEV\FRN-APPs\frinno-io\frinno-api\obj\Debug\net6.0\frinno-api.sourcelink.json
