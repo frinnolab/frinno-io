@@ -49,3 +49,4 @@ F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\refint\frinno-core.dll
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\ref\frinno-core.dll
 >>>>>>> master
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net6.0\frinno-core.sourcelink.json

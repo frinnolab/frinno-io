@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DiCDsIzoqyI3a33p2r+M6eoeDwGy1tEJA+dZbgsegobfin0K7bQ4JyPYkvENByoHDbp4vFwr8senbudUY8QaYw==",
+  "dgSpecHash": "C/fr2YkdJRkH7+eKNCpOqMRWdRbVldgtJ8VvlaB7xofTEC2H2D9s6SRI5MwKmiuqOzw4RFJ+R++vztk+5xtnmw==",
   "success": true,
   "projectFilePath": "F:\\DEV\\FRN-APPs\\frinno-io\\frinno-core\\frinno-core.csproj",
   "expectedPackageFiles": [
@@ -24,7 +24,10 @@
     "C:\\Users\\Frinno-iO\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-iO\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Frinno-iO\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
-    "C:\\Users\\Frinno-iO\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\Frinno-iO\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Frinno-iO\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.23\\microsoft.netcore.app.ref.6.0.23.nupkg.sha512",
+    "C:\\Users\\Frinno-iO\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.23\\microsoft.windowsdesktop.app.ref.6.0.23.nupkg.sha512",
+    "C:\\Users\\Frinno-iO\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.23\\microsoft.aspnetcore.app.ref.6.0.23.nupkg.sha512"
   ],
   "logs": []
 }

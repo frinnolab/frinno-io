@@ -36,3 +36,4 @@ F:\DEV\FRN-APPs\frinno-io\frinno-infrastructure\obj\Debug\net6.0\refint\frinno-i
 F:\DEV\FRN-APPs\frinno-io\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.genruntimeconfig.cache
 F:\DEV\FRN-APPs\frinno-io\frinno-infrastructure\obj\Debug\net6.0\ref\frinno-infrastructure.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-infrastructure\obj\Debug\net6.0\frinno-infrastructure.sourcelink.json

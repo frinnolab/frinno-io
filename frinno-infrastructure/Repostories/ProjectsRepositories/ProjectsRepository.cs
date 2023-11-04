@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using frinno_application.Projects;
 using frinno_core.Entities.Projects;
 using frinno_infrastructure.Data;
@@ -28,7 +24,6 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return await DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
             .ToListAsync();
         }
 
@@ -36,7 +31,6 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return await DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
             .Where(p=>p.Profile.Id == profileId)
             .ToListAsync();
         }
@@ -45,7 +39,6 @@ namespace frinno_infrastructure.Repostories.ProjectsRepositories
         {
             return DB.Projects
             .Include(pr=>pr.Profile)
-            .ThenInclude(pr=>pr.Skills)
             .SingleOrDefault((x)=>x==data);
         }
 

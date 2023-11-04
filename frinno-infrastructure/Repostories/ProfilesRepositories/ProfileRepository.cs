@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using frinno_application.Profiles;
 using frinno_core.Entities.Profiles;
 using frinno_infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 namespace frinno_infrastructure.Repostories.ProfilesRepositories
 {
     public class ProfileRepository : IProfileService<Profile>
@@ -26,12 +21,8 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         public IEnumerable<Profile> FetchAll()
         {
             return DB.Profiles
-            
             .Include(x=>x.Address)
-            .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
-            .Include(x=>x.Skills)
-            .Include(x=>x.Resumes)
             .ToList();
         }
 
@@ -39,10 +30,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             return DB.Profiles
             .Include(x=>x.Address)
-            .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
-            .Include(x=>x.Resumes)
-            .Include(x=>x.Skills)
             .FirstOrDefault((p)=>p==data);
         }
 
@@ -50,10 +38,7 @@ namespace frinno_infrastructure.Repostories.ProfilesRepositories
         {
             return DB.Profiles
             .Include(a=>a.Address)
-            .Include(x=>x.ProfileArticles)
             .Include(x=>x.Projects)
-            .Include(x=>x.Resumes)
-            .Include(x=>x.Skills)
             .Single(x=>x.Id ==dataId);
         }
 

@@ -61,3 +61,4 @@ F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\refint\frinno-appl
 F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.pdb
 F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\ref\frinno-application.dll
 >>>>>>> master
+F:\DEV\FRN-APPs\frinno-io\frinno-application\obj\Debug\net6.0\frinno-application.sourcelink.json
