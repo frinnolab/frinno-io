@@ -16,6 +16,5 @@ namespace frinno_core.Entities.Profiles
         public virtual Address Address { get; set; }
         public virtual AuthRolesEnum Role { get; set; }
         public virtual ICollection<Projects.Project> Projects { get; set; }
-        public virtual ICollection<Resumes.Resume> Resumes { get; set; }
     }
 }
