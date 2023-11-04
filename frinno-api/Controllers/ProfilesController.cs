@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using frinno_application.FileAssets;
 using frinno_application.Profiles;
 using frinno_core.DTOs;
@@ -9,7 +5,6 @@ using frinno_core.Entities;
 using frinno_core.Entities.FileAsset;
 using frinno_core.Entities.Profile.ValueObjects;
 using frinno_core.Entities.Profiles;
-using frinno_infrastructure.Repostories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -213,7 +208,6 @@ namespace frinno_api.Controllers
                         Country = profileResponse.Address.Country
                     },
                     TotalProjects = profileResponse.Projects != null ? profileResponse.Projects.Count : 0, 
-                    TotalResumes = profileResponse.Resumes != null ? profileResponse.Resumes.Count : 0, 
                 };
 
                 return Ok(response);
@@ -250,7 +244,6 @@ namespace frinno_api.Controllers
                     Email = p.Email,
                     Username = $"{p.FirstName} {p.LastName}",
                     TotalProjects = p.Projects != null ? p.Projects.Count : 0,
-                    TotalResumes = p.Resumes != null ? p.Resumes.Count : 0,
                     Role = Enum.GetName(p.Role),
                     AddressInfo = new ProfileAddressInfo
                     {
