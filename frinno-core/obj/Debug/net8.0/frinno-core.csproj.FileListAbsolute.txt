@@ -1,0 +1,13 @@
+F:\DEV\FRN-APPs\frinno-io\frinno-core\bin\Debug\net8.0\frinno-core.deps.json
+F:\DEV\FRN-APPs\frinno-io\frinno-core\bin\Debug\net8.0\frinno-core.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-core\bin\Debug\net8.0\frinno-core.pdb
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.csproj.AssemblyReference.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.GeneratedMSBuildEditorConfig.editorconfig
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.AssemblyInfoInputs.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.AssemblyInfo.cs
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.csproj.CoreCompileInputs.cache
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.sourcelink.json
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\refint\frinno-core.dll
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\frinno-core.pdb
+F:\DEV\FRN-APPs\frinno-io\frinno-core\obj\Debug\net8.0\ref\frinno-core.dll
